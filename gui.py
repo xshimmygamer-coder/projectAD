@@ -10,8 +10,18 @@ contador de anuncios assistidos por canal + preview ao vivo (screenshots CDP).
 import asyncio
 import os
 import queue
+import sys
 import threading
 import time
+
+# No .exe sem console (PyInstaller --windowed) o sys.stdout/stderr ficam None; o uvicorn
+# (servidor web do Flet) faz stdout.isatty() e crasha. Garante objetos validos ANTES do flet.
+if sys.stdout is None or sys.stderr is None:
+    _nul = open(os.devnull, "w")
+    if sys.stdout is None:
+        sys.stdout = _nul
+    if sys.stderr is None:
+        sys.stderr = _nul
 
 import flet as ft
 
