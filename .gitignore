@@ -1,0 +1,12 @@
+# Repo de TRANSFERENCIA (temporario) — vai TUDO, inclusive segredos.
+# Ignorado SO os artefatos regeneraveis (rebuild com build_exe.bat apos importar):
+build/
+dist/
+Output/
+__pycache__/
+*.pyc
+*.manifest
+MURIADS_pacote.zip
+MURIADS_setup.exe
+# settings.json / tokens.txt / proxies_pool.txt / contas_pool.json VAO no repo
+# (a pedido, pra importar nos outros servers). APAGAR o repo depois de usar.

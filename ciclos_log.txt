@@ -1,0 +1,415 @@
+23/06 15:38:04 > TOKEN SETADO: vjs7375fjy65z1ebf5n772gjs29ls3 > PROXY SETADO: 5.182.209.249:38262 > CANAL: vitinho > navegou > AD: PREROLL 15s > DUROU: 74s
+23/06 15:38:07 > TOKEN SETADO: guusl8gk8bq4zhbro1yk93aahd9e3u > PROXY SETADO: 212.87.212.82:45442 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 79s
+23/06 15:38:08 > TOKEN SETADO: s9f58qsnsxmuixd7dqu7263tkwpbrs > PROXY SETADO: 212.87.213.69:25096 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 80s
+23/06 15:38:11 > TOKEN SETADO: kuvm1kaud3e6m90btemmm6j3jb7vx3 > PROXY SETADO: 185.148.146.192:38579 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 88s
+23/06 15:38:10 > TOKEN SETADO: bobja57zy9440sq4iphz5izw8hosc4 > PROXY SETADO: 185.148.146.189:24504 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 92s
+23/06 15:39:47 > TOKEN SETADO: o7wf0h03kk1fh3rr74mx7gil6i8hrq > PROXY SETADO: 185.148.146.165:50752 > PROXY SEM REDE (descartado, trocou)
+23/06 15:38:17 > TOKEN SETADO: 7z1i1ndl64cw5x6jkf0rjammklv7mg > PROXY SETADO: 5.182.209.248:24278 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 102s
+23/06 15:38:13 > TOKEN SETADO: 78n6nl69qat7lx37oyub5o0o5yonfz > PROXY SETADO: 5.182.209.249:36468 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 111s
+23/06 15:38:14 > TOKEN SETADO: yfaekdchkwkpp82o0cg98ojlhzh0ba > PROXY SETADO: 185.148.146.165:32309 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 113s
+23/06 15:38:16 > TOKEN SETADO: mjdbgq01y6sokwmjkwluv3nk9yu57v > PROXY SETADO: 185.148.146.189:33287 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 113s
+23/06 15:41:29 > TOKEN SETADO: o7wf0h03kk1fh3rr74mx7gil6i8hrq > PROXY SETADO: 185.148.146.165:50752 > PROXY SEM REDE (descartado, trocou)
+23/06 15:41:41 > TOKEN SETADO: 2qd8qzrizf44m4k6lngoejdbcy7ps0 > PROXY SETADO: 5.182.209.248:45061 > PROXY SEM REDE (descartado, trocou)
+23/06 15:42:15 > TOKEN SETADO: qmjk036jajdamea7zsupc8k8pug7fl > PROXY SETADO: 5.182.209.248:51559 > PROXY SEM REDE (descartado, trocou)
+23/06 15:42:46 > TOKEN SETADO: xsduuuz74gf3jdgm5li3mmsgkynepl > PROXY SETADO: 212.87.212.82:45442 > FALHOU ABRIR PERFIL
+23/06 15:41:50 > TOKEN SETADO: xc4lnsx5ot24km0qvszep2df8jdoec > PROXY SETADO: 5.182.209.247:46599 > PROXY SEM REDE (descartado, trocou)
+23/06 15:41:51 > TOKEN SETADO: 7v2d5yfqobvddg082bcu1iowhcuh43 > PROXY SETADO: 5.182.209.247:34318 > PROXY SEM REDE (descartado, trocou)
+23/06 15:41:53 > TOKEN SETADO: snwgux3o9dt3hfzalxdpo2tpx3ugj3 > PROXY SETADO: 5.182.209.247:25496 > PROXY SEM REDE (descartado, trocou)
+23/06 15:41:12 > TOKEN SETADO: guusl8gk8bq4zhbro1yk93aahd9e3u > PROXY SETADO: 212.87.212.82:45442 > CANAL: vitinho > navegou > sem anuncio > DUROU: 96s
+23/06 15:42:51 > TOKEN SETADO: 8t9lyktev2177jtphy5x6e4e2n7fvz > PROXY SETADO: 5.182.209.246:43171 > FALHOU ABRIR PERFIL
+23/06 15:41:56 > TOKEN SETADO: oh2c5yvjam74de4bz0v21ocl9whnhz > PROXY SETADO: 5.182.209.249:19036 > PROXY SEM REDE (descartado, trocou)
+23/06 15:41:57 > TOKEN SETADO: iia4y7uf4zj816p3t839r5ayt13yfm > PROXY SETADO: 5.182.209.249:22451 > PROXY SEM REDE (descartado, trocou)
+23/06 15:41:59 > TOKEN SETADO: 7jf6xgj3fnqi6fbkvbl437obt59mmt > PROXY SETADO: 5.182.209.249:40701 > PROXY SEM REDE (descartado, trocou)
+23/06 15:42:55 > TOKEN SETADO: q73gv70i8dcn0g5lcg28k2ykp67vuj > PROXY SETADO: 212.87.212.134:28228 > FALHOU ABRIR PERFIL
+23/06 15:42:55 > TOKEN SETADO: dit5tl5dg2igkfh0jp7b2nqk0o42a3 > PROXY SETADO: 212.87.212.82:45600 > FALHOU ABRIR PERFIL
+23/06 15:41:21 > TOKEN SETADO: mjdbgq01y6sokwmjkwluv3nk9yu57v > PROXY SETADO: 185.148.146.189:33287 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 94s
+23/06 15:41:14 > TOKEN SETADO: s9f58qsnsxmuixd7dqu7263tkwpbrs > PROXY SETADO: 212.87.213.69:25096 > CANAL: vitinho > navegou > sem anuncio > DUROU: 104s
+23/06 15:42:56 > TOKEN SETADO: 1ujva4swd5k2cq9c4yfulmgpncnwux > PROXY SETADO: 5.182.209.249:22451 > FALHOU ABRIR PERFIL
+23/06 15:42:03 > TOKEN SETADO: wwvwc5uh6kh43d3pumcakkm6ar62db > PROXY SETADO: 5.182.209.249:40727 > PROXY SEM REDE (descartado, trocou)
+23/06 15:42:05 > TOKEN SETADO: w4spa62e1xlco2n7b2yk7jegskxafg > PROXY SETADO: 5.182.209.248:43098 > PROXY SEM REDE (descartado, trocou)
+23/06 15:43:02 > TOKEN SETADO: jqbzirsu8eyu6qe2xbdo7svos9izqz > PROXY SETADO: 212.87.213.71:14206 > FALHOU ABRIR PERFIL
+23/06 15:42:12 > TOKEN SETADO: bdgwv5r6avjve2vq8ou52ylt1p2tei > PROXY SETADO: 5.182.209.246:14387 > PROXY SEM REDE (descartado, trocou)
+23/06 15:41:18 > TOKEN SETADO: 78n6nl69qat7lx37oyub5o0o5yonfz > PROXY SETADO: 5.182.209.249:36468 > CANAL: vitinho > navegou > sem anuncio > DUROU: 113s
+23/06 15:43:06 > TOKEN SETADO: 3bxz8uyktiye7dg18ulkwt7x013rj2 > PROXY SETADO: 5.182.209.246:33299 > FALHOU ABRIR PERFIL
+23/06 15:42:17 > TOKEN SETADO: 42xlglg25z77tsk0drhk2i67wpory7 > PROXY SETADO: 5.182.209.249:42220 > PROXY SEM REDE (descartado, trocou)
+23/06 15:41:26 > TOKEN SETADO: lr9fxdm0pwyht6ypr178lx75f0sz95 > PROXY SETADO: 185.148.146.165:23823 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 107s
+23/06 15:43:09 > TOKEN SETADO: 8dkbsrud2hduno2sjgfedm4enw2ud4 > PROXY SETADO: 5.182.209.247:46599 > FALHOU ABRIR PERFIL
+23/06 15:43:09 > TOKEN SETADO: 9hf820j8c6icnk6t1fsgycty2xq8cw > PROXY SETADO: 212.87.213.73:37124 > FALHOU ABRIR PERFIL
+23/06 15:42:20 > TOKEN SETADO: f5xh7cnsky5ecqk9u3y50ndinplw9k > PROXY SETADO: 5.182.209.249:32010 > PROXY SEM REDE (descartado, trocou)
+23/06 15:43:10 > TOKEN SETADO: 341odfziayh2l5byetz35ygzz43x3n > PROXY SETADO: 212.87.213.72:21790 > FALHOU ABRIR PERFIL
+23/06 15:43:13 > TOKEN SETADO: rvm0ve0fagr2pn9luckf1p1qde9m2c > PROXY SETADO: 212.87.212.43:26861 > FALHOU ABRIR PERFIL
+23/06 15:41:11 > TOKEN SETADO: ynw8aipp5cvtj2f3ypp1mccitte1cu > PROXY SETADO: 212.87.212.82:45600 > CANAL: vitinho > navegou > sem anuncio > DUROU: 134s
+23/06 15:42:26 > TOKEN SETADO: 3a71klk2j2jn9ppoku59yp2nzjgbtt > PROXY SETADO: 5.182.209.246:28732 > PROXY SEM REDE (descartado, trocou)
+23/06 15:42:29 > TOKEN SETADO: m2nvon40fbw1e1ha2m2k018kc12ncx > PROXY SETADO: 5.182.209.247:52022 > PROXY SEM REDE (descartado, trocou)
+23/06 15:42:50 > TOKEN SETADO: 152k7le3emgs9ouwc2k70ki4lyuuns > PROXY SETADO: 5.182.209.246:22654 > PROXY SEM REDE (descartado, trocou)
+23/06 15:43:22 > TOKEN SETADO: 5upz2rq2h8x36evdimz5a8vp989c7r > PROXY SETADO: 5.182.209.249:42220 > FALHOU ABRIR PERFIL
+23/06 15:41:38 > TOKEN SETADO: ccgjqkrjyx0nrgflezhgbcxkm8rz81 > PROXY SETADO: 185.148.146.189:46741 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 114s
+23/06 15:41:20 > TOKEN SETADO: yfaekdchkwkpp82o0cg98ojlhzh0ba > PROXY SETADO: 185.148.146.165:32309 > CANAL: vitinho > navegou > sem anuncio > DUROU: 133s
+23/06 15:43:23 > TOKEN SETADO: ve6xbgyzysg6u1nbkbeeqkmz7f69f1 > PROXY SETADO: 212.87.212.82:45600 > FALHOU ABRIR PERFIL
+23/06 15:43:24 > TOKEN SETADO: su6kcd8dd6di8sjlj5ll2uxbyzywnv > PROXY SETADO: 212.87.212.82:52983 > FALHOU ABRIR PERFIL
+23/06 15:42:06 > TOKEN SETADO: mlt6m1qiiss251rmhecltk59u8szew > PROXY SETADO: 212.87.212.82:47873 > ERRO: HTTPConnectionPool(host='local.adspower.net', port=50325): Read timed out. (read
+23/06 15:41:23 > TOKEN SETADO: 7z1i1ndl64cw5x6jkf0rjammklv7mg > PROXY SETADO: 5.182.209.248:24278 > CANAL: vitinho > navegou > sem anuncio > DUROU: 141s
+23/06 17:38:46 > TOKEN SETADO: ujfidgvkqddfwvvyrws6lsc94jx4c3 > PROXY SETADO: 212.87.213.69:25096 > PROXY SEM REDE (descartado, trocou)
+23/06 17:39:26 > TOKEN SETADO: yabhdouvbmitqs4sewg3xfa5fc1k44 > PROXY SETADO: 5.182.209.249:40727 > PROXY SEM REDE (descartado, trocou)
+23/06 17:39:54 > TOKEN SETADO: yygux8ayx9o102xqtqs9e5mmn74ued > PROXY SETADO: 185.148.146.189:46741 > FALHOU ABRIR PERFIL
+23/06 17:39:49 > TOKEN SETADO: w60weg5pjj10gzl4qhw11rx5hs4z0q > PROXY SETADO: 212.87.213.69:25096 > PROXY SEM REDE (descartado, trocou)
+23/06 17:40:21 > TOKEN SETADO: 109rm5pfy1t0nyusoxj5hu9396hi1j > PROXY SETADO: 5.182.209.246:33299 > FALHOU ABRIR PERFIL
+23/06 17:40:23 > TOKEN SETADO: 3ovdnaoywmm29xmmg63iig0n5yw0c0 > PROXY SETADO: 212.87.212.43:26861 > FALHOU ABRIR PERFIL
+23/06 17:40:31 > TOKEN SETADO: ujfidgvkqddfwvvyrws6lsc94jx4c3 > PROXY SETADO: 5.182.209.249:42220 > FALHOU ABRIR PERFIL
+23/06 17:40:32 > TOKEN SETADO: yabhdouvbmitqs4sewg3xfa5fc1k44 > PROXY SETADO: 5.182.209.248:26581 > FALHOU ABRIR PERFIL
+23/06 17:38:55 > TOKEN SETADO: s62cwckeo497smnjwcwqduxw36orq7 > PROXY SETADO: 185.148.146.165:32309 > CANAL: memfps > navegou > AD: MIDROLL 30s > DUROU: 100s
+23/06 17:40:38 > TOKEN SETADO: w60weg5pjj10gzl4qhw11rx5hs4z0q > PROXY SETADO: 212.87.212.82:45600 > FALHOU ABRIR PERFIL
+23/06 17:40:40 > TOKEN SETADO: yygux8ayx9o102xqtqs9e5mmn74ued > PROXY SETADO: 212.87.213.69:25096 > FALHOU ABRIR PERFIL
+23/06 17:40:43 > TOKEN SETADO: 109rm5pfy1t0nyusoxj5hu9396hi1j > PROXY SETADO: 212.87.212.134:28228 > FALHOU ABRIR PERFIL
+23/06 17:40:46 > TOKEN SETADO: 3ovdnaoywmm29xmmg63iig0n5yw0c0 > PROXY SETADO: 212.87.213.71:14206 > FALHOU ABRIR PERFIL
+23/06 17:40:48 > TOKEN SETADO: ujfidgvkqddfwvvyrws6lsc94jx4c3 > PROXY SETADO: 5.182.209.249:22451 > FALHOU ABRIR PERFIL
+23/06 17:38:53 > TOKEN SETADO: ottkd2s28966da7g9agjtevjmgsjs6 > PROXY SETADO: 185.148.146.189:33287 > CANAL: memfps > navegou > AD: MIDROLL 36s > DUROU: 112s
+23/06 17:40:51 > TOKEN SETADO: yabhdouvbmitqs4sewg3xfa5fc1k44 > PROXY SETADO: 212.87.212.82:45442 > FALHOU ABRIR PERFIL
+23/06 17:40:53 > TOKEN SETADO: s62cwckeo497smnjwcwqduxw36orq7 > PROXY SETADO: 5.182.209.246:33299 > FALHOU ABRIR PERFIL
+23/06 17:40:54 > TOKEN SETADO: w60weg5pjj10gzl4qhw11rx5hs4z0q > PROXY SETADO: 5.182.209.249:42220 > FALHOU ABRIR PERFIL
+23/06 17:40:57 > TOKEN SETADO: yygux8ayx9o102xqtqs9e5mmn74ued > PROXY SETADO: 5.182.209.246:50011 > FALHOU ABRIR PERFIL
+23/06 17:38:58 > TOKEN SETADO: s6ipusfpyycj9fbemlzygblt7wxdr2 > PROXY SETADO: 212.87.212.82:45442 > CANAL: memfps > navegou > AD: MIDROLL 36s > DUROU: 115s
+23/06 18:00:36 > TOKEN SETADO: 3theuzjeurlwkh4flkfi4rmhpbvy6a > PROXY SETADO: 5.182.209.246:44529 > PROXY SEM REDE (descartado, trocou)
+23/06 18:00:39 > TOKEN SETADO: pyrimva3nq00hhuyzdsek1t5amtq76 > PROXY SETADO: 5.182.209.248:24278 > PROXY SEM REDE (descartado, trocou)
+23/06 18:00:41 > TOKEN SETADO: 6yu0zsz3d1l39i8fi01iblfw8x0d89 > PROXY SETADO: 5.182.209.249:36468 > PROXY SEM REDE (descartado, trocou)
+23/06 18:00:42 > TOKEN SETADO: a7exg9ypcrk8sr3amh5cjilghzzskq > PROXY SETADO: 5.182.209.246:43171 > PROXY SEM REDE (descartado, trocou)
+23/06 18:00:45 > TOKEN SETADO: saabth4397yl1f2c8svuapdn1jshu5 > PROXY SETADO: 5.182.209.246:22654 > PROXY SEM REDE (descartado, trocou)
+23/06 18:00:48 > TOKEN SETADO: axrp0k9l49ug41je4mj1hbifuoxpsq > PROXY SETADO: 5.182.209.247:52022 > PROXY SEM REDE (descartado, trocou)
+23/06 18:01:40 > TOKEN SETADO: sfcssvu0bqtrb6bgjwk2ftafwsdlnc > PROXY SETADO: 185.148.146.192:41711 > ERRO: cannot schedule new futures after shutdown
+23/06 18:01:41 > TOKEN SETADO: 81sn3zplga0hguxtjb1snjiajmuxgf > PROXY SETADO: 5.182.209.247:25496 > ERRO: cannot schedule new futures after shutdown
+23/06 18:00:50 > TOKEN SETADO: 1573pnjh879a2zl6m0qwpuc91zou54 > PROXY SETADO: 5.182.209.248:45061 > PROXY SEM REDE (descartado, trocou)
+23/06 18:22:59 > TOKEN SETADO: ujfidgvkqddfwvvyrws6lsc94jx4c3 > PROXY SETADO: 5.182.209.249:38262 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 86s
+23/06 18:23:02 > TOKEN SETADO: jp8vwbpoyqxv2s8n3b5q0sx5fwl63s > PROXY SETADO: 185.148.146.192:38579 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 90s
+23/06 18:23:04 > TOKEN SETADO: c0kpm8er04x3fyrby5ceqnm8u2l110 > PROXY SETADO: 185.148.146.189:24504 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 98s
+23/06 18:23:01 > TOKEN SETADO: h0ac50l7sgb9olef7hm1mw2j1iv61o > PROXY SETADO: 5.182.209.248:36000 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 119s
+23/06 18:23:07 > TOKEN SETADO: ottkd2s28966da7g9agjtevjmgsjs6 > PROXY SETADO: 212.87.212.82:32918 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 98s
+23/06 18:23:05 > TOKEN SETADO: pm4xmy4p0f9nwi5f30149o7wr48z3o > PROXY SETADO: 212.87.212.148:40507 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 107s
+23/06 18:38:00 > TOKEN SETADO: h0ac50l7sgb9olef7hm1mw2j1iv61o > PROXY SETADO: 212.87.213.73:17936 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:02 > TOKEN SETADO: c0kpm8er04x3fyrby5ceqnm8u2l110 > PROXY SETADO: 212.87.212.134:38573 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:03 > TOKEN SETADO: pm4xmy4p0f9nwi5f30149o7wr48z3o > PROXY SETADO: 5.182.209.247:32078 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:05 > TOKEN SETADO: s62cwckeo497smnjwcwqduxw36orq7 > PROXY SETADO: 5.182.209.246:43171 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:37:59 > TOKEN SETADO: ujfidgvkqddfwvvyrws6lsc94jx4c3 > PROXY SETADO: 212.87.213.73:37719 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 105s
+23/06 18:38:06 > TOKEN SETADO: vkb93vvfiadk0bc5rggb796s2bo9ha > PROXY SETADO: 5.182.209.248:16668 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 98s
+23/06 18:38:04 > TOKEN SETADO: ottkd2s28966da7g9agjtevjmgsjs6 > PROXY SETADO: 212.87.212.43:48886 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 107s
+23/06 18:38:16 > TOKEN SETADO: 2r5bndrc5pq0d2lb864n6vez5dgbzk > PROXY SETADO: 5.182.209.248:43098 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:17 > TOKEN SETADO: axrp0k9l49ug41je4mj1hbifuoxpsq > PROXY SETADO: 212.87.212.82:24014 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:18 > TOKEN SETADO: 1573pnjh879a2zl6m0qwpuc91zou54 > PROXY SETADO: 185.148.146.189:39825 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:19 > TOKEN SETADO: fwo9hjju8tlydn6zd03mt1uqw20zzh > PROXY SETADO: 5.182.209.249:19036 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:20 > TOKEN SETADO: 1tq2lrhs3c5teq1p29zxgm1nw9f4u6 > PROXY SETADO: 5.182.209.247:25496 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:21 > TOKEN SETADO: xbslfi0g4om3p133ehxgtyqxqa192q > PROXY SETADO: 5.182.209.246:42592 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:22 > TOKEN SETADO: p8bpo32iturgkt2pycwpein1g7iw2o > PROXY SETADO: 5.182.209.246:28570 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:22 > TOKEN SETADO: x2u65lg4hy0dvpbjpjdicwyc7cu8x2 > PROXY SETADO: 5.182.209.249:32010 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:23 > TOKEN SETADO: sfcssvu0bqtrb6bgjwk2ftafwsdlnc > PROXY SETADO: 212.87.213.69:14012 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:23 > TOKEN SETADO: 81sn3zplga0hguxtjb1snjiajmuxgf > PROXY SETADO: 212.87.212.82:50754 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:24 > TOKEN SETADO: xbgph5rhr8esqebmloajvfqpba25rb > PROXY SETADO: 212.87.212.82:26684 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:25 > TOKEN SETADO: yabhdouvbmitqs4sewg3xfa5fc1k44 > PROXY SETADO: 5.182.209.249:42220 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:25 > TOKEN SETADO: vbk3agqx7ok0rv1dt3d0sk5yyyschd > PROXY SETADO: 185.148.146.189:18720 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:26 > TOKEN SETADO: 4ezw0eoioaadluwv9znh0xctz9tv0o > PROXY SETADO: 212.87.213.73:39658 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:27 > TOKEN SETADO: y68gtrg94ws31nafosojasnoa8efpe > PROXY SETADO: 5.182.209.246:42651 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:28 > TOKEN SETADO: 0qr3i23k75qqwi55m0edp7k9c8s1dd > PROXY SETADO: 212.87.212.43:28630 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:29 > TOKEN SETADO: sv9b5crusj8hyiz876rv7b35fdk3af > PROXY SETADO: 5.182.209.247:37679 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:30 > TOKEN SETADO: oqfslqgtqoa32ljcsx7e0p0deg886s > PROXY SETADO: 212.87.212.82:32918 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:31 > TOKEN SETADO: 8k5128yequspqpgtr2gdthelbyptq0 > PROXY SETADO: 5.182.209.249:38262 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:32 > TOKEN SETADO: d7csqa5tyt591jmjk97vnhb5rlik77 > PROXY SETADO: 212.87.212.148:40507 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:33 > TOKEN SETADO: pmg6i0jktn276191avkj92wuyrufar > PROXY SETADO: 5.182.209.248:36000 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:34 > TOKEN SETADO: n78uyq570hfdu6xvjb9sre2ooma6hw > PROXY SETADO: 185.148.146.189:24504 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:35 > TOKEN SETADO: tsfhszzdgt4jukbxiddy3enldgfmcg > PROXY SETADO: 185.148.146.192:38579 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:35 > TOKEN SETADO: jxrffu8anz9fjay9v2crj6gbknwjjt > PROXY SETADO: 185.148.146.189:33287 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:36 > TOKEN SETADO: 0lrv0aoioi5etqodqup0pqiu38rwob > PROXY SETADO: 5.182.209.246:44529 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:37 > TOKEN SETADO: 4fejf4thpweqyr2iusfmpukefp100j > PROXY SETADO: 5.182.209.249:36468 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:38 > TOKEN SETADO: w60weg5pjj10gzl4qhw11rx5hs4z0q > PROXY SETADO: 5.182.209.248:24278 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:39 > TOKEN SETADO: ydo55d55k1tkmx0z3mg9ammrfv9u1c > PROXY SETADO: 185.148.146.165:32309 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:40 > TOKEN SETADO: s6o756gm3wkg8lrcokvh5lhk9plu7u > PROXY SETADO: 5.182.209.246:43171 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:41 > TOKEN SETADO: nko55r7ih4yldlfj05cum7jhrwrvfa > PROXY SETADO: 5.182.209.246:22654 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:42 > TOKEN SETADO: yygux8ayx9o102xqtqs9e5mmn74ued > PROXY SETADO: 212.87.213.73:37719 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:43 > TOKEN SETADO: lfxw1zi0j676qpio6bwuu3sfju3nuw > PROXY SETADO: 185.148.146.189:46741 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:44 > TOKEN SETADO: yy8hnqx18x6hkbzi4ip0bi601pfltg > PROXY SETADO: 5.182.209.247:52022 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:45 > TOKEN SETADO: dpe1j59fb21tm2521g0w0cwxujdv84 > PROXY SETADO: 185.148.146.192:41711 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:46 > TOKEN SETADO: bl4cfytn5o7eaqy00oml8f1mq7eaku > PROXY SETADO: 5.182.209.248:45061 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:47 > TOKEN SETADO: rr24yo3u7s15m9rdcztfyyzbb34t1w > PROXY SETADO: 212.87.212.134:48234 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:48 > TOKEN SETADO: eam8wo1dz5kr0gdi26t2a4p871zuhv > PROXY SETADO: 5.182.209.246:45366 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:49 > TOKEN SETADO: 3cwz1dop30819cy88emedf1eovrqed > PROXY SETADO: 212.87.213.73:17936 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:50 > TOKEN SETADO: 6p8w539t3ig91xqxxdyyginezrq1xh > PROXY SETADO: 185.148.146.189:45466 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:51 > TOKEN SETADO: n7doye13hqu0rkf9lkiq67fhutgrtl > PROXY SETADO: 5.182.209.247:34318 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:52 > TOKEN SETADO: 109rm5pfy1t0nyusoxj5hu9396hi1j > PROXY SETADO: 5.182.209.247:25496 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:53 > TOKEN SETADO: 3ovdnaoywmm29xmmg63iig0n5yw0c0 > PROXY SETADO: 5.182.209.249:19036 > ERRO: <asyncio.locks.Lock object at 0x0000015D79C3C590 [locked]> is bound to a differe
+23/06 18:38:01 > TOKEN SETADO: jp8vwbpoyqxv2s8n3b5q0sx5fwl63s > PROXY SETADO: 5.182.209.249:36605 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 119s
+23/06 18:38:08 > TOKEN SETADO: ffpmfqre57lu29mzz4sjrkpcl39ncn > PROXY SETADO: 185.148.146.189:46741 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 97s
+23/06 18:38:09 > TOKEN SETADO: 3theuzjeurlwkh4flkfi4rmhpbvy6a > PROXY SETADO: 212.87.213.69:20631 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 99s
+23/06 18:38:07 > TOKEN SETADO: s6ipusfpyycj9fbemlzygblt7wxdr2 > PROXY SETADO: 5.182.209.249:36468 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 137s
+23/06 18:38:11 > TOKEN SETADO: pyrimva3nq00hhuyzdsek1t5amtq76 > PROXY SETADO: 5.182.209.246:22654 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 123s
+23/06 18:38:12 > TOKEN SETADO: 6yu0zsz3d1l39i8fi01iblfw8x0d89 > PROXY SETADO: 185.148.146.165:32309 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 114s
+23/06 18:38:10 > TOKEN SETADO: 634wtrtn1p6j5dp6fptld6iv1virpx > PROXY SETADO: 5.182.209.247:52022 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 151s
+23/06 18:38:13 > TOKEN SETADO: a7exg9ypcrk8sr3amh5cjilghzzskq > PROXY SETADO: 212.87.213.69:18031 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 116s
+23/06 18:40:16 > TOKEN SETADO: h0ac50l7sgb9olef7hm1mw2j1iv61o > PROXY SETADO: 5.182.209.249:40701 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 131s
+23/06 18:40:17 > TOKEN SETADO: pm4xmy4p0f9nwi5f30149o7wr48z3o > PROXY SETADO: 212.87.212.148:40713 > CANAL: memfps > navegou > sem anuncio > DUROU: 118s
+23/06 18:49:54 > TOKEN SETADO: c0kpm8er04x3fyrby5ceqnm8u2l110 > PROXY SETADO: 212.87.212.134:38573 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 106s
+23/06 18:49:53 > TOKEN SETADO: jp8vwbpoyqxv2s8n3b5q0sx5fwl63s > PROXY SETADO: 5.182.209.249:36605 > CANAL: memfps > navegou > sem anuncio > DUROU: 118s
+23/06 18:49:56 > TOKEN SETADO: ottkd2s28966da7g9agjtevjmgsjs6 > PROXY SETADO: 212.87.212.43:48886 > CANAL: memfps > navegou > AD: MIDROLL 30s > DUROU: 97s
+23/06 18:50:02 > TOKEN SETADO: 634wtrtn1p6j5dp6fptld6iv1virpx > PROXY SETADO: 5.182.209.247:52022 > PROXY SEM REDE (descartado, trocou)
+23/06 18:50:03 > TOKEN SETADO: pyrimva3nq00hhuyzdsek1t5amtq76 > PROXY SETADO: 5.182.209.246:22654 > PROXY SEM REDE (descartado, trocou)
+23/06 18:49:55 > TOKEN SETADO: pm4xmy4p0f9nwi5f30149o7wr48z3o > PROXY SETADO: 5.182.209.247:32078 > CANAL: memfps > navegou > sem anuncio > DUROU: 134s
+23/06 18:49:52 > TOKEN SETADO: h0ac50l7sgb9olef7hm1mw2j1iv61o > PROXY SETADO: 212.87.213.73:17936 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 174s
+23/06 18:49:58 > TOKEN SETADO: vkb93vvfiadk0bc5rggb796s2bo9ha > PROXY SETADO: 5.182.209.248:16668 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 117s
+23/06 18:49:57 > TOKEN SETADO: s62cwckeo497smnjwcwqduxw36orq7 > PROXY SETADO: 5.182.209.246:43171 > CANAL: memfps > navegou > AD: MIDROLL 36s > DUROU: 131s
+23/06 18:50:00 > TOKEN SETADO: ffpmfqre57lu29mzz4sjrkpcl39ncn > PROXY SETADO: 185.148.146.189:46741 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 102s
+23/06 18:49:59 > TOKEN SETADO: s6ipusfpyycj9fbemlzygblt7wxdr2 > PROXY SETADO: 5.182.209.249:36468 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 136s
+23/06 18:50:01 > TOKEN SETADO: 3theuzjeurlwkh4flkfi4rmhpbvy6a > PROXY SETADO: 212.87.213.69:20631 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 121s
+23/06 18:50:05 > TOKEN SETADO: a7exg9ypcrk8sr3amh5cjilghzzskq > PROXY SETADO: 212.87.213.69:18031 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 96s
+23/06 18:50:04 > TOKEN SETADO: 6yu0zsz3d1l39i8fi01iblfw8x0d89 > PROXY SETADO: 185.148.146.165:32309 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 117s
+23/06 18:49:51 > TOKEN SETADO: ujfidgvkqddfwvvyrws6lsc94jx4c3 > PROXY SETADO: 212.87.213.73:37719 > CANAL: memfps > navegou > AD: MIDROLL 180s > DUROU: 269s
+23/06 18:50:08 > TOKEN SETADO: 2r5bndrc5pq0d2lb864n6vez5dgbzk > PROXY SETADO: 5.182.209.248:43098 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 101s
+23/06 18:50:06 > TOKEN SETADO: je2w1ih874wgjocszlxvv3x55wsun4 > PROXY SETADO: 185.148.146.189:20835 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 121s
+23/06 18:50:10 > TOKEN SETADO: 1573pnjh879a2zl6m0qwpuc91zou54 > PROXY SETADO: 185.148.146.189:39825 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 116s
+23/06 18:50:09 > TOKEN SETADO: axrp0k9l49ug41je4mj1hbifuoxpsq > PROXY SETADO: 212.87.212.82:24014 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 125s
+23/06 18:50:07 > TOKEN SETADO: saabth4397yl1f2c8svuapdn1jshu5 > PROXY SETADO: 5.182.209.249:40701 > CANAL: memfps > navegou > sem anuncio > DUROU: 147s
+23/06 18:50:16 > TOKEN SETADO: sfcssvu0bqtrb6bgjwk2ftafwsdlnc > PROXY SETADO: 212.87.213.69:14012 > CANAL: memfps > navegou > AD: PREROLL 15s > DUROU: 88s
+23/06 18:50:11 > TOKEN SETADO: fwo9hjju8tlydn6zd03mt1uqw20zzh > PROXY SETADO: 5.182.209.249:19036 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 140s
+23/06 18:50:22 > TOKEN SETADO: y68gtrg94ws31nafosojasnoa8efpe > PROXY SETADO: 5.182.209.246:42651 > PROXY SEM REDE (descartado, trocou)
+23/06 18:50:13 > TOKEN SETADO: xbslfi0g4om3p133ehxgtyqxqa192q > PROXY SETADO: 5.182.209.246:42592 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 141s
+23/06 18:50:14 > TOKEN SETADO: p8bpo32iturgkt2pycwpein1g7iw2o > PROXY SETADO: 5.182.209.246:28570 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 135s
+23/06 18:50:17 > TOKEN SETADO: 81sn3zplga0hguxtjb1snjiajmuxgf > PROXY SETADO: 212.87.212.82:50754 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 114s
+23/06 18:50:24 > TOKEN SETADO: sv9b5crusj8hyiz876rv7b35fdk3af > PROXY SETADO: 5.182.209.247:37679 > PROXY SEM REDE (descartado, trocou)
+23/06 18:50:18 > TOKEN SETADO: xbgph5rhr8esqebmloajvfqpba25rb > PROXY SETADO: 212.87.212.82:26684 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 106s
+23/06 18:50:12 > TOKEN SETADO: 1tq2lrhs3c5teq1p29zxgm1nw9f4u6 > PROXY SETADO: 5.182.209.247:25496 > CANAL: memfps > navegou > sem anuncio > DUROU: 176s
+23/06 18:50:23 > TOKEN SETADO: 0qr3i23k75qqwi55m0edp7k9c8s1dd > PROXY SETADO: 212.87.212.43:28630 > CANAL: memfps > navegou > AD: PREROLL 15s > DUROU: 74s
+23/06 18:50:21 > TOKEN SETADO: 4ezw0eoioaadluwv9znh0xctz9tv0o > PROXY SETADO: 212.87.213.73:39658 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 98s
+23/06 18:50:20 > TOKEN SETADO: vbk3agqx7ok0rv1dt3d0sk5yyyschd > PROXY SETADO: 185.148.146.189:18720 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 110s
+23/06 18:50:15 > TOKEN SETADO: x2u65lg4hy0dvpbjpjdicwyc7cu8x2 > PROXY SETADO: 5.182.209.249:32010 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 161s
+23/06 18:50:19 > TOKEN SETADO: yabhdouvbmitqs4sewg3xfa5fc1k44 > PROXY SETADO: 5.182.209.249:42220 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 143s
+23/06 18:50:27 > TOKEN SETADO: d7csqa5tyt591jmjk97vnhb5rlik77 > PROXY SETADO: 212.87.212.148:40507 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 87s
+23/06 18:50:25 > TOKEN SETADO: oqfslqgtqoa32ljcsx7e0p0deg886s > PROXY SETADO: 212.87.212.82:32918 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 108s
+23/06 18:50:37 > TOKEN SETADO: nko55r7ih4yldlfj05cum7jhrwrvfa > PROXY SETADO: 5.182.209.246:22654 > PROXY SEM REDE (descartado, trocou)
+23/06 18:50:40 > TOKEN SETADO: yy8hnqx18x6hkbzi4ip0bi601pfltg > PROXY SETADO: 5.182.209.247:52022 > PROXY SEM REDE (descartado, trocou)
+23/06 18:50:26 > TOKEN SETADO: 8k5128yequspqpgtr2gdthelbyptq0 > PROXY SETADO: 5.182.209.249:38262 > CANAL: memfps > navegou > sem anuncio > DUROU: 182s
+23/06 19:37:20 > TOKEN SETADO: n4gf4u64or2zg2wd07hr10rvtvy81s > PROXY SETADO: 5.182.209.249:36468 > PROXY SEM REDE (descartado, trocou)
+23/06 19:37:23 > TOKEN SETADO: 0czddurz8udy14c6e7eaomiswcppel > PROXY SETADO: 5.182.209.246:43171 > PROXY SEM REDE (descartado, trocou)
+23/06 19:37:24 > TOKEN SETADO: 8xy6n5mnbs5cs4o200zag36vhnozy3 > PROXY SETADO: 5.182.209.248:43098 > PROXY SEM REDE (descartado, trocou)
+23/06 19:37:12 > TOKEN SETADO: 2qd8qzrizf44m4k6lngoejdbcy7ps0 > PROXY SETADO: 5.182.209.248:16668 > CANAL: memfps > navegou > sem anuncio > DUROU: 147s
+23/06 19:37:26 > TOKEN SETADO: pi817ih3iwnolmf0wr2vgbkkajx5fp > PROXY SETADO: 5.182.209.249:40701 > PROXY SEM REDE (descartado, trocou)
+23/06 19:37:10 > TOKEN SETADO: e395is8oumt7p6vzd51oxiuqu7po0l > PROXY SETADO: 5.182.209.247:16697 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 157s
+23/06 19:37:29 > TOKEN SETADO: l0wo9c13b3mvg7et2o33g3bss4lzu9 > PROXY SETADO: 5.182.209.249:19036 > PROXY SEM REDE (descartado, trocou)
+23/06 19:37:14 > TOKEN SETADO: sdvu5qfcft43iucc5jnl6ljxls1dct > PROXY SETADO: 5.182.209.247:32078 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 161s
+23/06 19:37:15 > TOKEN SETADO: 6s6dqys24ul62c096seyvjfnni8jiw > PROXY SETADO: 5.182.209.246:22654 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 162s
+23/06 19:37:17 > TOKEN SETADO: 2re3ts9f3gfmv2hbg9mxw158usvcst > PROXY SETADO: 185.148.146.165:32309 > CANAL: memfps > navegou > AD: MIDROLL 90s > DUROU: 159s
+23/06 19:37:21 > TOKEN SETADO: snysy58iy2ksz97jtn5ghqbgtnje3u > PROXY SETADO: 212.87.213.73:17936 > CANAL: memfps > navegou > AD: MIDROLL 60s > DUROU: 128s
+23/06 19:37:22 > TOKEN SETADO: 39spq3jat4gvjhunqluymclfxdm40p > PROXY SETADO: 212.87.213.69:20631 > CANAL: memfps > navegou > AD: MIDROLL 66s > DUROU: 130s
+23/06 19:37:28 > TOKEN SETADO: cocsadad49pe5d1kylhf7c6ue0g2jz > PROXY SETADO: 212.87.212.43:48886 > CANAL: memfps > navegou > AD: MIDROLL 30s > DUROU: 94s
+23/06 19:37:11 > TOKEN SETADO: l3k76yo1rgmci8r8qg5kiixwa6ixz2 > PROXY SETADO: 5.182.209.247:52022 > CANAL: memfps > navegou > AD: MIDROLL 111s > DUROU: 218s
+23/06 19:37:16 > TOKEN SETADO: lf8yua0zu4o3okl3cr35ndxxkhs2m0 > PROXY SETADO: 5.182.209.249:36605 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 189s
+23/06 19:37:25 > TOKEN SETADO: 7jf6xgj3fnqi6fbkvbl437obt59mmt > PROXY SETADO: 212.87.213.69:18031 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 129s
+23/06 19:37:19 > TOKEN SETADO: n4iquwlwsmqxrlmc0vg98pqmcbebm9 > PROXY SETADO: 185.148.146.189:20835 > CANAL: memfps > navegou > AD: MIDROLL 90s > DUROU: 178s
+23/06 19:37:18 > TOKEN SETADO: byyxhskfn3kt8y669vtgxfnyxnnfoy > PROXY SETADO: 212.87.212.134:38573 > CANAL: memfps > navegou > AD: MIDROLL 105s > DUROU: 190s
+23/06 19:37:13 > TOKEN SETADO: 6pl6kyblta6nawiwvbevnzv9ijdor2 > PROXY SETADO: 212.87.213.73:37719 > CANAL: memfps > navegou > AD: MIDROLL 150s > DUROU: 223s
+23/06 19:39:45 > TOKEN SETADO: c0kpm8er04x3fyrby5ceqnm8u2l110 > PROXY SETADO: 5.182.209.247:37679 > PROXY SEM REDE (descartado, trocou)
+23/06 19:37:30 > TOKEN SETADO: zsvud1k1qeewffy0frby804ijwg6ov > PROXY SETADO: 185.148.146.189:39825 > CANAL: memfps > navegou > AD: MIDROLL 36s > DUROU: 112s
+23/06 19:37:27 > TOKEN SETADO: cqe34gxqf8kgn96cacyjpxrzclwvjn > PROXY SETADO: 212.87.212.82:24014 > CANAL: memfps > navegou > AD: MIDROLL 36s > DUROU: 124s
+23/06 19:37:31 > TOKEN SETADO: umcdpwb3zxlwc7fpoysi5hwn8ktl6a > PROXY SETADO: 185.148.146.189:46741 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 111s
+23/06 19:37:37 > TOKEN SETADO: y8l9goh9von5c9vie1fxa3invw83cn > PROXY SETADO: 212.87.213.69:14012 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 87s
+23/06 19:37:36 > TOKEN SETADO: 8ckmo13gvg6sxbofp1sdfnbfyaj4i0 > PROXY SETADO: 5.182.209.249:32010 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 99s
+23/06 19:37:34 > TOKEN SETADO: jof69mgm39jlgkt0dlwr4x9170dnpd > PROXY SETADO: 5.182.209.246:42592 > CANAL: memfps > navegou > AD: PREROLL 15s > DUROU: 115s
+23/06 19:43:36 > TOKEN SETADO: 2qd8qzrizf44m4k6lngoejdbcy7ps0 > PROXY SETADO: 5.182.209.248:16668 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: 6pl6kyblta6nawiwvbevnzv9ijdor2 > PROXY SETADO: 212.87.213.73:37719 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: sdvu5qfcft43iucc5jnl6ljxls1dct > PROXY SETADO: 5.182.209.247:32078 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: 6s6dqys24ul62c096seyvjfnni8jiw > PROXY SETADO: 5.182.209.246:22654 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: lf8yua0zu4o3okl3cr35ndxxkhs2m0 > PROXY SETADO: 5.182.209.249:36605 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: 2re3ts9f3gfmv2hbg9mxw158usvcst > PROXY SETADO: 185.148.146.165:32309 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: byyxhskfn3kt8y669vtgxfnyxnnfoy > PROXY SETADO: 212.87.212.134:38573 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: n4iquwlwsmqxrlmc0vg98pqmcbebm9 > PROXY SETADO: 185.148.146.189:20835 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: n4gf4u64or2zg2wd07hr10rvtvy81s > PROXY SETADO: 5.182.209.249:36468 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: snysy58iy2ksz97jtn5ghqbgtnje3u > PROXY SETADO: 212.87.213.73:17936 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: 39spq3jat4gvjhunqluymclfxdm40p > PROXY SETADO: 212.87.213.69:20631 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: 0czddurz8udy14c6e7eaomiswcppel > PROXY SETADO: 5.182.209.246:43171 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: 8xy6n5mnbs5cs4o200zag36vhnozy3 > PROXY SETADO: 5.182.209.248:43098 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: 7jf6xgj3fnqi6fbkvbl437obt59mmt > PROXY SETADO: 212.87.213.69:18031 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: pi817ih3iwnolmf0wr2vgbkkajx5fp > PROXY SETADO: 5.182.209.249:40701 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: cqe34gxqf8kgn96cacyjpxrzclwvjn > PROXY SETADO: 212.87.212.82:24014 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: cocsadad49pe5d1kylhf7c6ue0g2jz > PROXY SETADO: 212.87.212.43:48886 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: l0wo9c13b3mvg7et2o33g3bss4lzu9 > PROXY SETADO: 5.182.209.249:19036 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: zsvud1k1qeewffy0frby804ijwg6ov > PROXY SETADO: 185.148.146.189:39825 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: umcdpwb3zxlwc7fpoysi5hwn8ktl6a > PROXY SETADO: 185.148.146.189:46741 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: nxgh39kg34cmy6xd900wf02e7f82wc > PROXY SETADO: 5.182.209.246:28570 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: kgvvph4diaf447f6nvov635bt5mifh > PROXY SETADO: 5.182.209.249:42220 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: jof69mgm39jlgkt0dlwr4x9170dnpd > PROXY SETADO: 5.182.209.246:42592 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: q1zb61br6gktiwwcvkyq1lwqva6572 > PROXY SETADO: 5.182.209.247:25496 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: 8ckmo13gvg6sxbofp1sdfnbfyaj4i0 > PROXY SETADO: 5.182.209.249:32010 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: y8l9goh9von5c9vie1fxa3invw83cn > PROXY SETADO: 212.87.213.69:14012 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: kn10w24fgq5525ax9ftavti4k3ptz5 > PROXY SETADO: 5.182.209.246:42651 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: ujfidgvkqddfwvvyrws6lsc94jx4c3 > PROXY SETADO: 212.87.212.43:28630 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:36 > TOKEN SETADO: e395is8oumt7p6vzd51oxiuqu7po0l > PROXY SETADO: 5.182.209.247:16697 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:43 > TOKEN SETADO: jp8vwbpoyqxv2s8n3b5q0sx5fwl63s > PROXY SETADO: 212.87.213.73:39658 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:43 > TOKEN SETADO: c0kpm8er04x3fyrby5ceqnm8u2l110 > PROXY SETADO: 5.182.209.247:37679 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:44 > TOKEN SETADO: pm4xmy4p0f9nwi5f30149o7wr48z3o > PROXY SETADO: 185.148.146.189:18720 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:44 > TOKEN SETADO: ottkd2s28966da7g9agjtevjmgsjs6 > PROXY SETADO: 212.87.212.82:26684 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:45 > TOKEN SETADO: vkb93vvfiadk0bc5rggb796s2bo9ha > PROXY SETADO: 185.148.146.189:24504 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:45 > TOKEN SETADO: s6ipusfpyycj9fbemlzygblt7wxdr2 > PROXY SETADO: 185.148.146.192:38579 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:44 > TOKEN SETADO: s62cwckeo497smnjwcwqduxw36orq7 > PROXY SETADO: 212.87.212.148:40507 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:46 > TOKEN SETADO: 3theuzjeurlwkh4flkfi4rmhpbvy6a > PROXY SETADO: 5.182.209.249:36468 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:46 > TOKEN SETADO: 634wtrtn1p6j5dp6fptld6iv1virpx > PROXY SETADO: 185.148.146.189:33287 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:46 > TOKEN SETADO: pyrimva3nq00hhuyzdsek1t5amtq76 > PROXY SETADO: 5.182.209.248:24278 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:46 > TOKEN SETADO: 6yu0zsz3d1l39i8fi01iblfw8x0d89 > PROXY SETADO: 5.182.209.249:38262 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:45 > TOKEN SETADO: ffpmfqre57lu29mzz4sjrkpcl39ncn > PROXY SETADO: 5.182.209.246:44529 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:48 > TOKEN SETADO: je2w1ih874wgjocszlxvv3x55wsun4 > PROXY SETADO: 5.182.209.246:43171 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:48 > TOKEN SETADO: saabth4397yl1f2c8svuapdn1jshu5 > PROXY SETADO: 212.87.213.73:37719 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:48 > TOKEN SETADO: 2r5bndrc5pq0d2lb864n6vez5dgbzk > PROXY SETADO: 5.182.209.246:22654 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:48 > TOKEN SETADO: axrp0k9l49ug41je4mj1hbifuoxpsq > PROXY SETADO: 185.148.146.189:46741 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:48 > TOKEN SETADO: 1573pnjh879a2zl6m0qwpuc91zou54 > PROXY SETADO: 185.148.146.192:41711 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:48 > TOKEN SETADO: fwo9hjju8tlydn6zd03mt1uqw20zzh > PROXY SETADO: 5.182.209.247:52022 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:49 > TOKEN SETADO: xbslfi0g4om3p133ehxgtyqxqa192q > PROXY SETADO: 212.87.212.134:48234 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:49 > TOKEN SETADO: p8bpo32iturgkt2pycwpein1g7iw2o > PROXY SETADO: 5.182.209.246:45366 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:49 > TOKEN SETADO: 1tq2lrhs3c5teq1p29zxgm1nw9f4u6 > PROXY SETADO: 5.182.209.248:45061 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:50 > TOKEN SETADO: sfcssvu0bqtrb6bgjwk2ftafwsdlnc > PROXY SETADO: 5.182.209.247:25496 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:50 > TOKEN SETADO: 81sn3zplga0hguxtjb1snjiajmuxgf > PROXY SETADO: 5.182.209.247:34318 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:50 > TOKEN SETADO: xbgph5rhr8esqebmloajvfqpba25rb > PROXY SETADO: 5.182.209.249:19036 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:50 > TOKEN SETADO: yabhdouvbmitqs4sewg3xfa5fc1k44 > PROXY SETADO: 212.87.212.142:24591 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:50 > TOKEN SETADO: vbk3agqx7ok0rv1dt3d0sk5yyyschd > PROXY SETADO: 5.182.209.249:40701 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:50 > TOKEN SETADO: 4ezw0eoioaadluwv9znh0xctz9tv0o > PROXY SETADO: 212.87.212.82:47873 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:50 > TOKEN SETADO: x2u65lg4hy0dvpbjpjdicwyc7cu8x2 > PROXY SETADO: 212.87.213.73:17936 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:51 > TOKEN SETADO: 0qr3i23k75qqwi55m0edp7k9c8s1dd > PROXY SETADO: 5.182.209.248:43098 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:51 > TOKEN SETADO: sv9b5crusj8hyiz876rv7b35fdk3af > PROXY SETADO: 5.182.209.246:14387 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:51 > TOKEN SETADO: y68gtrg94ws31nafosojasnoa8efpe > PROXY SETADO: 185.148.146.192:20866 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:52 > TOKEN SETADO: 8k5128yequspqpgtr2gdthelbyptq0 > PROXY SETADO: 5.182.209.249:42220 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:52 > TOKEN SETADO: oqfslqgtqoa32ljcsx7e0p0deg886s > PROXY SETADO: 212.87.212.43:27697 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:53 > TOKEN SETADO: pmg6i0jktn276191avkj92wuyrufar > PROXY SETADO: 212.87.213.69:14012 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:54 > TOKEN SETADO: n78uyq570hfdu6xvjb9sre2ooma6hw > PROXY SETADO: 5.182.209.247:17099 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:55 > TOKEN SETADO: jxrffu8anz9fjay9v2crj6gbknwjjt > PROXY SETADO: 212.87.213.69:23843 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:56 > TOKEN SETADO: 4fejf4thpweqyr2iusfmpukefp100j > PROXY SETADO: 5.182.209.246:26885 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:58 > TOKEN SETADO: w60weg5pjj10gzl4qhw11rx5hs4z0q > PROXY SETADO: 212.87.212.134:52409 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:58 > TOKEN SETADO: s6o756gm3wkg8lrcokvh5lhk9plu7u > PROXY SETADO: 185.148.146.189:44991 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:58 > TOKEN SETADO: nko55r7ih4yldlfj05cum7jhrwrvfa > PROXY SETADO: 212.87.213.72:18519 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:59 > TOKEN SETADO: yygux8ayx9o102xqtqs9e5mmn74ued > PROXY SETADO: 5.182.209.247:28013 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:59 > TOKEN SETADO: lfxw1zi0j676qpio6bwuu3sfju3nuw > PROXY SETADO: 5.182.209.249:32010 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:59 > TOKEN SETADO: yy8hnqx18x6hkbzi4ip0bi601pfltg > PROXY SETADO: 5.182.209.246:22128 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:59 > TOKEN SETADO: bl4cfytn5o7eaqy00oml8f1mq7eaku > PROXY SETADO: 5.182.209.247:28524 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:58 > TOKEN SETADO: ydo55d55k1tkmx0z3mg9ammrfv9u1c > PROXY SETADO: 185.148.146.192:19862 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:59 > TOKEN SETADO: rr24yo3u7s15m9rdcztfyyzbb34t1w > PROXY SETADO: 185.148.146.165:21545 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:00 > TOKEN SETADO: eam8wo1dz5kr0gdi26t2a4p871zuhv > PROXY SETADO: 5.182.209.249:42735 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:00 > TOKEN SETADO: 3cwz1dop30819cy88emedf1eovrqed > PROXY SETADO: 5.182.209.248:19970 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:43:59 > TOKEN SETADO: dpe1j59fb21tm2521g0w0cwxujdv84 > PROXY SETADO: 5.182.209.248:49254 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:00 > TOKEN SETADO: n7doye13hqu0rkf9lkiq67fhutgrtl > PROXY SETADO: 212.87.213.72:28969 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:01 > TOKEN SETADO: 3ovdnaoywmm29xmmg63iig0n5yw0c0 > PROXY SETADO: 185.148.146.189:15575 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:00 > TOKEN SETADO: 6p8w539t3ig91xqxxdyyginezrq1xh > PROXY SETADO: 185.148.146.165:36789 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:01 > TOKEN SETADO: asrsz1s9oo904mmfllb8nequlqb607 > PROXY SETADO: 185.148.146.218:46954 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:03 > TOKEN SETADO: tp6z0lia4ugsarox6e8c6ino5iz7va > PROXY SETADO: 212.87.212.82:32918 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:05 > TOKEN SETADO: v0vzicil5bjhmddwol5ek9t2g8q653 > PROXY SETADO: 5.182.209.246:22654 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:05 > TOKEN SETADO: rvm0ve0fagr2pn9luckf1p1qde9m2c > PROXY SETADO: 5.182.209.247:32078 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:05 > TOKEN SETADO: wwvwc5uh6kh43d3pumcakkm6ar62db > PROXY SETADO: 212.87.213.69:20631 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:05 > TOKEN SETADO: ypvnvkqg7bby4m58mka3yyv4fono6j > PROXY SETADO: 212.87.213.69:18031 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:04 > TOKEN SETADO: guusl8gk8bq4zhbro1yk93aahd9e3u > PROXY SETADO: 212.87.212.142:41653 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:07 > TOKEN SETADO: jsfoyx14ssmwq1y1bmvzucq8p5uwd8 > PROXY SETADO: 185.148.146.165:32309 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:07 > TOKEN SETADO: wzz6cxnah3jwn53bn3nj38v42tn8rq > PROXY SETADO: 212.87.212.148:40507 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:07 > TOKEN SETADO: 8kneaw5pg9gzg0l88013xveuxqa5fh > PROXY SETADO: 5.182.209.247:52022 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:08 > TOKEN SETADO: su6kcd8dd6di8sjlj5ll2uxbyzywnv > PROXY SETADO: 212.87.212.134:38573 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:09 > TOKEN SETADO: wf1zkmekivewmm58sdnwr0zaib52jd > PROXY SETADO: 185.148.146.189:20835 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:09 > TOKEN SETADO: bv68ig3qp097xct7f1k5f3enuonncz > PROXY SETADO: 5.182.209.249:36468 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:11 > TOKEN SETADO: 5ikluc16pryvur4hni7vpbhb725lta > PROXY SETADO: 5.182.209.246:43171 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:11 > TOKEN SETADO: yaffjafpc7t0nfgr932vm72mv1s5af > PROXY SETADO: 5.182.209.248:16668 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:11 > TOKEN SETADO: lr72x854cgxensgwhav4zxeb6rm74j > PROXY SETADO: 5.182.209.248:43098 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:12 > TOKEN SETADO: pmo60imtyph2uowz6o4ogi6l1tps7e > PROXY SETADO: 5.182.209.249:40701 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:13 > TOKEN SETADO: 2ie2c4381cxvcurrkb046cawfj8nzj > PROXY SETADO: 5.182.209.249:36605 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:13 > TOKEN SETADO: 152k7le3emgs9ouwc2k70ki4lyuuns > PROXY SETADO: 212.87.212.82:24014 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:13 > TOKEN SETADO: 4ku8mvkzeuzdpu0izfbir33vg3kyq5 > PROXY SETADO: 5.182.209.249:19036 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:14 > TOKEN SETADO: gm7fttw7e2vfpgxpdpfv5legnl4rmz > PROXY SETADO: 5.182.209.247:16697 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:15 > TOKEN SETADO: bdgwv5r6avjve2vq8ou52ylt1p2tei > PROXY SETADO: 185.148.146.189:46741 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:15 > TOKEN SETADO: 1bouvh0dq0zxlafc9msu6bzgjfx8pg > PROXY SETADO: 5.182.209.247:25496 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:15 > TOKEN SETADO: 2h6wavqphpxc6vat5e8luckn90apwb > PROXY SETADO: 5.182.209.246:28570 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:17 > TOKEN SETADO: xeyolkyy6i010hc9odj1paydy3puht > PROXY SETADO: 5.182.209.249:42220 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:19 > TOKEN SETADO: 9hf820j8c6icnk6t1fsgycty2xq8cw > PROXY SETADO: 5.182.209.246:42651 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:44:19 > TOKEN SETADO: z2yv327y65evkbi1bf84ma9032yerv > PROXY SETADO: 212.87.213.73:39658 > ERRO: <asyncio.locks.Lock object at 0x00000138BBDEBB60 [locked]> is bound to a differe
+23/06 19:51:49 > TOKEN SETADO: sdvu5qfcft43iucc5jnl6ljxls1dct > PROXY SETADO: 5.182.209.247:32078 > PROXY SEM REDE (descartado, trocou)
+23/06 19:51:49 > TOKEN SETADO: 6s6dqys24ul62c096seyvjfnni8jiw > PROXY SETADO: 5.182.209.246:22654 > PROXY SEM REDE (descartado, trocou)
+23/06 19:51:49 > TOKEN SETADO: lf8yua0zu4o3okl3cr35ndxxkhs2m0 > PROXY SETADO: 5.182.209.249:36605 > PROXY SEM REDE (descartado, trocou)
+23/06 19:51:49 > TOKEN SETADO: n4gf4u64or2zg2wd07hr10rvtvy81s > PROXY SETADO: 5.182.209.249:36468 > PROXY SEM REDE (descartado, trocou)
+23/06 19:51:49 > TOKEN SETADO: 0czddurz8udy14c6e7eaomiswcppel > PROXY SETADO: 5.182.209.246:43171 > PROXY SEM REDE (descartado, trocou)
+23/06 19:51:49 > TOKEN SETADO: 8xy6n5mnbs5cs4o200zag36vhnozy3 > PROXY SETADO: 5.182.209.248:43098 > PROXY SEM REDE (descartado, trocou)
+23/06 19:51:49 > TOKEN SETADO: pi817ih3iwnolmf0wr2vgbkkajx5fp > PROXY SETADO: 5.182.209.249:40701 > PROXY SEM REDE (descartado, trocou)
+23/06 19:51:49 > TOKEN SETADO: l0wo9c13b3mvg7et2o33g3bss4lzu9 > PROXY SETADO: 5.182.209.249:19036 > PROXY SEM REDE (descartado, trocou)
+23/06 19:51:49 > TOKEN SETADO: nxgh39kg34cmy6xd900wf02e7f82wc > PROXY SETADO: 5.182.209.246:28570 > PROXY SEM REDE (descartado, trocou)
+23/06 19:51:49 > TOKEN SETADO: kgvvph4diaf447f6nvov635bt5mifh > PROXY SETADO: 5.182.209.249:42220 > PROXY SEM REDE (descartado, trocou)
+23/06 19:51:49 > TOKEN SETADO: jof69mgm39jlgkt0dlwr4x9170dnpd > PROXY SETADO: 5.182.209.246:42592 > PROXY SEM REDE (descartado, trocou)
+23/06 19:51:49 > TOKEN SETADO: q1zb61br6gktiwwcvkyq1lwqva6572 > PROXY SETADO: 5.182.209.247:25496 > PROXY SEM REDE (descartado, trocou)
+23/06 19:51:49 > TOKEN SETADO: 8ckmo13gvg6sxbofp1sdfnbfyaj4i0 > PROXY SETADO: 5.182.209.249:32010 > PROXY SEM REDE (descartado, trocou)
+23/06 19:51:49 > TOKEN SETADO: kn10w24fgq5525ax9ftavti4k3ptz5 > PROXY SETADO: 5.182.209.246:42651 > PROXY SEM REDE (descartado, trocou)
+23/06 19:53:23 > TOKEN SETADO: c0kpm8er04x3fyrby5ceqnm8u2l110 > PROXY SETADO: 5.182.209.247:37679 > PROXY SEM REDE (descartado, trocou)
+23/06 19:53:25 > TOKEN SETADO: s62cwckeo497smnjwcwqduxw36orq7 > PROXY SETADO: 212.87.212.148:40507 > PROXY SEM REDE (descartado, trocou)
+23/06 19:51:49 > TOKEN SETADO: e395is8oumt7p6vzd51oxiuqu7po0l > PROXY SETADO: 5.182.209.247:16697 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 153s
+23/06 19:51:49 > TOKEN SETADO: y8l9goh9von5c9vie1fxa3invw83cn > PROXY SETADO: 212.87.213.69:14012 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 161s
+23/06 19:51:49 > TOKEN SETADO: 7jf6xgj3fnqi6fbkvbl437obt59mmt > PROXY SETADO: 212.87.213.69:18031 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 187s
+23/06 20:01:02 > TOKEN SETADO: ujfidgvkqddfwvvyrws6lsc94jx4c3 > PROXY SETADO: 212.87.212.43:28630 > PROXY SEM REDE (descartado, trocou)
+23/06 20:01:02 > TOKEN SETADO: q1zb61br6gktiwwcvkyq1lwqva6572 > PROXY SETADO: 5.182.209.247:25496 > PROXY SEM REDE (descartado, trocou)
+23/06 20:01:02 > TOKEN SETADO: e395is8oumt7p6vzd51oxiuqu7po0l > PROXY SETADO: 5.182.209.247:16697 > PROXY SEM REDE (descartado, trocou)
+23/06 20:01:02 > TOKEN SETADO: 2qd8qzrizf44m4k6lngoejdbcy7ps0 > PROXY SETADO: 5.182.209.248:16668 > PROXY SEM REDE (descartado, trocou)
+23/06 20:01:02 > TOKEN SETADO: l3k76yo1rgmci8r8qg5kiixwa6ixz2 > PROXY SETADO: 5.182.209.247:52022 > PROXY SEM REDE (descartado, trocou)
+23/06 20:01:02 > TOKEN SETADO: sdvu5qfcft43iucc5jnl6ljxls1dct > PROXY SETADO: 5.182.209.247:32078 > PROXY SEM REDE (descartado, trocou)
+23/06 20:01:02 > TOKEN SETADO: 6s6dqys24ul62c096seyvjfnni8jiw > PROXY SETADO: 5.182.209.246:22654 > PROXY SEM REDE (descartado, trocou)
+23/06 20:01:02 > TOKEN SETADO: lf8yua0zu4o3okl3cr35ndxxkhs2m0 > PROXY SETADO: 5.182.209.249:36605 > PROXY SEM REDE (descartado, trocou)
+23/06 20:01:02 > TOKEN SETADO: n4gf4u64or2zg2wd07hr10rvtvy81s > PROXY SETADO: 5.182.209.249:36468 > PROXY SEM REDE (descartado, trocou)
+23/06 20:01:02 > TOKEN SETADO: 0czddurz8udy14c6e7eaomiswcppel > PROXY SETADO: 5.182.209.246:43171 > PROXY SEM REDE (descartado, trocou)
+23/06 20:01:02 > TOKEN SETADO: 8xy6n5mnbs5cs4o200zag36vhnozy3 > PROXY SETADO: 5.182.209.248:43098 > PROXY SEM REDE (descartado, trocou)
+23/06 20:01:02 > TOKEN SETADO: pi817ih3iwnolmf0wr2vgbkkajx5fp > PROXY SETADO: 5.182.209.249:40701 > PROXY SEM REDE (descartado, trocou)
+23/06 20:01:02 > TOKEN SETADO: l0wo9c13b3mvg7et2o33g3bss4lzu9 > PROXY SETADO: 5.182.209.249:19036 > PROXY SEM REDE (descartado, trocou)
+23/06 20:01:02 > TOKEN SETADO: kgvvph4diaf447f6nvov635bt5mifh > PROXY SETADO: 5.182.209.249:42220 > PROXY SEM REDE (descartado, trocou)
+23/06 20:01:02 > TOKEN SETADO: jof69mgm39jlgkt0dlwr4x9170dnpd > PROXY SETADO: 5.182.209.246:42592 > PROXY SEM REDE (descartado, trocou)
+23/06 20:01:02 > TOKEN SETADO: nxgh39kg34cmy6xd900wf02e7f82wc > PROXY SETADO: 5.182.209.246:28570 > PROXY SEM REDE (descartado, trocou)
+23/06 20:01:02 > TOKEN SETADO: 8ckmo13gvg6sxbofp1sdfnbfyaj4i0 > PROXY SETADO: 5.182.209.249:32010 > PROXY SEM REDE (descartado, trocou)
+23/06 20:01:02 > TOKEN SETADO: kn10w24fgq5525ax9ftavti4k3ptz5 > PROXY SETADO: 5.182.209.246:42651 > PROXY SEM REDE (descartado, trocou)
+23/06 20:02:30 > TOKEN SETADO: c0kpm8er04x3fyrby5ceqnm8u2l110 > PROXY SETADO: 5.182.209.247:37679 > PROXY SEM REDE (descartado, trocou)
+23/06 20:02:36 > TOKEN SETADO: s62cwckeo497smnjwcwqduxw36orq7 > PROXY SETADO: 212.87.212.148:40507 > PROXY SEM REDE (descartado, trocou)
+23/06 20:02:37 > TOKEN SETADO: s6ipusfpyycj9fbemlzygblt7wxdr2 > PROXY SETADO: 185.148.146.192:38579 > PROXY SEM REDE (descartado, trocou)
+23/06 20:03:05 > TOKEN SETADO: 1573pnjh879a2zl6m0qwpuc91zou54 > PROXY SETADO: 185.148.146.192:41711 > PROXY SEM REDE (descartado, trocou)
+23/06 20:03:32 > TOKEN SETADO: xbslfi0g4om3p133ehxgtyqxqa192q > PROXY SETADO: 212.87.212.134:48234 > FALHOU ABRIR PERFIL
+23/06 20:03:39 > TOKEN SETADO: p8bpo32iturgkt2pycwpein1g7iw2o > PROXY SETADO: 5.182.209.246:45366 > FALHOU ABRIR PERFIL
+23/06 20:03:13 > TOKEN SETADO: fwo9hjju8tlydn6zd03mt1uqw20zzh > PROXY SETADO: 5.182.209.247:52022 > PROXY SEM REDE (descartado, trocou)
+23/06 20:03:46 > TOKEN SETADO: x2u65lg4hy0dvpbjpjdicwyc7cu8x2 > PROXY SETADO: 212.87.213.73:17936 > FALHOU ABRIR PERFIL
+23/06 20:03:54 > TOKEN SETADO: sfcssvu0bqtrb6bgjwk2ftafwsdlnc > PROXY SETADO: 5.182.209.247:25496 > FALHOU ABRIR PERFIL
+23/06 20:04:01 > TOKEN SETADO: 81sn3zplga0hguxtjb1snjiajmuxgf > PROXY SETADO: 5.182.209.247:34318 > FALHOU ABRIR PERFIL
+23/06 20:01:02 > TOKEN SETADO: 2re3ts9f3gfmv2hbg9mxw158usvcst > PROXY SETADO: 185.148.146.165:32309 > CANAL: memfps > navegou > AD: MIDROLL 90s > DUROU: 157s
+23/06 20:01:02 > TOKEN SETADO: snysy58iy2ksz97jtn5ghqbgtnje3u > PROXY SETADO: 212.87.213.73:17936 > CANAL: memfps > navegou > AD: MIDROLL 90s > DUROU: 156s
+23/06 20:01:02 > TOKEN SETADO: y8l9goh9von5c9vie1fxa3invw83cn > PROXY SETADO: 212.87.213.69:14012 > CANAL: memfps > navegou > AD: PREROLL 20s > DUROU: 157s
+23/06 20:03:17 > TOKEN SETADO: 1tq2lrhs3c5teq1p29zxgm1nw9f4u6 > PROXY SETADO: 5.182.209.248:45061 > PROXY SEM REDE (descartado, trocou)
+23/06 20:01:02 > TOKEN SETADO: n4iquwlwsmqxrlmc0vg98pqmcbebm9 > PROXY SETADO: 185.148.146.189:20835 > CANAL: memfps > navegou > AD: MIDROLL 90s > DUROU: 183s
+23/06 20:02:31 > TOKEN SETADO: pm4xmy4p0f9nwi5f30149o7wr48z3o > PROXY SETADO: 185.148.146.189:18720 > CANAL: memfps > navegou > AD: MIDROLL 30s > DUROU: 132s
+23/06 20:02:13 > TOKEN SETADO: jp8vwbpoyqxv2s8n3b5q0sx5fwl63s > PROXY SETADO: 212.87.213.73:39658 > CANAL: memfps > navegou > AD: MIDROLL 60s > DUROU: 151s
+23/06 20:01:02 > TOKEN SETADO: 39spq3jat4gvjhunqluymclfxdm40p > PROXY SETADO: 212.87.213.69:20631 > CANAL: memfps > navegou > AD: MIDROLL 104s > DUROU: 191s
+23/06 20:04:03 > TOKEN SETADO: xbgph5rhr8esqebmloajvfqpba25rb > PROXY SETADO: 5.182.209.249:19036 > PROXY SEM REDE (descartado, trocou)
+23/06 20:01:02 > TOKEN SETADO: cqe34gxqf8kgn96cacyjpxrzclwvjn > PROXY SETADO: 212.87.212.82:24014 > CANAL: memfps > navegou > AD: MIDROLL 90s > DUROU: 189s
+23/06 20:01:02 > TOKEN SETADO: zsvud1k1qeewffy0frby804ijwg6ov > PROXY SETADO: 185.148.146.189:39825 > CANAL: memfps > navegou > AD: MIDROLL 96s > DUROU: 189s
+23/06 20:01:02 > TOKEN SETADO: 7jf6xgj3fnqi6fbkvbl437obt59mmt > PROXY SETADO: 212.87.213.69:18031 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 194s
+23/06 20:01:02 > TOKEN SETADO: byyxhskfn3kt8y669vtgxfnyxnnfoy > PROXY SETADO: 212.87.212.134:38573 > CANAL: memfps > navegou > AD: MIDROLL 119s > DUROU: 198s
+23/06 20:01:02 > TOKEN SETADO: umcdpwb3zxlwc7fpoysi5hwn8ktl6a > PROXY SETADO: 185.148.146.189:46741 > CANAL: memfps > navegou > AD: MIDROLL 101s > DUROU: 195s
+23/06 20:04:09 > TOKEN SETADO: yabhdouvbmitqs4sewg3xfa5fc1k44 > PROXY SETADO: 212.87.212.142:24591 > PROXY SEM REDE (descartado, trocou)
+23/06 20:01:02 > TOKEN SETADO: 6pl6kyblta6nawiwvbevnzv9ijdor2 > PROXY SETADO: 212.87.213.73:37719 > CANAL: memfps > navegou > AD: MIDROLL 120s > DUROU: 222s
+23/06 20:04:29 > TOKEN SETADO: vbk3agqx7ok0rv1dt3d0sk5yyyschd > PROXY SETADO: 5.182.209.249:40701 > PROXY SEM REDE (descartado, trocou)
+23/06 20:02:52 > TOKEN SETADO: axrp0k9l49ug41je4mj1hbifuoxpsq > PROXY SETADO: 185.148.146.189:46741 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 138s
+23/06 20:02:37 > TOKEN SETADO: ffpmfqre57lu29mzz4sjrkpcl39ncn > PROXY SETADO: 5.182.209.246:44529 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 154s
+23/06 20:02:43 > TOKEN SETADO: 6yu0zsz3d1l39i8fi01iblfw8x0d89 > PROXY SETADO: 5.182.209.249:38262 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 150s
+23/06 20:02:45 > TOKEN SETADO: saabth4397yl1f2c8svuapdn1jshu5 > PROXY SETADO: 212.87.213.73:37719 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 149s
+23/06 20:02:40 > TOKEN SETADO: pyrimva3nq00hhuyzdsek1t5amtq76 > PROXY SETADO: 5.182.209.248:24278 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 155s
+23/06 20:02:44 > TOKEN SETADO: a7exg9ypcrk8sr3amh5cjilghzzskq > PROXY SETADO: 185.148.146.165:32309 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 153s
+23/06 20:02:46 > TOKEN SETADO: 2r5bndrc5pq0d2lb864n6vez5dgbzk > PROXY SETADO: 5.182.209.246:22654 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 155s
+23/06 20:04:45 > TOKEN SETADO: 0qr3i23k75qqwi55m0edp7k9c8s1dd > PROXY SETADO: 5.182.209.248:43098 > PROXY SEM REDE (descartado, trocou)
+23/06 20:04:56 > TOKEN SETADO: sv9b5crusj8hyiz876rv7b35fdk3af > PROXY SETADO: 5.182.209.246:14387 > PROXY SEM REDE (descartado, trocou)
+23/06 20:05:06 > TOKEN SETADO: 8k5128yequspqpgtr2gdthelbyptq0 > PROXY SETADO: 5.182.209.249:42220 > PROXY SEM REDE (descartado, trocou)
+23/06 20:02:44 > TOKEN SETADO: je2w1ih874wgjocszlxvv3x55wsun4 > PROXY SETADO: 5.182.209.246:43171 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 176s
+23/06 20:05:06 > TOKEN SETADO: d7csqa5tyt591jmjk97vnhb5rlik77 > PROXY SETADO: 5.182.209.246:28732 > PROXY SEM REDE (descartado, trocou)
+23/06 20:02:37 > TOKEN SETADO: vkb93vvfiadk0bc5rggb796s2bo9ha > PROXY SETADO: 185.148.146.189:24504 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 191s
+23/06 20:05:09 > TOKEN SETADO: n78uyq570hfdu6xvjb9sre2ooma6hw > PROXY SETADO: 5.182.209.247:17099 > PROXY SEM REDE (descartado, trocou)
+23/06 20:05:10 > TOKEN SETADO: tsfhszzdgt4jukbxiddy3enldgfmcg > PROXY SETADO: 5.182.209.247:37898 > PROXY SEM REDE (descartado, trocou)
+23/06 20:05:11 > TOKEN SETADO: 0lrv0aoioi5etqodqup0pqiu38rwob > PROXY SETADO: 5.182.209.249:16652 > PROXY SEM REDE (descartado, trocou)
+23/06 20:02:38 > TOKEN SETADO: 3theuzjeurlwkh4flkfi4rmhpbvy6a > PROXY SETADO: 5.182.209.249:36468 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 193s
+23/06 20:05:12 > TOKEN SETADO: 4fejf4thpweqyr2iusfmpukefp100j > PROXY SETADO: 5.182.209.246:26885 > PROXY SEM REDE (descartado, trocou)
+23/06 20:02:40 > TOKEN SETADO: 634wtrtn1p6j5dp6fptld6iv1virpx > PROXY SETADO: 185.148.146.189:33287 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 197s
+23/06 20:05:39 > TOKEN SETADO: yygux8ayx9o102xqtqs9e5mmn74ued > PROXY SETADO: 5.182.209.247:28013 > PROXY SEM REDE (descartado, trocou)
+23/06 20:05:41 > TOKEN SETADO: lfxw1zi0j676qpio6bwuu3sfju3nuw > PROXY SETADO: 5.182.209.249:32010 > PROXY SEM REDE (descartado, trocou)
+23/06 20:05:45 > TOKEN SETADO: yy8hnqx18x6hkbzi4ip0bi601pfltg > PROXY SETADO: 5.182.209.246:22128 > PROXY SEM REDE (descartado, trocou)
+23/06 20:04:40 > TOKEN SETADO: y68gtrg94ws31nafosojasnoa8efpe > PROXY SETADO: 185.148.146.192:20866 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 130s
+23/06 20:04:33 > TOKEN SETADO: 4ezw0eoioaadluwv9znh0xctz9tv0o > PROXY SETADO: 212.87.212.82:47873 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 134s
+23/06 20:06:07 > TOKEN SETADO: 6p8w539t3ig91xqxxdyyginezrq1xh > PROXY SETADO: 185.148.146.165:36789 > PROXY SEM REDE (descartado, trocou)
+23/06 20:05:01 > TOKEN SETADO: oqfslqgtqoa32ljcsx7e0p0deg886s > PROXY SETADO: 212.87.212.43:27697 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 117s
+23/06 20:06:11 > TOKEN SETADO: 3ovdnaoywmm29xmmg63iig0n5yw0c0 > PROXY SETADO: 185.148.146.189:15575 > PROXY SEM REDE (descartado, trocou)
+23/06 20:05:07 > TOKEN SETADO: pmg6i0jktn276191avkj92wuyrufar > PROXY SETADO: 212.87.213.69:14012 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 128s
+23/06 20:07:10 > TOKEN SETADO: wzz6cxnah3jwn53bn3nj38v42tn8rq > PROXY SETADO: 212.87.212.148:40507 > PROXY SEM REDE (descartado, trocou)
+23/06 20:05:14 > TOKEN SETADO: w60weg5pjj10gzl4qhw11rx5hs4z0q > PROXY SETADO: 212.87.212.134:52409 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 126s
+23/06 20:07:13 > TOKEN SETADO: 8kneaw5pg9gzg0l88013xveuxqa5fh > PROXY SETADO: 5.182.209.247:52022 > PROXY SEM REDE (descartado, trocou)
+23/06 20:05:11 > TOKEN SETADO: jxrffu8anz9fjay9v2crj6gbknwjjt > PROXY SETADO: 212.87.213.69:23843 > CANAL: memfps > navegou > AD: PREROLL 30s > DUROU: 132s
+23/06 20:07:33 > TOKEN SETADO: ii5gwhe8uyi4ojr34yje3yizv31nn8 > PROXY SETADO: 212.87.212.43:48886 > FALHOU ABRIR PERFIL

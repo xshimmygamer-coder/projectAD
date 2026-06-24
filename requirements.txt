@@ -1,0 +1,5 @@
+flet==0.28.3
+requests
+playwright
+pywin32
+pillow
