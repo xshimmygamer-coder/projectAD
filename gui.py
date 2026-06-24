@@ -74,7 +74,8 @@ def main(page: ft.Page):
 
     # ── estado da RUN ──
     estado = {"rodando": False, "contador": {}}
-    _ui_lock = threading.Lock()   # serializa page.update() entre as threads (logs/preview)
+    # UI: APENAS o thread `atualizador` chama page.update(). As demais threads (consumidor
+    # de logs, preview) e os handlers só MEXEM nos controles -> zero corrida/lock/starvation.
 
     # ╔══ BANNER ══╗ (faixa full-width, altura fixa — corta topo/baixo)
     BANNER_H = 150
@@ -125,7 +126,6 @@ def main(page: ft.Page):
                                for g in grupos])
         chaves = {o.key for o in dd_group.options}
         dd_group.value = atual if atual in chaves else ""
-        page.update()
         aviso(f"{len(grupos)} grupo(s) detectado(s).")
 
     def salvar_apis(e):
@@ -341,8 +341,6 @@ def main(page: ft.Page):
                         _cards[n][1].src_base64 = b64
                         _cards[n][2].value = f"Perfil {n} · {canal}"
                 grid_preview.controls = [_cards[n][0] for n in sorted(_cards)]
-                with _ui_lock:
-                    page.update()
             except Exception:
                 pass
     threading.Thread(target=_refresh_preview, daemon=True).start()
@@ -352,8 +350,7 @@ def main(page: ft.Page):
         lista_logs.controls.append(ft.Text(msg, color=cor, size=13, selectable=True))
         if len(lista_logs.controls) > 600:
             del lista_logs.controls[:200]
-        with _ui_lock:
-            page.update()
+        # update e feito pelo thread `atualizador`
 
     def atualiza_contador():
         c = estado["contador"]
@@ -423,12 +420,22 @@ def main(page: ft.Page):
                         btn_parar.disabled = True
                 if len(lista_logs.controls) > 600:
                     del lista_logs.controls[:len(lista_logs.controls) - 400]
-                with _ui_lock:                        # 1 update por lote, serializado
-                    page.update()
             except Exception:
                 pass                                  # NUNCA deixa a thread morrer
 
     threading.Thread(target=consumidor, daemon=True).start()
+
+    def atualizador():
+        # UNICO chamador de page.update() — as outras threads so mexem nos controles.
+        # Se um update for lento/pesado (preview), so atrasa o proximo tick; nada congela
+        # nem morre. Logs/contador aparecem no proximo ciclo.
+        while True:
+            time.sleep(0.4)
+            try:
+                page.update()
+            except Exception:
+                pass
+    threading.Thread(target=atualizador, daemon=True).start()
 
     # ── start / stop ──
     def iniciar(e):
@@ -441,8 +448,6 @@ def main(page: ft.Page):
         add_log("Preparando RUN…", "#ffffff")
         btn_iniciar.disabled = True
         btn_parar.disabled = False
-        with _ui_lock:
-            page.update()
         # aplica a escolha do Preview DESTA run (orquestrador le do settings.json)
         run = config_store.carregar().get("run", {}) or {}
         run["preview"] = bool(chk_preview.value)
@@ -463,8 +468,6 @@ def main(page: ft.Page):
         add_log("Parando… fechando perfis.", "#ffffff")
         eventos.parar.set()
         btn_parar.disabled = True
-        with _ui_lock:
-            page.update()
 
     btn_iniciar.on_click = iniciar
     btn_parar.on_click = parar
