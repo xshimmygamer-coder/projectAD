@@ -466,3 +466,73 @@ Call log:
 23/06 22:16:08 > TOKEN SETADO: 9lolnlkjurf9b19ei374ff5n4bq76y > PROXY SETADO: 212.87.212.82:47873 > CANAL: vitinho > navegou > sem anuncio > DUROU: 161s
 23/06 22:17:04 > TOKEN SETADO: mjdbgq01y6sokwmjkwluv3nk9yu57v > PROXY SETADO: 5.182.209.248:49254 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 107s
 23/06 22:16:34 > TOKEN SETADO: lkihoboo49wzw0z81aqzwybqwre9o5 > PROXY SETADO: 5.182.209.247:37898 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 139s
+23/06 22:22:00 > TOKEN SETADO: ju6fl3irdrlsj9lzkecql2hg6rinxb > PROXY SETADO: 212.87.213.69:14012 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:22:00 > TOKEN SETADO: btvvv80rw7yq2tbkgxzk5jhmwo1i9p > PROXY SETADO: 5.182.209.246:42651 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:22:00 > TOKEN SETADO: axrp0k9l49ug41je4mj1hbifuoxpsq > PROXY SETADO: 212.87.212.82:26684 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:22:00 > TOKEN SETADO: liynwqbvo26ucqht3f3n3hr06dq90i > PROXY SETADO: 212.87.213.73:39658 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:22:00 > TOKEN SETADO: 8dkbsrud2hduno2sjgfedm4enw2ud4 > PROXY SETADO: 185.148.146.189:18720 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:22:00 > TOKEN SETADO: 4ku8mvkzeuzdpu0izfbir33vg3kyq5 > PROXY SETADO: 212.87.212.82:24014 > PROXY SEM REDE (descartado, trocou)
+23/06 22:22:00 > TOKEN SETADO: 2qd8qzrizf44m4k6lngoejdbcy7ps0 > PROXY SETADO: 5.182.209.247:32078 > PROXY SEM REDE (descartado, trocou)
+23/06 22:22:00 > TOKEN SETADO: sgmtaf94503i8moe6aeh4e9j2xqvdx > PROXY SETADO: 5.182.209.249:36605 > PROXY SEM REDE (descartado, trocou)
+23/06 22:22:00 > TOKEN SETADO: vns9tqcy5vg8q21peskijy4urppr78 > PROXY SETADO: 185.148.146.189:39825 > PROXY SEM REDE (descartado, trocou)
+23/06 22:22:00 > TOKEN SETADO: zag5t4cdf71quaiz4120guq0ixbhyj > PROXY SETADO: 5.182.209.246:28570 > PROXY SEM REDE (descartado, trocou)
+23/06 22:22:00 > TOKEN SETADO: neyjqaktgt98ljd21x9a9fczy5lbrw > PROXY SETADO: 5.182.209.249:32010 > PROXY SEM REDE (descartado, trocou)
+23/06 22:22:00 > TOKEN SETADO: e395is8oumt7p6vzd51oxiuqu7po0l > PROXY SETADO: 212.87.212.82:50754 > PROXY SEM REDE (descartado, trocou)
+23/06 22:22:00 > TOKEN SETADO: n4iquwlwsmqxrlmc0vg98pqmcbebm9 > PROXY SETADO: 5.182.209.246:42592 > PROXY SEM REDE (descartado, trocou)
+23/06 22:22:00 > TOKEN SETADO: a9ixh6mo2aegag1ta3egrgbw4i45ob > PROXY SETADO: 212.87.213.73:37719 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:22:00 > TOKEN SETADO: vd5mzik1yw6p4cd7w3jzwtirlk4u18 > PROXY SETADO: 212.87.213.73:17936 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:22:00 > TOKEN SETADO: w60weg5pjj10gzl4qhw11rx5hs4z0q > PROXY SETADO: 185.148.146.189:24504 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:22:00 > TOKEN SETADO: 2sl1a7kjso49h3yfs6q0iweg3dfhbi > PROXY SETADO: 5.182.209.249:38262 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:22:00 > TOKEN SETADO: ruqhk11lbp818mzrjfycn7wf9b3l9h > PROXY SETADO: 212.87.212.134:48234 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:22:00 > TOKEN SETADO: 7li19hh8sxh6oca47zmwc6a22f2u2b > PROXY SETADO: 5.182.209.248:45061 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:22:58 > TOKEN SETADO: y8l9goh9von5c9vie1fxa3invw83cn > PROXY SETADO: 5.182.209.246:45366 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:00 > TOKEN SETADO: 6pl6kyblta6nawiwvbevnzv9ijdor2 > PROXY SETADO: 5.182.209.247:34318 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:01 > TOKEN SETADO: m4ibc25zq12665ruvtp8qxwbjhzpbu > PROXY SETADO: 5.182.209.249:19036 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:01 > TOKEN SETADO: 9lolnlkjurf9b19ei374ff5n4bq76y > PROXY SETADO: 212.87.212.82:47873 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:02 > TOKEN SETADO: ujmop3p4rqsk93er2mk0jvi2m6heoz > PROXY SETADO: 5.182.209.248:43098 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:03 > TOKEN SETADO: utdex0l22ba94q1r1riz195jr93x7k > PROXY SETADO: 5.182.209.246:14387 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:03 > TOKEN SETADO: ypvnvkqg7bby4m58mka3yyv4fono6j > PROXY SETADO: 5.182.209.246:28732 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:04 > TOKEN SETADO: 23cgso9j21g86xogh9pb4exe41pjhy > PROXY SETADO: 212.87.212.43:27697 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:06 > TOKEN SETADO: g3l7r446i6xekweby33o6w0pfk47ua > PROXY SETADO: 212.87.213.69:14012 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:07 > TOKEN SETADO: tp6z0lia4ugsarox6e8c6ino5iz7va > PROXY SETADO: 5.182.209.247:17099 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:07 > TOKEN SETADO: w459hfz8dh4qmkdkydnogl93lloug1 > PROXY SETADO: 5.182.209.249:16652 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:07 > TOKEN SETADO: jt7mzi62nw09rkb1swm2rjoux5h4w4 > PROXY SETADO: 212.87.213.69:23843 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:07 > TOKEN SETADO: lkihoboo49wzw0z81aqzwybqwre9o5 > PROXY SETADO: 5.182.209.247:37898 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:09 > TOKEN SETADO: skrkurdlfvg339gp36fygmixb9xc2p > PROXY SETADO: 212.87.213.72:18519 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:09 > TOKEN SETADO: 54cfelggsr121yk644lvmvzygjfikj > PROXY SETADO: 212.87.212.134:52409 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:12 > TOKEN SETADO: 1bouvh0dq0zxlafc9msu6bzgjfx8pg > PROXY SETADO: 5.182.209.249:32010 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:13 > TOKEN SETADO: e3rize7oop4onyv7s1c3adal5y1v1r > PROXY SETADO: 5.182.209.246:26885 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:13 > TOKEN SETADO: 0mrunlwnoy4jfjsetcfowjuw3zgsvj > PROXY SETADO: 5.182.209.247:28013 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:13 > TOKEN SETADO: mjdbgq01y6sokwmjkwluv3nk9yu57v > PROXY SETADO: 5.182.209.248:49254 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:24 > TOKEN SETADO: s34xvmeyzkywiyuosoghyfgp1n11fn > PROXY SETADO: 5.182.209.247:28524 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:25 > TOKEN SETADO: m1q91vu3l7fw7w6m5wxsjswcr4l988 > PROXY SETADO: 5.182.209.249:42735 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:31 > TOKEN SETADO: v0vzicil5bjhmddwol5ek9t2g8q653 > PROXY SETADO: 212.87.213.72:28969 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:23:32 > TOKEN SETADO: xawqtk1mvzxwxet9c5cu30dojgdvy2 > PROXY SETADO: 185.148.146.165:21545 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:22:00 > TOKEN SETADO: yf49diackuqrv5efz3x7hnm5jbok3d > PROXY SETADO: 212.87.213.69:18031 > CANAL: vitinho > NAO chegou > sem anuncio > DUROU: 74s
+23/06 22:23:39 > TOKEN SETADO: w48m5tl4683hngthgo8cjapwlsdmj0 > PROXY SETADO: 212.87.212.134:14823 > ERRO: BrowserType.connect_over_cdp: Connection closed while reading from the driver
+23/06 22:22:00 > TOKEN SETADO: gq76n4dnuwwa0s3560nkc5nao4lf94 > PROXY SETADO: 5.182.209.247:16697 > CANAL: vitinho > NAO chegou > sem anuncio > DUROU: 81s
+23/06 22:22:00 > TOKEN SETADO: x3d8sm0vrow6lvew3lyk1n1am7jw2d > PROXY SETADO: 212.87.213.69:20631 > CANAL: vitinho > NAO chegou > sem anuncio > DUROU: 85s
+23/06 22:24:48 > TOKEN SETADO: 3fqsgjq0963f1uggl5cpiq7lcgufa4 > PROXY SETADO: 5.182.209.248:16668 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 66s
+23/06 22:24:47 > TOKEN SETADO: gq76n4dnuwwa0s3560nkc5nao4lf94 > PROXY SETADO: 5.182.209.247:16697 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 72s
+23/06 22:24:43 > TOKEN SETADO: nizfvpyi2a1qonbe97kxas0t62b0hc > PROXY SETADO: 212.87.213.73:37719 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 88s
+23/06 22:24:46 > TOKEN SETADO: skv6i3c0qbss04k4nrq9t7qh5b9rai > PROXY SETADO: 212.87.212.134:38573 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 84s
+23/06 22:24:44 > TOKEN SETADO: x3d8sm0vrow6lvew3lyk1n1am7jw2d > PROXY SETADO: 212.87.213.69:20631 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 94s
+23/06 22:24:45 > TOKEN SETADO: 4ku8mvkzeuzdpu0izfbir33vg3kyq5 > PROXY SETADO: 212.87.212.82:24014 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 96s
+23/06 22:24:49 > TOKEN SETADO: 7rq3c10vidmr5l3nffs81cnpbluly2 > PROXY SETADO: 212.87.213.73:17936 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 81s
+23/06 22:24:53 > TOKEN SETADO: bxdr2c549lvghmtzdn145t7vjm7moa > PROXY SETADO: 185.148.146.189:20835 > CANAL: vitinho > navegou > AD: PREROLL 15s > DUROU: 69s
+23/06 22:24:51 > TOKEN SETADO: yf49diackuqrv5efz3x7hnm5jbok3d > PROXY SETADO: 212.87.213.69:18031 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 75s
+23/06 22:24:52 > TOKEN SETADO: aotiaj8yky1vy25ysaoqced22688jk > PROXY SETADO: 5.182.209.249:19036 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 75s
+23/06 22:24:54 > TOKEN SETADO: hp69dxmgsvvlidfesaihc67uiqkke1 > PROXY SETADO: 212.87.212.43:48886 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 74s
+23/06 22:24:50 > TOKEN SETADO: 4fejf4thpweqyr2iusfmpukefp100j > PROXY SETADO: 5.182.209.248:43098 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 86s
+23/06 22:24:59 > TOKEN SETADO: neyjqaktgt98ljd21x9a9fczy5lbrw > PROXY SETADO: 5.182.209.249:32010 > CANAL: vitinho > navegou > AD: PREROLL 15s > DUROU: 58s
+23/06 22:25:07 > TOKEN SETADO: w60weg5pjj10gzl4qhw11rx5hs4z0q > PROXY SETADO: 185.148.146.189:24504 > PROXY SEM REDE (descartado, trocou)
+23/06 22:24:58 > TOKEN SETADO: zag5t4cdf71quaiz4120guq0ixbhyj > PROXY SETADO: 5.182.209.246:28570 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 67s
+23/06 22:25:08 > TOKEN SETADO: 2sl1a7kjso49h3yfs6q0iweg3dfhbi > PROXY SETADO: 5.182.209.249:38262 > PROXY SEM REDE (descartado, trocou)
+23/06 22:24:57 > TOKEN SETADO: vns9tqcy5vg8q21peskijy4urppr78 > PROXY SETADO: 185.148.146.189:39825 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 77s
+23/06 22:25:10 > TOKEN SETADO: 7li19hh8sxh6oca47zmwc6a22f2u2b > PROXY SETADO: 5.182.209.248:45061 > PROXY SEM REDE (descartado, trocou)
+23/06 22:24:56 > TOKEN SETADO: sgmtaf94503i8moe6aeh4e9j2xqvdx > PROXY SETADO: 5.182.209.249:36605 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 90s
+23/06 22:25:00 > TOKEN SETADO: n4iquwlwsmqxrlmc0vg98pqmcbebm9 > PROXY SETADO: 5.182.209.246:42592 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 84s
+23/06 22:24:55 > TOKEN SETADO: 2qd8qzrizf44m4k6lngoejdbcy7ps0 > PROXY SETADO: 5.182.209.247:32078 > CANAL: vitinho > navegou > sem anuncio > DUROU: 121s
+23/06 22:26:11 > TOKEN SETADO: y8l9goh9von5c9vie1fxa3invw83cn > PROXY SETADO: 5.182.209.246:45366 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 71s
+23/06 22:25:12 > TOKEN SETADO: ruqhk11lbp818mzrjfycn7wf9b3l9h > PROXY SETADO: 212.87.212.134:48234 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 87s
+23/06 22:26:50 > TOKEN SETADO: 23cgso9j21g86xogh9pb4exe41pjhy > PROXY SETADO: 212.87.212.43:27697 > CANAL: vitinho > navegou > AD: PREROLL 15s > DUROU: 84s

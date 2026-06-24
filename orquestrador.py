@@ -347,7 +347,7 @@ async def slot_loop(uid, contas_q, proxies_q, pw, canal, stop_event, inicio_dela
 # porta do limite da API (gate ~0.55s = ~109 RPM, sem cap) com muitos navegando
 # juntos; o Conservador abre devagar, sem risco de cap.
 PRESETS_ABERTURA = {
-    "turbo":       dict(max_abrindo=50, abrir_intervalo=0.0, stagger=0.0, api=0.55,
+    "turbo":       dict(max_abrindo=10, abrir_intervalo=0.8, stagger=0.5, api=0.55,
                         batch=0, batch_pausa=0),
     "moderado":    dict(max_abrindo=6,  abrir_intervalo=1.5, stagger=1.0, api=0.7,
                         batch=0, batch_pausa=0),

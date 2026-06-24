@@ -218,7 +218,8 @@ A GUI tem **1 seletor "Modo de abertura"** (não mais campos soltos). Cada modo 
 em `PRESETS_ABERTURA` (orquestrador) aplicado por `_aplicar_modo_abertura(modo)`, que seta
 internamente `MAX_ABRINDO` (semáforo), `ABRIR_INTERVALO_S`, `STAGGER_START_S`,
 `API_MIN_INTERVALO_S` (e `BATCH_*`, hoje 0):
-- **turbo**: max_abrindo=50, intervalo=0, stagger=0, api=0.55 → enche no limite da API (~109 RPM).
+- **turbo**: max_abrindo=10, intervalo=0.8, stagger=0.5, api=0.55 → rápido (API no talo) mas
+  com concorrência CDP capada em 10 (50 colapsava o CDP do AdsPower).
 - **moderado**: max_abrindo=6, intervalo=1.5, stagger=1.0, api=0.7 → meio-termo.
 - **conservador**: max_abrindo=3, intervalo=4.0, stagger=2.5, api=1.1 → bem cadenciado, sem cap.
 Config salva como `modo_abertura` em settings.json[run]. O gargalo real é sempre a API
