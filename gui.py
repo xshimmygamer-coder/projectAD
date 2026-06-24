@@ -215,12 +215,13 @@ def main(page: ft.Page):
     f_pausa_max = ft.TextField(label="Pausa p/ reabrir MAX (s)", value=gr("pausa_reabrir_max_s", 20), width=220)
     f_to_nav = ft.TextField(label="Timeout navegação (ms)", value=gr("timeout_nav_ms", 30000), width=220)
     f_to_rede = ft.TextField(label="Timeout rede proxy (ms)", value=gr("timeout_rede_ms", 20000), width=220)
+    f_proxy_falhas = ft.TextField(label="Descartar proxy após N falhas (0=nunca)", value=gr("proxy_max_falhas", 3), width=260)
 
     # ── LEGIBILIDADE: texto branco + fundo do campo + borda (some no fundo escuro) ──
     for _c in (f_api_key, f_api_base, f_api_filtro, f_proxies, f_tokens,
                f_canais, f_nperfis, f_sess_min, f_sess_max, f_grace_min, f_grace_max,
                f_ad_marg, f_bau_check, f_prev_int, f_pausa_min, f_pausa_max,
-               f_q_alvo, f_to_nav, f_to_rede):
+               f_q_alvo, f_to_nav, f_to_rede, f_proxy_falhas):
         _c.color = "#ffffff"
         _c.bgcolor = CARD
         _c.border_color = "#3a3a3d"
@@ -265,6 +266,7 @@ def main(page: ft.Page):
             "pausa_reabrir_max_s": _f(f_pausa_max, 20),
             "timeout_nav_ms": _i(f_to_nav, 30000),
             "timeout_rede_ms": _i(f_to_rede, 20000),
+            "proxy_max_falhas": _i(f_proxy_falhas, 3),
         })
         aviso("Configurações da RUN salvas.")
 
@@ -283,7 +285,7 @@ def main(page: ft.Page):
         _linha(f_bau, f_bau_check),
         _linha(f_prev, f_prev_int),
         _linha(f_pausa_min, f_pausa_max),
-        _linha(f_to_nav, f_to_rede),
+        _linha(f_to_nav, f_to_rede, f_proxy_falhas),
         ft.FilledButton("Salvar", on_click=salvar_configs, style=ft.ButtonStyle(bgcolor=ROXO)),
     ], spacing=12, scroll=ft.ScrollMode.AUTO))
 
@@ -383,6 +385,8 @@ def main(page: ft.Page):
             return f"Perfil {n} saiu de {canal} (durou {ev.get('dur')}s)", CINZA
         if t == "proxy_morto":
             return f"Perfil {n}: proxy sem rede — trocando de proxy", "#ff6b6b"
+        if t == "proxy_descartado":
+            return f"Perfil {n}: proxy descartado (sem rede demais) — fora do rodízio", "#ff6b6b"
         if t == "falha_abrir":
             return f"Perfil {n}: falha ao abrir — tentando outra conta", "#ff6b6b"
         if t == "erro":

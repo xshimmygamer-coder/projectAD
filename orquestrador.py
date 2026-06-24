@@ -81,6 +81,9 @@ PREVIEW_INTERVALO  = 2.0       # s entre screenshots de cada perfil
 # perfis executando acoes ao mesmo tempo).
 PAUSA_REABRIR_MIN_S = 8
 PAUSA_REABRIR_MAX_S = 20
+# Descarte de proxy: apos N falhas de rede, o proxy sai do rodizio (residencial
+# estatico que falha N vezes esta expirado). 0 = nunca descarta (sempre re-tenta).
+PROXY_MAX_FALHAS = 3
 LOG_CICLOS     = True         # grava 1 linha por ciclo (horario, token, proxy) em...
 ARQ_LOG_CICLOS = "ciclos_log.txt"
 
@@ -89,6 +92,16 @@ def _agora():
 
 # ── Log unico de ciclos (token + proxy usados, sem ID de perfil) ──────────────
 _log_lock = threading.Lock()
+_proxy_falhas = {}   # proxy -> nº de falhas de rede consecutivas (p/ descarte)
+
+def _registrar_proxy_morto(proxy):
+    """Anexa um proxy descartado em proxies_mortos.txt (auditoria)."""
+    try:
+        with _log_lock:
+            with open(paths.arquivo("proxies_mortos.txt"), "a", encoding="utf-8") as f:
+                f.write(proxy + "\n")
+    except OSError:
+        pass
 
 def log_ciclo(ts, linha):
     """Anexa uma linha ao log de ciclos: '<dd/mm HH:MM:SS> > <linha>'. ts = datetime
@@ -298,6 +311,7 @@ async def slot_loop(uid, contas_q, proxies_q, pw, canal, stop_event, inicio_dela
                 _liberou["v"] = True
                 sem.release()
 
+        descartar_proxy = False
         try:
             port = await abrir_perfil(uid, conta, proxy)
             if not port:
@@ -317,14 +331,24 @@ async def slot_loop(uid, contas_q, proxies_q, pw, canal, stop_event, inicio_dela
             log_ciclo(t0, f"{base} > CANAL: {canal} > {nav} > {ad_txt} > DUROU: {dur}s")
             eventos.emit("fim", n=slot_n, canal=canal,
                          teve_ad=bool(resumo and resumo["teve_ad"]), dur=dur)
+            _proxy_falhas.pop(proxy, None)   # funcionou -> zera strikes desse proxy
         except navegacao.ProxySemRede:
-            # proxy sem rede: fecha o perfil e reinicia o ciclo com OUTRO proxy.
-            # devolve esse proxy pro FIM da fila (residencial costuma voltar) e
-            # a proxima volta pega um proxy diferente da frente.
-            print(f"[{rotulo}] PROXY SEM REDE ({proxy.split(':')[0]}) — fechando e "
-                  f"trocando de proxy", flush=True)
-            log_ciclo(t0, f"{base} > PROXY SEM REDE (descartado, trocou)")
-            eventos.emit("proxy_morto", n=slot_n, canal=canal)
+            # proxy sem rede: conta um strike. Se atingiu PROXY_MAX_FALHAS, DESCARTA
+            # (nao devolve a fila) — residencial estatico que falha N vezes esta morto.
+            n_fal = _proxy_falhas.get(proxy, 0) + 1
+            _proxy_falhas[proxy] = n_fal
+            if PROXY_MAX_FALHAS > 0 and n_fal >= PROXY_MAX_FALHAS:
+                descartar_proxy = True
+                _registrar_proxy_morto(proxy)
+                print(f"[{rotulo}] PROXY {proxy.split(':')[0]} sem rede {n_fal}x — "
+                      f"DESCARTADO (saiu do rodizio)", flush=True)
+                log_ciclo(t0, f"{base} > PROXY DESCARTADO ({n_fal} falhas)")
+                eventos.emit("proxy_descartado", n=slot_n, canal=canal)
+            else:
+                print(f"[{rotulo}] PROXY {proxy.split(':')[0]} sem rede "
+                      f"({n_fal}/{PROXY_MAX_FALHAS}) — troca", flush=True)
+                log_ciclo(t0, f"{base} > PROXY SEM REDE ({n_fal}/{PROXY_MAX_FALHAS})")
+                eventos.emit("proxy_morto", n=slot_n, canal=canal)
         except Exception as e:
             print(f"[{rotulo}] erro: {str(e)[:140]}", flush=True)
             log_ciclo(t0, f"{base} > ERRO: {str(e)[:80]}")
@@ -335,8 +359,9 @@ async def slot_loop(uid, contas_q, proxies_q, pw, canal, stop_event, inicio_dela
                 await _ads(swap.stop, uid)
             except Exception:
                 pass
-            await contas_q.put(conta)     # devolve pra pool (rotaciona)
-            await proxies_q.put(proxy)    # vai pro fim; a proxima get pega outro
+            await contas_q.put(conta)     # devolve a conta pra pool (rotaciona)
+            if not descartar_proxy:
+                await proxies_q.put(proxy) # devolve o proxy; se descartado, SAI do rodizio
 
         # CADENCIA: pausa randomizada apos fechar, antes de reabrir (menos perfis juntos)
         if not stop_event.is_set() and PAUSA_REABRIR_MAX_S > 0:
@@ -374,7 +399,7 @@ def _aplicar_config_run():
     global SESSAO_MIN_S, SESSAO_MAX_S, GRACE_POS_AD_MIN_S, GRACE_POS_AD_MAX_S
     global AD_FIM_MARGEM_S, API_MIN_INTERVALO_S, STAGGER_START_S, BAU, BAU_CHECK_S
     global PREVIEW, PREVIEW_INTERVALO, PAUSA_REABRIR_MIN_S, PAUSA_REABRIR_MAX_S
-    global TIMEOUT_NAV, TIMEOUT_REDE
+    global TIMEOUT_NAV, TIMEOUT_REDE, PROXY_MAX_FALHAS
     global FORCAR_QUALIDADE, QUALIDADE_ALVO, TEMA_ESCURO, MAX_ABRINDO, ABRIR_INTERVALO_S
     global BATCH_SIZE, BATCH_PAUSA_S
     swap.aplicar_config_adspower()
@@ -394,6 +419,7 @@ def _aplicar_config_run():
     PREVIEW_INTERVALO = float(g("preview_intervalo", PREVIEW_INTERVALO))
     PAUSA_REABRIR_MIN_S = float(g("pausa_reabrir_min_s", PAUSA_REABRIR_MIN_S))
     PAUSA_REABRIR_MAX_S = float(g("pausa_reabrir_max_s", PAUSA_REABRIR_MAX_S))
+    PROXY_MAX_FALHAS = int(g("proxy_max_falhas", PROXY_MAX_FALHAS))
     TIMEOUT_NAV = int(g("timeout_nav_ms", TIMEOUT_NAV))
     TIMEOUT_REDE = int(g("timeout_rede_ms", TIMEOUT_REDE))
     FORCAR_QUALIDADE = bool(g("forcar_qualidade", FORCAR_QUALIDADE))
@@ -417,12 +443,14 @@ async def amain():
     # entao recriamos os locks/contadores AQUI, ligados ao loop ATUAL -> evita o erro
     # "Lock bound to a different event loop" ao iniciar a 2a RUN.
     global _api_lock, _abrir_lock, _batch_lock, _api_ultimo, _abrir_ultimo, _batch_n
+    global _proxy_falhas
     _api_lock = asyncio.Lock()
     _abrir_lock = asyncio.Lock()
     _batch_lock = asyncio.Lock()
     _api_ultimo = 0.0
     _abrir_ultimo = 0.0
     _batch_n = 0
+    _proxy_falhas = {}   # zera os strikes de proxy a cada RUN
     # argv ainda sobrescreve (modo CLI): [n_perfis] [canais,virgula]
     if len(sys.argv) > 1 and sys.argv[1].isdigit():
         n = int(sys.argv[1])

@@ -536,3 +536,17 @@ Call log:
 23/06 22:26:11 > TOKEN SETADO: y8l9goh9von5c9vie1fxa3invw83cn > PROXY SETADO: 5.182.209.246:45366 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 71s
 23/06 22:25:12 > TOKEN SETADO: ruqhk11lbp818mzrjfycn7wf9b3l9h > PROXY SETADO: 212.87.212.134:48234 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 87s
 23/06 22:26:50 > TOKEN SETADO: 23cgso9j21g86xogh9pb4exe41pjhy > PROXY SETADO: 212.87.212.43:27697 > CANAL: vitinho > navegou > AD: PREROLL 15s > DUROU: 84s
+23/06 22:26:52 > TOKEN SETADO: g3l7r446i6xekweby33o6w0pfk47ua > PROXY SETADO: 212.87.213.69:14012 > CANAL: vitinho > navegou > sem anuncio > DUROU: 134s
+23/06 22:27:01 > TOKEN SETADO: jt7mzi62nw09rkb1swm2rjoux5h4w4 > PROXY SETADO: 212.87.213.69:23843 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 110s
+23/06 22:26:48 > TOKEN SETADO: ypvnvkqg7bby4m58mka3yyv4fono6j > PROXY SETADO: 5.182.209.246:28732 > CANAL: vitinho > navegou > AD: MIDROLL 90s > DUROU: 152s
+23/06 22:27:09 > TOKEN SETADO: lkihoboo49wzw0z81aqzwybqwre9o5 > PROXY SETADO: 5.182.209.247:37898 > CANAL: vitinho > navegou > AD: MIDROLL 30s > DUROU: 105s
+23/06 22:25:02 > TOKEN SETADO: ju6fl3irdrlsj9lzkecql2hg6rinxb > PROXY SETADO: 212.87.213.69:14012 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 248s
+23/06 22:27:17 > TOKEN SETADO: 54cfelggsr121yk644lvmvzygjfikj > PROXY SETADO: 212.87.212.134:52409 > CANAL: vitinho > navegou > AD: MIDROLL 36s > DUROU: 104s
+23/06 22:26:42 > TOKEN SETADO: utdex0l22ba94q1r1riz195jr93x7k > PROXY SETADO: 5.182.209.246:14387 > CANAL: vitinho > navegou > AD: MIDROLL 120s > DUROU: 177s
+23/06 22:25:05 > TOKEN SETADO: liynwqbvo26ucqht3f3n3hr06dq90i > PROXY SETADO: 212.87.213.73:39658 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 257s
+23/06 22:25:11 > TOKEN SETADO: vd5mzik1yw6p4cd7w3jzwtirlk4u18 > PROXY SETADO: 212.87.213.73:17936 > CANAL: vitinho > navegou > AD: MIDROLL 156s > DUROU: 225s
+23/06 22:25:06 > TOKEN SETADO: 8dkbsrud2hduno2sjgfedm4enw2ud4 > PROXY SETADO: 185.148.146.189:18720 > CANAL: vitinho > navegou > AD: PREROLL 30s > DUROU: 258s
+23/06 22:26:54 > TOKEN SETADO: w459hfz8dh4qmkdkydnogl93lloug1 > PROXY SETADO: 5.182.209.249:16652 > CANAL: vitinho > navegou > AD: MIDROLL 60s > DUROU: 148s
+23/06 22:26:32 > TOKEN SETADO: 9lolnlkjurf9b19ei374ff5n4bq76y > PROXY SETADO: 212.87.212.82:47873 > CANAL: vitinho > navegou > AD: MIDROLL 135s > DUROU: 205s
+23/06 22:27:12 > TOKEN SETADO: skrkurdlfvg339gp36fygmixb9xc2p > PROXY SETADO: 212.87.213.72:18519 > CANAL: vitinho > navegou > sem anuncio > DUROU: 132s
+23/06 22:25:09 > TOKEN SETADO: a9ixh6mo2aegag1ta3egrgbw4i45ob > PROXY SETADO: 212.87.213.73:37719 > CANAL: vitinho > navegou > AD: MIDROLL 174s > DUROU: 243s

@@ -175,8 +175,11 @@ Por slot (1 task async por perfil), em loop:
 1. pega conta (cookie) + proxy livres da pool;
 2. `swap`: stop -> delcache -> update(cookie+proxy+fingerprint) -> start (pega `debug_port`);
 3. `connect_over_cdp` na porta; **checa rede do proxy** (`navegacao.tem_rede` carrega a
-   home; residencial cai muito) — sem rede levanta `ProxySemRede` -> fecha o perfil e
-   reinicia o ciclo com OUTRO proxy (o proxy ruim vai pro fim da fila). Com rede,
+   home) — sem rede levanta `ProxySemRede` -> fecha o perfil e troca de proxy. **Descarte
+   por strikes**: `_proxy_falhas[proxy]` conta as falhas; ao atingir `PROXY_MAX_FALHAS`
+   (default 3, config na GUI; 0=nunca) o proxy é **descartado** (não volta à fila, vai p/
+   `proxies_mortos.txt`) — residencial estático que falha N vezes está expirado. Sucesso
+   zera os strikes do proxy. Com rede,
    `navegacao.ir_para_canal` (sidebar->busca->URL, já na home: `comecar_da_home=False`);
 4. fica `SESSAO_MIN_S..MAX_S` no canal; o `ad_detector` (anexado à page) vigia anúncio:
    **nunca fecha no meio do anúncio**; ao detectar ad, **ignora o tempo base** e fecha o
