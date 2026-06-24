@@ -199,7 +199,8 @@ async def sessao_no_canal(pw, debug_port, canal, rotulo, slot_n=0, libera_cb=Non
             preview.registrar(slot_n, page, canal)
 
         # estado de anuncio do slot, atualizado pelos eventos do detector
-        slot = {"em_ad": False, "teve_ad": False, "fechar_apos": None, "ad_info": ""}
+        slot = {"em_ad": False, "teve_ad": False, "fechar_apos": None, "ad_info": "",
+                "ad_fim_max": None}
 
         def on_ad(ev):
             ad.evento_padrao(ev)  # loga humano + jsonl
@@ -207,11 +208,18 @@ async def sessao_no_canal(pw, debug_port, canal, rotulo, slot_n=0, libera_cb=Non
                 slot["em_ad"] = True
                 slot["teve_ad"] = True
                 slot["ad_info"] = f"{ev['roll_type']} {ev['duracao_total_s']:.0f}s"
+                # teto do ad: se passar MUITO disso e o AD_END nao veio (manifests pararam,
+                # ex.: proxy caiu no meio do ad), o loop destrava o em_ad.
+                try:
+                    slot["ad_fim_max"] = datetime.fromisoformat(ev["fim_previsto"]) + timedelta(seconds=60)
+                except Exception:
+                    slot["ad_fim_max"] = _agora() + timedelta(seconds=int(ev["duracao_total_s"]) + 60)
                 eventos.emit("ad_on", n=slot_n, canal=canal,
                              dur=int(ev["duracao_total_s"]), roll=ev["roll_type"])
             else:  # AD_END -> fecha o ciclo apos espera RANDOMIZADA do fim do anuncio,
                    # IGNORANDO o tempo base (override, pode fechar antes do minimo).
                 slot["em_ad"] = False
+                slot["ad_fim_max"] = None
                 grace = random.uniform(GRACE_POS_AD_MIN_S, GRACE_POS_AD_MAX_S)
                 slot["fechar_apos"] = _agora() + timedelta(seconds=grace)
                 print(f"[{rotulo}] anuncio acabou — fechando em {grace:.0f}s", flush=True)
@@ -248,21 +256,45 @@ async def sessao_no_canal(pw, debug_port, canal, rotulo, slot_n=0, libera_cb=Non
 
         prox_bau = _agora()   # checa bau ja na entrada e a cada BAU_CHECK_S
         prox_banner = _agora() + timedelta(seconds=12)  # re-checa banners que aparecem depois
+        # TETO DURO: fecha SEMPRE depois disso, aconteca o que acontecer (perfil travado,
+        # em_ad preso, overlay grudado). Garante que nenhum perfil fica zumbi.
+        limite_duro = t_sess + timedelta(seconds=SESSAO_MAX_S + 240)
         while True:
             await asyncio.sleep(1)
+            if _agora() > limite_duro:
+                print(f"[{rotulo}] limite duro de sessao — fechando (perfil pode ter travado)",
+                      flush=True)
+                break
             if _agora() >= prox_banner:
-                await navegacao.fechar_banners(page, rotulo)
+                try:
+                    await asyncio.wait_for(navegacao.fechar_banners(page, rotulo), timeout=15)
+                except Exception:
+                    pass
                 prox_banner = _agora() + timedelta(seconds=12)
             if BAU and _agora() >= prox_bau:
-                if await navegacao.resgatar_bau(page, rotulo):
-                    eventos.emit("bau", n=slot_n, canal=canal)
+                try:
+                    if await asyncio.wait_for(navegacao.resgatar_bau(page, rotulo), timeout=15):
+                        eventos.emit("bau", n=slot_n, canal=canal)
+                except Exception:
+                    pass
                 prox_bau = _agora() + timedelta(seconds=BAU_CHECK_S)
             if slot["em_ad"]:
-                continue                      # nunca fecha no meio do anuncio (manifest)
+                # se passou MUITO do fim previsto do ad e o AD_END nao veio, os manifests
+                # pararam (ex.: proxy caiu no meio do ad) -> destrava p/ poder fechar.
+                afm = slot.get("ad_fim_max")
+                if afm and _agora() > afm:
+                    slot["em_ad"] = False
+                else:
+                    continue                  # nunca fecha no meio do anuncio (manifest)
             if _agora() >= slot["fechar_apos"]:
                 # confirmacao final pelo DOM: se o overlay de ad ainda esta na tela
                 # (viewer atrasado pela latencia), NAO fecha — re-checa em 3s.
-                if slot["teve_ad"] and await navegacao.ad_na_tela(page):
+                try:
+                    overlay = (slot["teve_ad"] and
+                               await asyncio.wait_for(navegacao.ad_na_tela(page), timeout=8))
+                except Exception:
+                    overlay = False
+                if overlay:
                     slot["fechar_apos"] = _agora() + timedelta(seconds=3)
                     continue
                 break
