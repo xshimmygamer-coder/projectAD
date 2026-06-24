@@ -3,7 +3,7 @@
 # Gera dist\twitch_swap\twitch_swap.exe (onedir — mais robusto p/ Flet + Playwright).
 from PyInstaller.utils.hooks import collect_all
 
-datas = [("assets/banner.png", "assets")]
+datas = [("assets/banner.png", "assets"), ("assets/icone.ico", "assets")]
 binaries = []
 hiddenimports = [
     # win32 (preview/janelas) + Pillow (downscale do preview)

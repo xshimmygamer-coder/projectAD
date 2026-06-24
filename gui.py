@@ -63,12 +63,7 @@ def main(page: ft.Page):
     page.theme_mode = ft.ThemeMode.DARK   # texto claro por padrao (legivel no fundo escuro)
     page.window_width = 1100
     page.window_height = 800
-    # icone da janela / taskbar (no .exe quem manda e o icon do PyInstaller)
-    for _attr in ("window_icon",):
-        try:
-            setattr(page, _attr, paths.asset("icone.ico"))
-        except Exception:
-            pass
+    # icone da janela/taskbar (Flet 0.28: page.window.icon). Path bundle-aware.
     try:
         page.window.icon = paths.asset("icone.ico")
     except Exception:
@@ -475,4 +470,4 @@ if __name__ == "__main__":
         sys.argv = [sys.argv[0]] + [a for a in sys.argv[1:] if a != "--taskview"]
         taskview.main()
         sys.exit(0)
-    ft.app(target=main, assets_dir=os.path.join(paths.base_dir(), "assets"))
+    ft.app(target=main, assets_dir=paths.assets_dir())
