@@ -133,9 +133,10 @@ com `START-DATE`, `DURATION`, `X-TV-TWITCH-AD-ROLL-TYPE` (MIDROLL/PREROLL),
 0. **SEMPRE parte da home** (`comecar_da_home=True`): o Chromium faz session-restore e
    reabre a aba do canal anterior; sem forçar a home, o perfil abriria já no canal e o
    fluxo orgânico seria pulado. Então volta pra `twitch.tv/` antes de procurar.
-1. **HOMEPAGE/SIDEBAR**: procura `a[href="/<canal>" i]` por toda a home + sidebar (cards,
-   Followed, Recommended); expande sidebar colapsada (`side-nav-arrow`), clica "Show More"
-   (`side-nav-show-more-button`), rola a sidebar, e CLICA no link (navegação orgânica).
+1. **HOMEPAGE/SIDEBAR (ENXUTO)**: UMA checagem rápida de `a[href="/<canal>" i]` na home/sidebar
+   (wait_for visible ~2s); se aparece (canal em destaque / conta que segue), CLICA; se não,
+   vai DIRETO pro Tier 2. Removido o loop de 3 passadas (expand/show-more/scroll) que prendia
+   ~10s na home — conta nova quase nunca segue o canal, então a sidebar raramente o tem.
 2. **BUSCA**: clica no `search-link`, digita o canal (humanizado) no `tw-input`, clica no
    resultado (`a[href="/<canal>" i]`); tenta Enter se preciso.
 3. **URL DIRETO**: `page.goto` e, se falhar, CDP `Page.navigate`.

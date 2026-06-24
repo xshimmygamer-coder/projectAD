@@ -7,13 +7,13 @@
   },
   "run": {
     "canais": [
-      "memfps"
+      "vitinho"
     ],
     "n_perfis": 0,
     "sessao_min_s": 60,
-    "sessao_max_s": 120,
+    "sessao_max_s": 90,
     "grace_min_s": 15.0,
-    "grace_max_s": 30.0,
+    "grace_max_s": 25.0,
     "ad_margem_s": 10.0,
     "modo_abertura": "turbo",
     "bau": true,
@@ -22,7 +22,7 @@
     "forcar_qualidade": true,
     "qualidade_alvo": "160p30",
     "preview": true,
-    "preview_intervalo": 2.0,
+    "preview_intervalo": 1.5,
     "pausa_reabrir_min_s": 5.0,
     "pausa_reabrir_max_s": 15.0,
     "timeout_nav_ms": 30000,

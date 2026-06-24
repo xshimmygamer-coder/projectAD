@@ -167,60 +167,33 @@ async def navegar_url(page, url, timeout=30000):
         print(f"  [navegar] {url[:40]} falhou: {str(e)[:40]}", flush=True)
         await asyncio.sleep(3)
 
-# ── TIER 1: homepage / sidebar ──────────────────────────────────────────────
+# ── TIER 1: homepage / sidebar (ENXUTO) ─────────────────────────────────────
+# Conta nova quase nunca SEGUE o canal (logo nao aparece na sidebar). Entao aqui so
+# fazemos UMA checagem rapida: se o link do canal ja estiver visivel na home/sidebar
+# (ex.: canal grande em destaque, ou conta que segue), clica; senao vai DIRETO pra
+# busca — sem o ritual lento de expandir/show-more/rolar (que prendia ~10s na home).
 async def _tier_sidebar(page, canal, log):
-    log(f"procurando /{canal} na homepage/sidebar...")
-    # espera a home renderizar (sidebar/busca) antes de procurar — evita cair cedo no URL
+    log(f"procurando /{canal} na home/sidebar (rapido)...")
     try:
         await page.wait_for_selector(SEL_SIDEBAR + ", " + SEL_SEARCH_LINK, timeout=8000)
     except Exception:
         pass
-    sel = _sel_link(canal)
-    for tentativa in range(3):
-        # 1) tenta achar o link em qualquer lugar (cards da home + sidebar)
+    try:
+        link = page.locator(_sel_link(canal)).first
         try:
-            link = page.locator(sel).first
-            if await link.count() > 0:
-                await asyncio.sleep(random.uniform(0.8, 2.0))
-                if await _clicar(page, link):
-                    await asyncio.sleep(random.uniform(3, 5))
-                    if _no_canal(page.url, canal):
-                        log(f"NO CANAL /{canal} (via sidebar/homepage)")
-                        return True
+            await link.wait_for(state="visible", timeout=2000)   # curto: aparece ou nao
         except Exception:
             pass
-
-        # 2) expandir sidebar colapsada
-        try:
-            if await page.locator(SEL_SIDEBAR_COLLAPSED).count() > 0:
-                arrow = page.locator(SEL_ARROW).first
-                if await arrow.count() > 0:
-                    await _clicar(page, arrow)
-                    await asyncio.sleep(random.uniform(0.8, 1.6))
-        except Exception:
-            pass
-
-        # 3) na 1a passada: "Show More"; depois: rolar a sidebar
-        if tentativa == 0:
-            try:
-                sm = page.locator(SEL_SHOW_MORE).first
-                if await sm.count() > 0:
-                    await _clicar(page, sm)
-                    await asyncio.sleep(random.uniform(1, 2))
-            except Exception:
-                pass
-        else:
-            try:
-                sb = page.locator(SEL_SIDEBAR).first
-                if await sb.count() > 0:
-                    box = await sb.bounding_box()
-                    if box:
-                        await mouse_humano.mover(page, box["x"] + box["width"] / 2,
-                                                 box["y"] + box["height"] / 2)
-                        await mouse_humano.scroll_suave(page, "down", random.randint(150, 350))
-                        await asyncio.sleep(random.uniform(0.8, 1.6))
-            except Exception:
-                pass
+        if await link.count() > 0:
+            await asyncio.sleep(random.uniform(0.4, 1.0))
+            if await _clicar(page, link):
+                await asyncio.sleep(random.uniform(3, 5))
+                if _no_canal(page.url, canal):
+                    log(f"NO CANAL /{canal} (via home/sidebar)")
+                    return True
+    except Exception:
+        pass
+    log("nao esta na home/sidebar -> indo pra busca")
     return False
 
 # ── TIER 2: busca ───────────────────────────────────────────────────────────
