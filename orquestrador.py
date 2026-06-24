@@ -315,7 +315,7 @@ async def sessao_no_canal(pw, debug_port, canal, rotulo, slot_n=0, libera_cb=Non
             pass
 
 # ─────────────────────────── Loop de cada slot/perfil ───────────────────────────
-async def slot_loop(uid, contas_q, proxies_q, pw, canal, stop_event, inicio_delay=0.0,
+async def slot_loop(uid, contas_q, proxies_q, pw_holder, canal, stop_event, inicio_delay=0.0,
                     slot_n=0, abrir_sem=None):
     if inicio_delay:
         await asyncio.sleep(inicio_delay)   # escalona o start (suaviza burst de API/CPU)
@@ -358,8 +358,8 @@ async def slot_loop(uid, contas_q, proxies_q, pw, canal, stop_event, inicio_dela
                 continue
             print(f"[{rotulo}] aberto (porta {port}) proxy={proxy.split(':')[0]}", flush=True)
             eventos.emit("aberto", n=slot_n, canal=canal)
-            resumo = await sessao_no_canal(pw, port, canal, rotulo, slot_n=slot_n,
-                                           libera_cb=_libera)
+            resumo = await sessao_no_canal(pw_holder["pw"], port, canal, rotulo,
+                                           slot_n=slot_n, libera_cb=_libera)
             nav = "navegou" if (resumo and resumo["chegou"]) else "NAO chegou"
             ad_txt = f"AD: {resumo['ad_info']}" if (resumo and resumo["teve_ad"]) else "sem anuncio"
             dur = resumo["dur_s"] if resumo else 0
@@ -394,9 +394,12 @@ async def slot_loop(uid, contas_q, proxies_q, pw, canal, stop_event, inicio_dela
                 log_ciclo(t0, f"{base} > PROXY SEM REDE ({n_fal}/{PROXY_MAX_FALHAS})")
                 eventos.emit("proxy_morto", n=slot_n, canal=canal)
         except Exception as e:
-            print(f"[{rotulo}] erro: {str(e)[:140]}", flush=True)
-            log_ciclo(t0, f"{base} > ERRO: {str(e)[:80]}")
-            eventos.emit("erro", n=slot_n, canal=canal, msg=str(e)[:80])
+            msg = str(e)
+            print(f"[{rotulo}] erro: {msg[:140]}", flush=True)
+            log_ciclo(t0, f"{base} > ERRO: {msg[:80]}")
+            eventos.emit("erro", n=slot_n, canal=canal, msg=msg[:80])
+            if _erro_driver(msg):
+                pw_holder["morto"].set()      # driver do Playwright caiu -> aciona supervisor
         finally:
             _libera()                     # idempotente (solta a vaga se ainda nao soltou)
             try:
@@ -407,6 +410,9 @@ async def slot_loop(uid, contas_q, proxies_q, pw, canal, stop_event, inicio_dela
             if not descartar_proxy:
                 await proxies_q.put(proxy) # devolve o proxy; se descartado, SAI do rodizio
 
+        # se o driver caiu, respira ate o supervisor reerguer (evita spin de erro)
+        while pw_holder["morto"].is_set() and not stop_event.is_set():
+            await asyncio.sleep(random.uniform(3, 6))
         # CADENCIA: pausa randomizada apos fechar, antes de reabrir (menos perfis juntos)
         if not stop_event.is_set() and PAUSA_REABRIR_MAX_S > 0:
             await asyncio.sleep(random.uniform(PAUSA_REABRIR_MIN_S, PAUSA_REABRIR_MAX_S))
@@ -480,6 +486,51 @@ async def _watch_parar(stop_event):
             return
         await asyncio.sleep(0.4)
 
+
+def _erro_driver(msg):
+    """True se o erro indica que o DRIVER do Playwright (node.exe) caiu — nesse caso o
+    pw inteiro morre e TODOS os slots falham; precisa reiniciar o Playwright."""
+    m = (msg or "").lower()
+    return ("reading from the driver" in m
+            or "driver closed" in m
+            or ("connection closed" in m and "driver" in m))
+
+
+async def _supervisor_driver(pw_holder, async_pw, stop_event):
+    """Auto-recuperacao: se o driver do Playwright cair (um slot seta pw_holder['morto']),
+    reinicia o Playwright e atualiza pw_holder['pw']. Os slots leem pw_holder['pw'] a cada
+    ciclo, entao passam a usar o driver novo automaticamente."""
+    while not stop_event.is_set():
+        try:
+            await asyncio.wait_for(pw_holder["morto"].wait(), timeout=5)
+        except asyncio.TimeoutError:
+            continue                       # re-checa stop_event periodicamente
+        if stop_event.is_set():
+            break
+        await asyncio.sleep(2)             # debounce: junta varios slots sinalizando juntos
+        print("[driver] Playwright caiu — reiniciando...", flush=True)
+        eventos.emit("erro", n="-", canal="", msg="driver CDP caiu — reiniciando")
+        try:
+            await pw_holder["pw"].stop()
+        except Exception:
+            pass
+        novo = None
+        for tent in range(6):
+            if stop_event.is_set():
+                break
+            try:
+                novo = await async_pw().start()
+                break
+            except Exception as e:
+                print(f"[driver] falha ao reiniciar ({tent+1}/6): {str(e)[:80]}", flush=True)
+                await asyncio.sleep(5)
+        if novo is not None:
+            pw_holder["pw"] = novo
+            print("[driver] Playwright reiniciado com sucesso.", flush=True)
+            eventos.emit("erro", n="-", canal="", msg="driver CDP reiniciado — retomando")
+        pw_holder["morto"].clear()
+        await asyncio.sleep(10)            # cooldown: evita reinicio em cascata
+
 # ─────────────────────────── Main ───────────────────────────
 async def amain():
     canais, n = _aplicar_config_run()
@@ -532,14 +583,18 @@ async def amain():
 
     abrir_sem = asyncio.Semaphore(MAX_ABRINDO)   # limita aberturas+navegacoes simultaneas
 
-    async with async_pw() as pw:
+    # pw gerenciado manualmente (start/stop) p/ permitir REINICIO automatico se o driver
+    # do Playwright cair (senao todos os slots ficam em erro pra sempre). Ver _supervisor_driver.
+    pw_holder = {"pw": await async_pw().start(), "morto": asyncio.Event()}
+    try:
         print(f"engine CDP: {engine}. Rodando. Ctrl+C para parar.", flush=True)
         watcher = asyncio.create_task(_watch_parar(stop_event))
+        supervisor = asyncio.create_task(_supervisor_driver(pw_holder, async_pw, stop_event))
         prev_task = (asyncio.create_task(preview.capturador(PREVIEW_INTERVALO))
                      if PREVIEW else None)
         # no modo batch o gate de lote controla a cadencia -> sem stagger por slot
         tasks = [asyncio.create_task(
-                     slot_loop(u, contas_q, proxies_q, pw, atribuicao[u], stop_event,
+                     slot_loop(u, contas_q, proxies_q, pw_holder, atribuicao[u], stop_event,
                                inicio_delay=(0 if BATCH_SIZE > 0 else i * STAGGER_START_S),
                                slot_n=numeros[u], abrir_sem=abrir_sem))
                  for i, u in enumerate(perfis)]
@@ -550,6 +605,7 @@ async def amain():
         finally:
             stop_event.set()
             watcher.cancel()
+            supervisor.cancel()
             for t in tasks:
                 t.cancel()
             await asyncio.gather(*tasks, return_exceptions=True)
@@ -572,6 +628,11 @@ async def amain():
             print(resumo_run, flush=True)
             eventos.emit("resumo", txt=resumo_run)
             eventos.emit("run_fim", motivo="parado")
+    finally:
+        try:
+            await pw_holder["pw"].stop()    # encerra o driver do Playwright
+        except Exception:
+            pass
 
 def main():
     try:
