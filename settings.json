@@ -27,6 +27,6 @@
     "pausa_reabrir_max_s": 15.0,
     "timeout_nav_ms": 30000,
     "timeout_rede_ms": 20000,
-    "proxy_max_falhas": 3
+    "proxy_max_falhas": 2
   }
 }

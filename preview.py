@@ -40,39 +40,52 @@ def get_shots():
         return dict(_shots)
 
 
-async def capturador(intervalo=2.0, largura=320, quality=35):
-    """Loop: screenshot (jpeg) de cada perfil ativo, downscale e guarda em base64."""
+def _downscale(raw, largura, quality):
+    """Reduz o jpeg (CPU) — roda em thread separada p/ nao travar o event loop."""
+    from PIL import Image
+    im = Image.open(io.BytesIO(raw)).convert("RGB")
+    w, h = im.size
+    if w > largura:
+        im = im.resize((largura, max(1, int(h * largura / w))))
+    buf = io.BytesIO()
+    im.save(buf, "JPEG", quality=quality)
+    return buf.getvalue()
+
+
+async def capturador(intervalo=2.0, largura=320, quality=35, max_simult=6, shot_timeout=4.0):
+    """Loop: screenshot (jpeg) de cada perfil ativo -> downscale -> base64. Resiliente:
+      - timeout por screenshot (pagina travada/erro NAO congela o resto);
+      - no maximo `max_simult` capturas simultaneas (nao satura o CDP);
+      - downscale (PIL) em thread (nao bloqueia o event loop)."""
     try:
-        from PIL import Image
+        import PIL  # noqa: F401
+        tem_pil = True
     except Exception:
-        Image = None
+        tem_pil = False
+    sem = asyncio.Semaphore(max_simult)
 
     async def cap(n, page, canal):
-        try:
-            raw = await page.screenshot(type="jpeg", quality=quality)
-        except Exception:
-            return
-        if Image is not None:
+        async with sem:
             try:
-                im = Image.open(io.BytesIO(raw)).convert("RGB")
-                w, h = im.size
-                if w > largura:
-                    im = im.resize((largura, max(1, int(h * largura / w))))
-                buf = io.BytesIO()
-                im.save(buf, "JPEG", quality=quality)
-                raw = buf.getvalue()
+                raw = await page.screenshot(type="jpeg", quality=quality,
+                                            timeout=int(shot_timeout * 1000))
+            except Exception:
+                return   # travada/fechando/erro -> pula este frame, nao trava os outros
+        if tem_pil:
+            try:
+                raw = await asyncio.to_thread(_downscale, raw, largura, quality)
             except Exception:
                 pass
-        b64 = base64.b64encode(raw).decode()
         with _lock:
-            _shots[n] = (b64, canal)
+            _shots[n] = (base64.b64encode(raw).decode(), canal)
 
     try:
         while True:
             with _lock:
                 itens = [(n, p, c) for n, (p, c) in _pages.items()]
             if itens:
-                await asyncio.gather(*[cap(n, p, c) for n, p, c in itens])
+                await asyncio.gather(*[cap(n, p, c) for n, p, c in itens],
+                                     return_exceptions=True)
             await asyncio.sleep(intervalo)
     except asyncio.CancelledError:
         pass
