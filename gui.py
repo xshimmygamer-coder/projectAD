@@ -368,8 +368,8 @@ def main(page: ft.Page):
     # ── log helpers ──
     def add_log(msg, cor=CINZA):
         lista_logs.controls.append(ft.Text(msg, color=cor, size=13, selectable=True))
-        if len(lista_logs.controls) > 600:
-            del lista_logs.controls[:200]
+        if len(lista_logs.controls) > 150:
+            del lista_logs.controls[:len(lista_logs.controls) - 100]
         # update e feito pelo thread `atualizador`
 
     def atualiza_contador():
@@ -382,38 +382,43 @@ def main(page: ft.Page):
         # page.update() e feito pelo chamador/consumidor (evita corrida entre threads)
 
     # ── traducao de eventos -> mensagem didatica ──
+    # Retorna (msg, cor, live). live=False => NAO mostra no painel ao vivo (evita o spam
+    # rotineiro que travava a ListView), mas o ciclo segue gravado no ciclos_log.txt.
     def traduzir(ev):
         t = ev.get("tipo"); n = ev.get("n"); canal = ev.get("canal", "")
         if t == "run_inicio":
-            return f"RUN iniciada — {ev.get('perfis')} perfis ({ev.get('canais')})", "#ffffff"
+            return f"RUN iniciada — {ev.get('perfis')} perfis ({ev.get('canais')})", "#ffffff", True
         if t == "aberto":
-            return f"Perfil {n} aberto · proxy ok", CINZA
+            return f"Perfil {n} aberto · proxy ok", CINZA, False           # rotineiro: oculta ao vivo
         if t == "navegou":
-            return (f"Perfil {n} entrou em {canal}" if ev.get("ok")
-                    else f"Perfil {n} não conseguiu entrar em {canal}"), CINZA
+            if ev.get("ok"):
+                return f"Perfil {n} entrou em {canal}", CINZA, False        # rotineiro: oculta ao vivo
+            return f"Perfil {n} não conseguiu entrar em {canal}", "#ff6b6b", True
         if t == "ad_on":
-            return f"Perfil {n} assistindo a um anúncio de {ev.get('dur')}s em {canal}…", "#ffd24a"
+            return f"Perfil {n} assistindo a um anúncio de {ev.get('dur')}s em {canal}…", "#ffd24a", True
         if t == "ad_off":
-            return f"Perfil {n} — anúncio terminou em {canal} (fecha em ~{ev.get('grace')}s)", "#ffd24a"
+            return f"Perfil {n} — anúncio terminou em {canal} (fecha em ~{ev.get('grace')}s)", "#ffd24a", True
         if t == "bau":
-            return f"Perfil {n} coletou o baú em {canal}", VERDE
+            return f"Perfil {n} coletou o baú em {canal}", VERDE, True
         if t == "fim":
             if ev.get("teve_ad"):
                 estado["contador"][canal] = estado["contador"].get(canal, 0) + 1
                 atualiza_contador()
-                return f"Perfil {n} saiu de {canal} — assistiu anúncio ✅ (durou {ev.get('dur')}s)", VERDE
-            return f"Perfil {n} saiu de {canal} (durou {ev.get('dur')}s)", CINZA
+                return f"Perfil {n} saiu de {canal} — assistiu anúncio ✅ (durou {ev.get('dur')}s)", VERDE, True
+            return f"Perfil {n} saiu de {canal} (durou {ev.get('dur')}s)", CINZA, False  # rotineiro
         if t == "proxy_morto":
-            return f"Perfil {n}: proxy sem rede — trocando de proxy", "#ff6b6b"
+            return f"Perfil {n}: proxy sem rede — trocando de proxy", "#ff6b6b", True
         if t == "proxy_descartado":
-            return f"Perfil {n}: proxy descartado (sem rede demais) — fora do rodízio", "#ff6b6b"
+            return f"Perfil {n}: proxy descartado (sem rede demais) — fora do rodízio", "#ff6b6b", True
         if t == "falha_abrir":
-            return f"Perfil {n}: falha ao abrir — tentando outra conta", "#ff6b6b"
+            return f"Perfil {n}: falha ao abrir — tentando outra conta", "#ff6b6b", True
         if t == "erro":
-            return f"Perfil {n}: erro ({ev.get('msg')})", "#ff6b6b"
+            return f"Perfil {n}: erro ({ev.get('msg')})", "#ff6b6b", True
+        if t == "resumo":
+            return ev.get("txt", ""), "#7CFC00", True
         if t == "run_fim":
-            return f"RUN encerrada ({ev.get('motivo','')}).", "#ffffff"
-        return None, CINZA
+            return f"RUN encerrada ({ev.get('motivo','')}).", "#ffffff", True
+        return None, CINZA, False
 
     # ── consumidor da fila de eventos (thread) ──
     fila = queue.Queue()
@@ -431,15 +436,15 @@ def main(page: ft.Page):
                 for e in lote:
                     if not e:
                         continue
-                    msg, cor = traduzir(e)            # traduzir ja atualiza o contador (sem update)
-                    if msg:
+                    msg, cor, live = traduzir(e)      # traduzir ja atualiza o contador (sem update)
+                    if msg and live:                  # so eventos importantes vao pro painel ao vivo
                         lista_logs.controls.append(ft.Text(msg, color=cor, size=13, selectable=True))
                     if e.get("tipo") == "run_fim":
                         estado["rodando"] = False
                         btn_iniciar.disabled = False
                         btn_parar.disabled = True
-                if len(lista_logs.controls) > 600:
-                    del lista_logs.controls[:len(lista_logs.controls) - 400]
+                if len(lista_logs.controls) > 150:    # lista pequena: auto_scroll nao engasga no web
+                    del lista_logs.controls[:len(lista_logs.controls) - 100]
             except Exception:
                 pass                                  # NUNCA deixa a thread morrer
 
@@ -515,7 +520,13 @@ if __name__ == "__main__":
         sys.argv = [sys.argv[0]] + [a for a in sys.argv[1:] if a != "--taskview"]
         taskview.main()
         sys.exit(0)
-    # MODO WEB: a UI abre no navegador (mais estavel que o cliente desktop em sessoes
-    # longas). Se travar, F5 recupera SEM matar a RUN; fechar a aba nao para o backend.
-    ft.app(target=main, assets_dir=paths.assets_dir(),
-           view=ft.AppView.WEB_BROWSER, port=8553)
+    # MODO da UI (sem precisar rebuildar — troca pela variavel de ambiente MURIADS_GUI):
+    #   web (PADRAO): abre no navegador. Mais estavel em runs longas; F5 recupera sem
+    #                 matar a RUN; fechar a aba nao para o backend.
+    #   app/desktop : janela nativa do Flet (cuidado: congela em sessoes longas).
+    _modo = (os.environ.get("MURIADS_GUI") or "web").strip().lower()
+    if _modo in ("app", "desktop", "flet_app"):
+        ft.app(target=main, assets_dir=paths.assets_dir())            # janela desktop nativa
+    else:
+        ft.app(target=main, assets_dir=paths.assets_dir(),
+               view=ft.AppView.WEB_BROWSER, port=8553)                # navegador (padrao)

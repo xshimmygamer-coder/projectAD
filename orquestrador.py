@@ -93,6 +93,7 @@ def _agora():
 # ── Log unico de ciclos (token + proxy usados, sem ID de perfil) ──────────────
 _log_lock = threading.Lock()
 _proxy_falhas = {}   # proxy -> nº de falhas de rede consecutivas (p/ descarte)
+_run_stats = {"ciclos": 0, "anuncios": 0, "interrompidos": 0, "tokens": set(), "ips": set()}
 
 def _registrar_proxy_morto(proxy):
     """Anexa um proxy descartado em proxies_mortos.txt (auditoria)."""
@@ -324,6 +325,8 @@ async def slot_loop(uid, contas_q, proxies_q, pw, canal, stop_event, inicio_dela
         rotulo = f"{uid}/{conta['id']}"
         t0 = datetime.now()   # horario local do inicio do ciclo (token/proxy setados)
         base = f"TOKEN SETADO: {conta['auth_token']} > PROXY SETADO: {proxy}"
+        _run_stats["tokens"].add(conta["auth_token"])
+        _run_stats["ips"].add(proxy.split(":")[0])
 
         # ── gate de ABERTURA ──
         # Modo BATCH (BATCH_SIZE>0): libera em lotes (navegam juntos), pausa entre lotes,
@@ -364,6 +367,15 @@ async def slot_loop(uid, contas_q, proxies_q, pw, canal, stop_event, inicio_dela
             eventos.emit("fim", n=slot_n, canal=canal,
                          teve_ad=bool(resumo and resumo["teve_ad"]), dur=dur)
             _proxy_falhas.pop(proxy, None)   # funcionou -> zera strikes desse proxy
+            _run_stats["ciclos"] += 1
+            if resumo and resumo["teve_ad"]:
+                _run_stats["anuncios"] += 1
+        except asyncio.CancelledError:
+            # Parar no MEIO da sessao: registra o ciclo PARCIAL antes de encerrar (nada se perde).
+            dur = int((datetime.now() - t0).total_seconds())
+            _run_stats["interrompidos"] += 1
+            log_ciclo(t0, f"{base} > CANAL: {canal} > INTERROMPIDO (parar) > DUROU: {dur}s")
+            raise
         except navegacao.ProxySemRede:
             # proxy sem rede: conta um strike. Se atingiu PROXY_MAX_FALHAS, DESCARTA
             # (nao devolve a fila) — residencial estatico que falha N vezes esta morto.
@@ -475,7 +487,7 @@ async def amain():
     # entao recriamos os locks/contadores AQUI, ligados ao loop ATUAL -> evita o erro
     # "Lock bound to a different event loop" ao iniciar a 2a RUN.
     global _api_lock, _abrir_lock, _batch_lock, _api_ultimo, _abrir_ultimo, _batch_n
-    global _proxy_falhas
+    global _proxy_falhas, _run_stats
     _api_lock = asyncio.Lock()
     _abrir_lock = asyncio.Lock()
     _batch_lock = asyncio.Lock()
@@ -483,6 +495,7 @@ async def amain():
     _abrir_ultimo = 0.0
     _batch_n = 0
     _proxy_falhas = {}   # zera os strikes de proxy a cada RUN
+    _run_stats = {"ciclos": 0, "anuncios": 0, "interrompidos": 0, "tokens": set(), "ips": set()}
     # argv ainda sobrescreve (modo CLI): [n_perfis] [canais,virgula]
     if len(sys.argv) > 1 and sys.argv[1].isdigit():
         n = int(sys.argv[1])
@@ -549,6 +562,15 @@ async def amain():
                     await _ads(swap.stop, u)
                 except Exception:
                     pass
+            s = _run_stats
+            resumo_run = ("=== RUN encerrada: "
+                          f"{s['ciclos']} ciclos"
+                          + (f" (+{s['interrompidos']} interrompidos no parar)" if s['interrompidos'] else "")
+                          + f" · {s['anuncios']} anuncios"
+                          f" · {len(s['tokens'])} tokens · {len(s['ips'])} IPs ===")
+            log_ciclo(datetime.now(), resumo_run)
+            print(resumo_run, flush=True)
+            eventos.emit("resumo", txt=resumo_run)
             eventos.emit("run_fim", motivo="parado")
 
 def main():
