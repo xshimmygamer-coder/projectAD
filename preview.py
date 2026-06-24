@@ -15,6 +15,13 @@ import threading
 _lock = threading.Lock()
 _pages = {}   # n -> (page, canal)
 _shots = {}   # n -> (base64_jpeg, canal)
+_ativo = True   # GUI desliga quando NAO esta na aba Preview -> nao captura (alivia CDP/UI)
+
+
+def set_ativo(v):
+    """Liga/desliga a captura (a GUI chama conforme a aba Preview estar visivel)."""
+    global _ativo
+    _ativo = bool(v)
 
 
 def registrar(n, page, canal=""):
@@ -81,6 +88,9 @@ async def capturador(intervalo=2.0, largura=320, quality=35, max_simult=6, shot_
 
     try:
         while True:
+            if not _ativo:                       # aba Preview fechada -> nao captura nada
+                await asyncio.sleep(intervalo)
+                continue
             with _lock:
                 itens = [(n, p, c) for n, (p, c) in _pages.items()]
             if itens:

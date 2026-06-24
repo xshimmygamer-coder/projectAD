@@ -76,6 +76,7 @@ def main(page: ft.Page):
     estado = {"rodando": False, "contador": {}}
     # UI: APENAS o thread `atualizador` chama page.update(). As demais threads (consumidor
     # de logs, preview) e os handlers só MEXEM nos controles -> zero corrida/lock/starvation.
+    IDX_PREVIEW = 4   # ordem das abas: APIs(0) Proxy(1) Tokens(2) Configs(3) Preview(4) Logs(5)
 
     # ╔══ BANNER ══╗ (faixa full-width, altura fixa — corta topo/baixo)
     BANNER_H = 150
@@ -327,6 +328,15 @@ def main(page: ft.Page):
                 intervalo = 2.0
             time.sleep(max(0.5, intervalo))
             try:
+                # so trabalha quando a aba Preview esta aberta (alivia CDP + cliente Flet).
+                na_aba = False
+                try:
+                    na_aba = (abas.selected_index == IDX_PREVIEW)
+                except Exception:
+                    na_aba = False
+                preview.set_ativo(na_aba)
+                if not na_aba:
+                    continue
                 shots = preview.get_shots()
                 for n in list(_cards):
                     if n not in shots:
@@ -495,4 +505,7 @@ if __name__ == "__main__":
         sys.argv = [sys.argv[0]] + [a for a in sys.argv[1:] if a != "--taskview"]
         taskview.main()
         sys.exit(0)
-    ft.app(target=main, assets_dir=paths.assets_dir())
+    # MODO WEB: a UI abre no navegador (mais estavel que o cliente desktop em sessoes
+    # longas). Se travar, F5 recupera SEM matar a RUN; fechar a aba nao para o backend.
+    ft.app(target=main, assets_dir=paths.assets_dir(),
+           view=ft.AppView.WEB_BROWSER, port=8553)

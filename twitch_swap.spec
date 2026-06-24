@@ -13,8 +13,9 @@ hiddenimports = [
     "mouse_humano", "config_store", "eventos", "paths",
 ]
 
-# Empacota Flet (cliente desktop) + Playwright (driver) + Pillow + Patchright se houver.
-for pkg in ("flet", "flet_desktop", "playwright", "PIL", "patchright"):
+# Empacota Flet (core + cliente WEB + desktop) + Playwright (driver) + Pillow + Patchright.
+# flet_web traz o app web (web/index.html, main.dart.js...) — sem ele o modo web da 500.
+for pkg in ("flet", "flet_web", "flet_desktop", "playwright", "PIL", "patchright"):
     try:
         d, b, h = collect_all(pkg)
         datas += d
