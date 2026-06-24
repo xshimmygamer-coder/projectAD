@@ -74,6 +74,7 @@ def main(page: ft.Page):
 
     # ── estado da RUN ──
     estado = {"rodando": False, "contador": {}}
+    _ui_lock = threading.Lock()   # serializa page.update() entre as threads (logs/preview)
 
     # ╔══ BANNER ══╗ (faixa full-width, altura fixa — corta topo/baixo)
     BANNER_H = 150
@@ -340,7 +341,8 @@ def main(page: ft.Page):
                         _cards[n][1].src_base64 = b64
                         _cards[n][2].value = f"Perfil {n} · {canal}"
                 grid_preview.controls = [_cards[n][0] for n in sorted(_cards)]
-                page.update()
+                with _ui_lock:
+                    page.update()
             except Exception:
                 pass
     threading.Thread(target=_refresh_preview, daemon=True).start()
@@ -350,7 +352,8 @@ def main(page: ft.Page):
         lista_logs.controls.append(ft.Text(msg, color=cor, size=13, selectable=True))
         if len(lista_logs.controls) > 600:
             del lista_logs.controls[:200]
-        page.update()
+        with _ui_lock:
+            page.update()
 
     def atualiza_contador():
         c = estado["contador"]
@@ -359,7 +362,7 @@ def main(page: ft.Page):
         else:
             txt_contador.value = "Anúncios assistidos — " + " · ".join(
                 f"{canal}: {n}" for canal, n in sorted(c.items(), key=lambda x: -x[1]))
-        page.update()
+        # page.update() e feito pelo chamador/consumidor (evita corrida entre threads)
 
     # ── traducao de eventos -> mensagem didatica ──
     def traduzir(ev):
@@ -400,17 +403,30 @@ def main(page: ft.Page):
 
     def consumidor():
         while True:
-            ev = fila.get()
-            if ev is None:
-                continue
-            msg, cor = traduzir(ev)
-            if msg:
-                add_log(msg, cor)
-            if ev.get("tipo") == "run_fim":
-                estado["rodando"] = False
-                btn_iniciar.disabled = False
-                btn_parar.disabled = True
-                page.update()
+            try:
+                ev = fila.get()                      # bloqueia ate ter 1 evento
+                lote = [ev]
+                try:                                  # drena o que ja chegou (batch)
+                    while len(lote) < 300:
+                        lote.append(fila.get_nowait())
+                except queue.Empty:
+                    pass
+                for e in lote:
+                    if not e:
+                        continue
+                    msg, cor = traduzir(e)            # traduzir ja atualiza o contador (sem update)
+                    if msg:
+                        lista_logs.controls.append(ft.Text(msg, color=cor, size=13, selectable=True))
+                    if e.get("tipo") == "run_fim":
+                        estado["rodando"] = False
+                        btn_iniciar.disabled = False
+                        btn_parar.disabled = True
+                if len(lista_logs.controls) > 600:
+                    del lista_logs.controls[:len(lista_logs.controls) - 400]
+                with _ui_lock:                        # 1 update por lote, serializado
+                    page.update()
+            except Exception:
+                pass                                  # NUNCA deixa a thread morrer
 
     threading.Thread(target=consumidor, daemon=True).start()
 
@@ -425,7 +441,8 @@ def main(page: ft.Page):
         add_log("Preparando RUN…", "#ffffff")
         btn_iniciar.disabled = True
         btn_parar.disabled = False
-        page.update()
+        with _ui_lock:
+            page.update()
         # aplica a escolha do Preview DESTA run (orquestrador le do settings.json)
         run = config_store.carregar().get("run", {}) or {}
         run["preview"] = bool(chk_preview.value)
@@ -446,7 +463,8 @@ def main(page: ft.Page):
         add_log("Parando… fechando perfis.", "#ffffff")
         eventos.parar.set()
         btn_parar.disabled = True
-        page.update()
+        with _ui_lock:
+            page.update()
 
     btn_iniciar.on_click = iniciar
     btn_parar.on_click = parar

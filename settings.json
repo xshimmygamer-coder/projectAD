@@ -15,17 +15,18 @@
     "grace_min_s": 15.0,
     "grace_max_s": 20.0,
     "ad_margem_s": 10.0,
-    "modo_abertura": "moderado",
+    "modo_abertura": "turbo",
     "bau": true,
     "bau_check_s": 30,
     "tema_escuro": true,
     "forcar_qualidade": true,
     "qualidade_alvo": "160p30",
     "preview": true,
-    "preview_intervalo": 1.5,
+    "preview_intervalo": 2.0,
     "pausa_reabrir_min_s": 5.0,
     "pausa_reabrir_max_s": 15.0,
     "timeout_nav_ms": 30000,
-    "timeout_rede_ms": 20000
+    "timeout_rede_ms": 20000,
+    "proxy_max_falhas": 3
   }
 }
