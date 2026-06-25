@@ -10,12 +10,16 @@ capturador() como task. A GUI le get_shots() e desenha a grade.
 import asyncio
 import base64
 import io
+import os
 import threading
+
+import paths
 
 _lock = threading.Lock()
 _pages = {}   # n -> (page, canal)
 _shots = {}   # n -> (base64_jpeg, canal)
 _ativo = True   # GUI desliga quando NAO esta na aba Preview -> nao captura (alivia CDP/UI)
+PREVIEW_DIR = paths.arquivo("preview")   # engine grava slot_N.jpg aqui; a GUI (outro proc) le
 
 
 def set_ativo(v):
@@ -71,6 +75,21 @@ async def capturador(intervalo=2.0, largura=320, quality=35, max_simult=6, shot_
         tem_pil = False
     sem = asyncio.Semaphore(max_simult)
 
+    try:
+        os.makedirs(PREVIEW_DIR, exist_ok=True)
+    except OSError:
+        pass
+
+    def _gravar(n, raw):
+        # grava atomico: .tmp -> replace (a GUI, outro processo, nunca le pela metade)
+        dst = os.path.join(PREVIEW_DIR, f"slot_{n}.jpg")
+        try:
+            with open(dst + ".tmp", "wb") as f:
+                f.write(raw)
+            os.replace(dst + ".tmp", dst)
+        except OSError:
+            pass
+
     async def cap(n, page, canal):
         async with sem:
             try:
@@ -85,6 +104,7 @@ async def capturador(intervalo=2.0, largura=320, quality=35, max_simult=6, shot_
                 pass
         with _lock:
             _shots[n] = (base64.b64encode(raw).decode(), canal)
+        _gravar(n, raw)                          # disponibiliza p/ a GUI (processo separado)
 
     try:
         while True:
@@ -96,6 +116,17 @@ async def capturador(intervalo=2.0, largura=320, quality=35, max_simult=6, shot_
             if itens:
                 await asyncio.gather(*[cap(n, p, c) for n, p, c in itens],
                                      return_exceptions=True)
+            # limpa JPEGs de slots que sairam (perfil fechado)
+            try:
+                ativos = {f"slot_{n}.jpg" for n, _, _ in itens}
+                for fn in os.listdir(PREVIEW_DIR):
+                    if fn.startswith("slot_") and fn.endswith(".jpg") and fn not in ativos:
+                        try:
+                            os.remove(os.path.join(PREVIEW_DIR, fn))
+                        except OSError:
+                            pass
+            except OSError:
+                pass
             await asyncio.sleep(intervalo)
     except asyncio.CancelledError:
         pass

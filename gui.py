@@ -8,8 +8,11 @@ contador de anuncios assistidos por canal + preview ao vivo (screenshots CDP).
   python gui.py
 """
 import asyncio
+import base64
+import json
 import os
 import queue
+import subprocess
 import sys
 import threading
 import time
@@ -33,6 +36,12 @@ import swap
 
 # orquestrador importa swap/navegacao/ad_detector — pesado, mas ok no start
 import orquestrador
+
+# Arquivos de IPC entre a GUI e a ENGINE (processo separado) — ao lado do exe:
+ARQ_EVENTOS = paths.arquivo("eventos_live.jsonl")    # engine ANEXA eventos; GUI faz tail
+ARQ_PARAR_FLAG = paths.arquivo("parar.flag")         # GUI cria -> engine encerra
+ARQ_PREVIEW_FLAG = paths.arquivo("preview_on.flag")  # GUI liga/desliga a captura na engine
+PREVIEW_DIR = paths.arquivo("preview")               # engine grava slot_N.jpg; GUI le
 
 APP_NOME = "MURIADS"
 
@@ -83,7 +92,7 @@ def main(page: ft.Page):
         page.open(ft.SnackBar(ft.Text(msg, color="#ffffff"), bgcolor=cor))
 
     # ── estado da RUN ──
-    estado = {"rodando": False, "contador": {}}
+    estado = {"rodando": False, "contador": {}, "tail_pos": 0, "proc": None}
     # UI: APENAS o thread `atualizador` chama page.update(). As demais threads (consumidor
     # de logs, preview) e os handlers só MEXEM nos controles -> zero corrida/lock/starvation.
     IDX_PREVIEW = 4   # ordem das abas: APIs(0) Proxy(1) Tokens(2) Configs(3) Preview(4) Logs(5)
@@ -344,22 +353,44 @@ def main(page: ft.Page):
                     na_aba = (abas.selected_index == IDX_PREVIEW)
                 except Exception:
                     na_aba = False
-                preview.set_ativo(na_aba)
+                # sinaliza a ENGINE (outro processo) p/ capturar SO quando a aba esta aberta
+                try:
+                    if na_aba:
+                        open(ARQ_PREVIEW_FLAG, "w").close()
+                    else:
+                        os.remove(ARQ_PREVIEW_FLAG)
+                except OSError:
+                    pass
                 if not na_aba:
                     continue
-                shots = preview.get_shots()
-                for n in list(_cards):
-                    if n not in shots:
-                        _cards.pop(n, None)
-                for n, (b64, canal) in shots.items():
+                # le os JPEGs que a engine gravou em PREVIEW_DIR
+                try:
+                    arqs = [f for f in os.listdir(PREVIEW_DIR)
+                            if f.startswith("slot_") and f.endswith(".jpg")]
+                except OSError:
+                    arqs = []
+                presentes = set()
+                for fn in arqs:
+                    try:
+                        n = int(fn[len("slot_"):-len(".jpg")])
+                    except ValueError:
+                        continue
+                    try:
+                        with open(os.path.join(PREVIEW_DIR, fn), "rb") as f:
+                            b64 = base64.b64encode(f.read()).decode()
+                    except OSError:
+                        continue
+                    presentes.add(n)
                     if n not in _cards:
                         img = ft.Image(src_base64=b64, fit=ft.ImageFit.COVER,
                                        border_radius=4, expand=True)
-                        txt = ft.Text(f"Perfil {n} · {canal}", color=CINZA, size=11)
+                        txt = ft.Text(f"Perfil {n}", color=CINZA, size=11)
                         _cards[n] = (ft.Column([img, txt], spacing=2, expand=True), img, txt)
                     else:
                         _cards[n][1].src_base64 = b64
-                        _cards[n][2].value = f"Perfil {n} · {canal}"
+                for n in list(_cards):
+                    if n not in presentes:
+                        _cards.pop(n, None)
                 grid_preview.controls = [_cards[n][0] for n in sorted(_cards)]
             except Exception:
                 pass
@@ -420,35 +451,59 @@ def main(page: ft.Page):
             return f"RUN encerrada ({ev.get('motivo','')}).", "#ffffff", True
         return None, CINZA, False
 
-    # ── consumidor da fila de eventos (thread) ──
-    fila = queue.Queue()
-
-    def consumidor():
+    # ── tailer: lê os eventos que a ENGINE (processo separado) anexa em ARQ_EVENTOS ──
+    # Funciona como 'tail -f'. Ao (re)abrir a GUI, lê desde o início e reconstrói
+    # contador+logs do estado atual da RUN. A GUI nunca roda a engine -> não congela.
+    def tailer():
         while True:
             try:
-                ev = fila.get()                      # bloqueia ate ter 1 evento
-                lote = [ev]
-                try:                                  # drena o que ja chegou (batch)
-                    while len(lote) < 300:
-                        lote.append(fila.get_nowait())
-                except queue.Empty:
-                    pass
-                for e in lote:
-                    if not e:
-                        continue
-                    msg, cor, live = traduzir(e)      # traduzir ja atualiza o contador (sem update)
-                    if msg and live:                  # so eventos importantes vao pro painel ao vivo
-                        lista_logs.controls.append(ft.Text(msg, color=cor, size=13, selectable=True))
-                    if e.get("tipo") == "run_fim":
-                        estado["rodando"] = False
-                        btn_iniciar.disabled = False
-                        btn_parar.disabled = True
-                if len(lista_logs.controls) > 150:    # lista pequena: auto_scroll nao engasga no web
-                    del lista_logs.controls[:len(lista_logs.controls) - 100]
+                existe = os.path.exists(ARQ_EVENTOS)
+                tam = os.path.getsize(ARQ_EVENTOS) if existe else 0
+                pos = estado.get("tail_pos", 0)
+                if (not existe) or tam < pos:        # recriado/truncado (nova RUN / 1º open)
+                    pos = 0
+                if tam > pos:
+                    with open(ARQ_EVENTOS, "r", encoding="utf-8") as f:
+                        f.seek(pos)
+                        novas = f.readlines()
+                        pos = f.tell()
+                    estado["tail_pos"] = pos
+                    for ln in novas:
+                        ln = ln.strip()
+                        if not ln:
+                            continue
+                        try:
+                            ev = json.loads(ln)
+                        except Exception:
+                            continue
+                        msg, cor, live = traduzir(ev)   # traduzir ja atualiza o contador
+                        if msg and live:
+                            lista_logs.controls.append(ft.Text(msg, color=cor, size=13, selectable=True))
+                        t = ev.get("tipo")
+                        if t == "run_inicio":
+                            estado["rodando"] = True
+                            btn_iniciar.disabled = True
+                            btn_parar.disabled = False
+                        elif t == "run_fim":
+                            estado["rodando"] = False
+                            btn_iniciar.disabled = False
+                            btn_parar.disabled = True
+                    if len(lista_logs.controls) > 150:
+                        del lista_logs.controls[:len(lista_logs.controls) - 100]
+                else:
+                    estado["tail_pos"] = pos
+                # motor morreu sem run_fim? reseta os botoes
+                proc = estado.get("proc")
+                if proc is not None and proc.poll() is not None and estado["rodando"]:
+                    estado["rodando"] = False
+                    btn_iniciar.disabled = False
+                    btn_parar.disabled = True
+                    lista_logs.controls.append(ft.Text("Motor encerrou.", color="#ffffff", size=13))
             except Exception:
                 pass                                  # NUNCA deixa a thread morrer
+            time.sleep(0.4)
 
-    threading.Thread(target=consumidor, daemon=True).start()
+    threading.Thread(target=tailer, daemon=True).start()
 
     def atualizador():
         # UNICO chamador de page.update() — as outras threads so mexem nos controles.
@@ -462,7 +517,7 @@ def main(page: ft.Page):
                 pass
     threading.Thread(target=atualizador, daemon=True).start()
 
-    # ── start / stop ──
+    # ── start / stop ── (a engine roda em PROCESSO separado; a GUI só lê o arquivo)
     def iniciar(e):
         if estado["rodando"]:
             return
@@ -470,28 +525,40 @@ def main(page: ft.Page):
         estado["contador"] = {}
         atualiza_contador()
         lista_logs.controls.clear()
-        add_log("Preparando RUN…", "#ffffff")
+        add_log("Preparando RUN… (motor em processo separado)", "#ffffff")
         btn_iniciar.disabled = True
         btn_parar.disabled = False
-        # aplica a escolha do Preview DESTA run (orquestrador le do settings.json)
+        # aplica a escolha do Preview DESTA run (a engine le do settings.json)
         run = config_store.carregar().get("run", {}) or {}
         run["preview"] = bool(chk_preview.value)
         config_store.salvar_secao("run", run)
         f_prev.value = chk_preview.value   # mantem a aba Configs em sincronia
-        eventos.reset()
-        eventos.set_sink(fila.put)
-
-        def _run():
+        # limpa eventos/flags da run anterior e reinicia a posicao do tailer
+        for arq in (ARQ_EVENTOS, ARQ_PARAR_FLAG, ARQ_PREVIEW_FLAG):
             try:
-                asyncio.run(orquestrador.amain())
-            except Exception as ex:
-                fila.put({"tipo": "erro", "n": "-", "msg": str(ex)[:120]})
-                fila.put({"tipo": "run_fim", "motivo": "erro"})
-        threading.Thread(target=_run, daemon=True).start()
+                os.remove(arq)
+            except OSError:
+                pass
+        estado["tail_pos"] = 0
+        # lanca a ENGINE: o MESMO exe com --engine (frozen) ou 'python gui.py --engine'
+        if getattr(sys, "frozen", False):
+            cmd = [sys.executable, "--engine"]
+        else:
+            cmd = [sys.executable, os.path.abspath(__file__), "--engine"]
+        try:
+            estado["proc"] = subprocess.Popen(cmd, cwd=paths.base_dir())
+        except Exception as ex:
+            add_log(f"Falha ao iniciar o motor: {str(ex)[:100]}", "#ff6b6b")
+            estado["rodando"] = False
+            btn_iniciar.disabled = False
+            btn_parar.disabled = True
 
     def parar(e):
-        add_log("Parando… fechando perfis.", "#ffffff")
-        eventos.parar.set()
+        add_log("Parando… o motor vai fechar os perfis.", "#ffffff")
+        try:
+            open(ARQ_PARAR_FLAG, "w").close()   # flag -> a engine encerra (fecha perfis + resumo)
+        except OSError:
+            pass
         btn_parar.disabled = True
 
     btn_iniciar.on_click = iniciar
@@ -511,8 +578,37 @@ def main(page: ft.Page):
     page.add(ft.Column([banner, abas], spacing=0, expand=True))
 
 
+def _rodar_engine():
+    """Modo ENGINE (processo separado, lançado pela GUI com --engine): roda o orquestrador,
+    grava eventos em ARQ_EVENTOS e observa ARQ_PARAR_FLAG (parada) e ARQ_PREVIEW_FLAG (preview).
+    Roda em processo PRÓPRIO -> não disputa CPU/GIL com a UI (a GUI não congela mais)."""
+    eventos.set_sink(eventos.sink_arquivo(ARQ_EVENTOS))
+
+    def _watch_flags():
+        while not eventos.parar.is_set():
+            if os.path.exists(ARQ_PARAR_FLAG):
+                eventos.parar.set()
+                return
+            preview.set_ativo(os.path.exists(ARQ_PREVIEW_FLAG))  # captura só quando a GUI pede
+            time.sleep(0.4)
+    threading.Thread(target=_watch_flags, daemon=True).start()
+    try:
+        asyncio.run(orquestrador.amain())
+    except Exception as ex:
+        try:
+            with open(ARQ_EVENTOS, "a", encoding="utf-8") as f:
+                f.write(json.dumps({"tipo": "erro", "n": "-", "msg": str(ex)[:120]}) + "\n")
+                f.write(json.dumps({"tipo": "run_fim", "motivo": "erro"}) + "\n")
+        except Exception:
+            pass
+
+
 if __name__ == "__main__":
     import sys
+    # Modo ENGINE: a GUI relança ESTE exe com --engine (motor em processo separado).
+    if "--engine" in sys.argv:
+        _rodar_engine()
+        sys.exit(0)
     # Empacotado em .exe: o orquestrador relanca ESTE exe com --taskview p/ abrir a
     # grade DWM (nao existe 'python taskview.py' dentro do bundle).
     if "--taskview" in sys.argv:

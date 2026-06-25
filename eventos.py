@@ -22,6 +22,20 @@ def _sink_print(ev):
 
 
 _sink = _sink_print
+_arq_lock = threading.Lock()
+
+
+def sink_arquivo(path):
+    """Sink que ANEXA cada evento como 1 JSON por linha em `path`. Usado pela ENGINE
+    rodando em processo separado; a GUI faz 'tail' desse arquivo (desacopla UI da engine)."""
+    def _s(ev):
+        try:
+            with _arq_lock:
+                with open(path, "a", encoding="utf-8") as f:
+                    f.write(json.dumps(ev, ensure_ascii=False) + "\n")
+        except Exception:
+            pass
+    return _s
 
 
 def set_sink(fn):

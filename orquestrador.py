@@ -93,7 +93,7 @@ def _agora():
 # ── Log unico de ciclos (token + proxy usados, sem ID de perfil) ──────────────
 _log_lock = threading.Lock()
 _proxy_falhas = {}   # proxy -> nº de falhas de rede consecutivas (p/ descarte)
-_run_stats = {"ciclos": 0, "anuncios": 0, "interrompidos": 0, "tokens": set(), "ips": set()}
+_run_stats = {"ciclos": 0, "anuncios": 0, "interrompidos": 0, "tokens": set(), "proxies": set()}
 
 def _registrar_proxy_morto(proxy):
     """Anexa um proxy descartado em proxies_mortos.txt (auditoria)."""
@@ -327,7 +327,7 @@ async def slot_loop(uid, contas_q, proxies_q, pw_holder, canais, canal_carga, st
         t0 = datetime.now()   # horario local do inicio do ciclo (token/proxy setados)
         base = f"TOKEN SETADO: {conta['auth_token']} > PROXY SETADO: {proxy}"
         _run_stats["tokens"].add(conta["auth_token"])
-        _run_stats["ips"].add(proxy.split(":")[0])
+        _run_stats["proxies"].add(proxy)   # endpoint completo (host:porta:user) — proxies usados
 
         # ── gate de ABERTURA ──
         # Modo BATCH (BATCH_SIZE>0): libera em lotes (navegam juntos), pausa entre lotes,
@@ -558,7 +558,7 @@ async def amain():
     _abrir_ultimo = 0.0
     _batch_n = 0
     _proxy_falhas = {}   # zera os strikes de proxy a cada RUN
-    _run_stats = {"ciclos": 0, "anuncios": 0, "interrompidos": 0, "tokens": set(), "ips": set()}
+    _run_stats = {"ciclos": 0, "anuncios": 0, "interrompidos": 0, "tokens": set(), "proxies": set()}
     # argv ainda sobrescreve (modo CLI): [n_perfis] [canais,virgula]
     if len(sys.argv) > 1 and sys.argv[1].isdigit():
         n = int(sys.argv[1])
@@ -637,7 +637,7 @@ async def amain():
                           f"{s['ciclos']} ciclos"
                           + (f" (+{s['interrompidos']} interrompidos no parar)" if s['interrompidos'] else "")
                           + f" · {s['anuncios']} anuncios"
-                          f" · {len(s['tokens'])} tokens · {len(s['ips'])} IPs ===")
+                          f" · {len(s['tokens'])} tokens · {len(s['proxies'])} proxies ===")
             log_ciclo(datetime.now(), resumo_run)
             print(resumo_run, flush=True)
             eventos.emit("resumo", txt=resumo_run)
