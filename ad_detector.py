@@ -27,6 +27,8 @@ import re
 import sys
 from datetime import datetime, timedelta, timezone
 
+import paths
+
 # ─────────────────────────── Parser do manifest ───────────────────────────
 _AD_CLASS = 'CLASS="twitch-stitched-ad"'
 
@@ -141,7 +143,7 @@ class AdState:
                 self.atual = None
 
 # ─────────────────────────── Saida padrao (log) ───────────────────────────
-LOG_JSONL = "ads_log.jsonl"
+LOG_JSONL = paths.arquivo("ads_log.jsonl")   # sempre ao lado do exe (independe do CWD)
 
 def evento_padrao(ev):
     # linha humana

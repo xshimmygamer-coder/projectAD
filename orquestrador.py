@@ -85,7 +85,7 @@ PAUSA_REABRIR_MAX_S = 20
 # estatico que falha N vezes esta expirado). 0 = nunca descarta (sempre re-tenta).
 PROXY_MAX_FALHAS = 3
 LOG_CICLOS     = True         # grava 1 linha por ciclo (horario, token, proxy) em...
-ARQ_LOG_CICLOS = "ciclos_log.txt"
+ARQ_LOG_CICLOS = paths.arquivo("ciclos_log.txt")   # sempre ao lado do exe (independe do CWD)
 
 def _agora():
     return datetime.now(timezone.utc)
@@ -315,13 +315,14 @@ async def sessao_no_canal(pw, debug_port, canal, rotulo, slot_n=0, libera_cb=Non
             pass
 
 # ─────────────────────────── Loop de cada slot/perfil ───────────────────────────
-async def slot_loop(uid, contas_q, proxies_q, pw_holder, canal, stop_event, inicio_delay=0.0,
-                    slot_n=0, abrir_sem=None):
+async def slot_loop(uid, contas_q, proxies_q, pw_holder, canais, canal_carga, stop_event,
+                    inicio_delay=0.0, slot_n=0, abrir_sem=None):
     if inicio_delay:
         await asyncio.sleep(inicio_delay)   # escalona o start (suaviza burst de API/CPU)
     while not stop_event.is_set():
         conta = await contas_q.get()
         proxy = await proxies_q.get()
+        canal = _escolher_canal(canais, canal_carga)   # canal DESTE ciclo (balanceado+aleatorio)
         rotulo = f"{uid}/{conta['id']}"
         t0 = datetime.now()   # horario local do inicio do ciclo (token/proxy setados)
         base = f"TOKEN SETADO: {conta['auth_token']} > PROXY SETADO: {proxy}"
@@ -409,6 +410,7 @@ async def slot_loop(uid, contas_q, proxies_q, pw_holder, canal, stop_event, inic
             await contas_q.put(conta)     # devolve a conta pra pool (rotaciona)
             if not descartar_proxy:
                 await proxies_q.put(proxy) # devolve o proxy; se descartado, SAI do rodizio
+            canal_carga[canal] -= 1       # libera a vaga do canal (rebalanceia o proximo ciclo)
 
         # se o driver caiu, respira ate o supervisor reerguer (evita spin de erro)
         while pw_holder["morto"].is_set() and not stop_event.is_set():
@@ -485,6 +487,16 @@ async def _watch_parar(stop_event):
             stop_event.set()
             return
         await asyncio.sleep(0.4)
+
+
+def _escolher_canal(canais, carga):
+    """Distribuicao DINAMICA + balanceada + aleatoria: escolhe o canal MENOS carregado
+    agora (desempate por sorteio) e reserva uma vaga. Garante divisao ~igual entre canais
+    (diferenca max. 1), com qual-perfil-vai-onde aleatorizado. Liberar com carga[canal]-=1."""
+    menor = min(carga[c] for c in canais)
+    c = random.choice([c for c in canais if carga[c] == menor])
+    carga[c] += 1
+    return c
 
 
 def _erro_driver(msg):
@@ -566,13 +578,15 @@ async def amain():
         print(f"AVISO: menos proxies ({len(proxies)}) que perfis ({len(perfis)}) — "
               f"slots vao esperar proxy livre.")
 
-    # Distribuicao FIXA por perfil (balanceada): perfil i -> canais[i % M]
-    atribuicao = {u: canais[i % len(canais)] for i, u in enumerate(perfis)}
+    # Distribuicao DINAMICA + balanceada + aleatoria: a cada ciclo o perfil pega o canal
+    # MENOS carregado (desempate por sorteio) -> trocam de canal ao longo da run, mas a
+    # divisao entre canais fica sempre ~igual (nunca 80/20). Ver _escolher_canal/slot_loop.
     numeros = {u: i + 1 for i, u in enumerate(perfis)}   # nº amigavel do slot (1..N)
-    dist = Counter(atribuicao.values())
-    print(f"Canais: {', '.join(f'{c}({dist[c]})' for c in canais)} | "
+    canal_carga = Counter()                              # perfis ATIVOS por canal agora
+    alvo = Counter(canais[i % len(canais)] for i in range(len(perfis)))   # so p/ exibir o alvo
+    print(f"Canais (dinamico ~balanceado): {', '.join(f'{c}(~{alvo[c]})' for c in canais)} | "
           f"Perfis(slots): {len(perfis)} | Contas: {len(contas)} | Proxies: {len(proxies)}")
-    eventos.emit("run_inicio", perfis=len(perfis), canais=dict(dist))
+    eventos.emit("run_inicio", perfis=len(perfis), canais=dict(alvo))
 
     contas_q, proxies_q = asyncio.Queue(), asyncio.Queue()
     for c in contas:  contas_q.put_nowait(c)
@@ -594,7 +608,7 @@ async def amain():
                      if PREVIEW else None)
         # no modo batch o gate de lote controla a cadencia -> sem stagger por slot
         tasks = [asyncio.create_task(
-                     slot_loop(u, contas_q, proxies_q, pw_holder, atribuicao[u], stop_event,
+                     slot_loop(u, contas_q, proxies_q, pw_holder, canais, canal_carga, stop_event,
                                inicio_delay=(0 if BATCH_SIZE > 0 else i * STAGGER_START_S),
                                slot_n=numeros[u], abrir_sem=abrir_sem))
                  for i, u in enumerate(perfis)]

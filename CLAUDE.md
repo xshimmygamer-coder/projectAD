@@ -167,10 +167,12 @@ com `START-DATE`, `DURATION`, `X-TV-TWITCH-AD-ROLL-TYPE` (MIDROLL/PREROLL),
   `python navegacao.py <debug_port> <canal> [rotulo]`.
 
 ## Orquestrador CDP — `orquestrador.py` (FEITO, fluxo completo)
-Amarra tudo. **Multi-canal**: `CANAIS` = lista; distribuição **fixa por perfil
-(balanceada)** — perfil `i` → `CANAIS[i % M]` (cada perfil fica sempre no mesmo canal;
-`atribuicao` montada no start, split impresso ex. `vitinho(3), gaules(2)`). argv[2]
-sobrescreve por vírgula: `python orquestrador.py 6 vitinho,gaules,loud`.
+Amarra tudo. **Multi-canal**: `CANAIS` = lista; distribuição **DINÂMICA + balanceada +
+aleatória** — a cada ciclo o slot pega o canal **menos carregado** (`_escolher_canal`,
+desempate por sorteio) e libera no `finally` (`canal_carga` Counter). Perfis **trocam de
+canal** ao longo da run, mas a divisão fica sempre ~igual (validado: pior ~57/43, nunca
+80/20; ~45-61% dos ciclos mudam de canal). argv[2] sobrescreve por vírgula:
+`python orquestrador.py 6 vitinho,gaules,loud`.
 Por slot (1 task async por perfil), em loop:
 1. pega conta (cookie) + proxy livres da pool;
 2. `swap`: stop -> delcache -> update(cookie+proxy+fingerprint) -> start (pega `debug_port`);
