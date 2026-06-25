@@ -620,7 +620,7 @@ if __name__ == "__main__":
     #   web (PADRAO): abre no navegador. Mais estavel em runs longas; F5 recupera sem
     #                 matar a RUN; fechar a aba nao para o backend.
     #   app/desktop : janela nativa do Flet (cuidado: congela em sessoes longas).
-    _modo = (os.environ.get("MURIADS_GUI") or "web").strip().lower()
+    _modo = (os.environ.get("MURIADS_GUI") or "app").strip().lower()
     if _modo in ("app", "desktop", "flet_app"):
         ft.app(target=main, assets_dir=paths.assets_dir())            # janela desktop nativa
     else:
