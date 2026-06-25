@@ -29,7 +29,15 @@ PERFIS_FILTRO_NOME = config_store.get("adspower", "filtro_nome", "")
 HOME        = "https://www.twitch.tv/"
 SESSAO_MIN_S = 600          # (usado só pelo swap.py standalone; o orquestrador tem o seu)
 SESSAO_MAX_S = 900
-DELCACHE_TIPOS = ["cookie", "local_storage", "indexeddb"]
+# Limpeza ANTES de setar novo proxy+cookie. _FULL tenta zerar TUDO; se o AdsPower rejeitar
+# algum tipo, o delcache cai pro _SEGURO (que muda a conta de verdade). Ver delcache().
+# Conjunto COMPLETO validado contra a API do AdsPower (todos retornam code:0) -> wipe total
+# antes de injetar novo proxy+cookie.
+DELCACHE_TIPOS = ["cache", "cookie", "history", "local_storage", "session_storage",
+                  "indexeddb", "service_worker", "cache_storage", "file_system",
+                  "web_sql", "form_data", "password", "media_licenses", "download_history"]
+DELCACHE_TIPOS_SEGURO = ["cookie", "local_storage", "indexeddb"]
+_delcache_full_ok = True   # latch: desliga o _FULL na sessao se for recusado (evita custo duplo)
 BROWSER_VERSION = "146"
 COOKIE_EXP  = 1893456000    # expiracao do auth-token (unix seg, futuro)
 
@@ -78,8 +86,22 @@ def stop(uid):
     return _get("/api/v1/browser/stop", {"user_id": uid})
 
 def delcache(uid):
+    """Limpa o perfil antes de injetar novo proxy+cookie. Tenta o conjunto FULL (zera tudo);
+    se o AdsPower recusar (tipo invalido), cai pro SEGURO e trava o FULL p/ a sessao (evita
+    pagar 2 chamadas por ciclo)."""
+    global _delcache_full_ok
+    if _delcache_full_ok:
+        r = _post("/api/v2/browser-profile/delete-cache",
+                  {"profile_id": [uid], "type": DELCACHE_TIPOS})
+        if r.get("code") == 0:
+            return r
+        r2 = _post("/api/v2/browser-profile/delete-cache",
+                   {"profile_id": [uid], "type": DELCACHE_TIPOS_SEGURO})
+        if r2.get("code") == 0:        # full falhou mas seguro passou => tipo invalido
+            _delcache_full_ok = False
+        return r2                       # se ambos falharam (ex.: perfil aberto), abrir_perfil re-tenta
     return _post("/api/v2/browser-profile/delete-cache",
-                 {"profile_id": [uid], "type": DELCACHE_TIPOS})
+                 {"profile_id": [uid], "type": DELCACHE_TIPOS_SEGURO})
 
 def cookie_authtoken(val):
     return [{"id": 1, "name": "auth-token", "value": val, "domain": ".twitch.tv",
