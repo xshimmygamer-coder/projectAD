@@ -563,6 +563,35 @@ def main(page: ft.Page):
     btn_iniciar.on_click = iniciar
     btn_parar.on_click = parar
 
+    # ── botao trocar modo da UI (app <-> web): fecha ESTA janela e reabre no outro modo.
+    #    A engine (se rodando) e processo separado -> a RUN NAO e afetada.
+    _modo_atual = (os.environ.get("MURIADS_GUI") or "app").strip().lower()
+    _is_app = _modo_atual in ("app", "desktop", "flet_app")
+
+    def _trocar_modo(e):
+        alvo = "web" if _is_app else "app"
+        env = {**os.environ, "MURIADS_GUI": alvo}
+        cmd = ([sys.executable] if getattr(sys, "frozen", False)
+               else [sys.executable, os.path.abspath(__file__)])
+        try:
+            subprocess.Popen(cmd, env=env, cwd=paths.base_dir())
+        except Exception:
+            return
+        # fecha esta instancia SOZINHA (a engine, se rodando, continua em processo separado):
+        # 1) fecha a janela desktop graciosamente; 2) encerra o processo (fallback garantido).
+        try:
+            page.window.destroy()
+        except Exception:
+            pass
+        threading.Thread(target=lambda: (time.sleep(1.5), os._exit(0)), daemon=True).start()
+
+    btn_modo = ft.OutlinedButton(
+        ("🌐 Abrir em modo Web" if _is_app else "🖥 Abrir em modo App"),
+        on_click=_trocar_modo,
+        tooltip="Fecha esta janela e reabre no outro modo. A RUN em andamento continua.")
+    header = ft.Container(content=ft.Row([btn_modo], alignment=ft.MainAxisAlignment.END),
+                          padding=ft.padding.only(left=12, right=12, top=4, bottom=2))
+
     # ╔══ MONTAGEM ══╗
     abas = ft.Tabs(selected_index=0, expand=True, indicator_color=ROXO,
                    label_color="#ffffff", unselected_label_color=CINZA, tabs=[
@@ -574,7 +603,7 @@ def main(page: ft.Page):
         ft.Tab(text="Logs ao vivo", content=aba_logs),
     ])
 
-    page.add(ft.Column([banner, abas], spacing=0, expand=True))
+    page.add(ft.Column([banner, header, abas], spacing=0, expand=True))
 
 
 def _rodar_engine():
