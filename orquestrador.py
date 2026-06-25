@@ -201,13 +201,14 @@ async def sessao_no_canal(pw, debug_port, canal, rotulo, slot_n=0, libera_cb=Non
 
         # estado de anuncio do slot, atualizado pelos eventos do detector
         slot = {"em_ad": False, "teve_ad": False, "fechar_apos": None, "ad_info": "",
-                "ad_fim_max": None}
+                "ad_fim_max": None, "ad_dur": 0}
 
         def on_ad(ev):
             ad.evento_padrao(ev)  # loga humano + jsonl
             if ev["tipo"] == "AD_START":
                 slot["em_ad"] = True
                 slot["teve_ad"] = True
+                slot["ad_dur"] = int(ev["duracao_total_s"])
                 slot["ad_info"] = f"{ev['roll_type']} {ev['duracao_total_s']:.0f}s"
                 # teto do ad: se passar MUITO disso e o AD_END nao veio (manifests pararam,
                 # ex.: proxy caiu no meio do ad), o loop destrava o em_ad.
@@ -224,7 +225,8 @@ async def sessao_no_canal(pw, debug_port, canal, rotulo, slot_n=0, libera_cb=Non
                 grace = random.uniform(GRACE_POS_AD_MIN_S, GRACE_POS_AD_MAX_S)
                 slot["fechar_apos"] = _agora() + timedelta(seconds=grace)
                 print(f"[{rotulo}] anuncio acabou — fechando em {grace:.0f}s", flush=True)
-                eventos.emit("ad_off", n=slot_n, canal=canal, grace=int(grace))
+                eventos.emit("ad_off", n=slot_n, canal=canal, grace=int(grace),
+                             dur=slot.get("ad_dur", 0))
 
         state = ad.AdState(rotulo, on_ad, margem_fim_s=AD_FIM_MARGEM_S)
         ad.anexar_detector(page.context, state)
@@ -348,6 +350,8 @@ async def slot_loop(uid, contas_q, proxies_q, pw_holder, canais, canal_carga, st
                 sem.release()
 
         descartar_proxy = False
+        pausa_ciclo = (random.uniform(PAUSA_REABRIR_MIN_S, PAUSA_REABRIR_MAX_S)
+                       if PAUSA_REABRIR_MAX_S > 0 else 0)   # tempo ate reabrir (mostrado no fim)
         try:
             port = await abrir_perfil(uid, conta, proxy)
             if not port:
@@ -366,7 +370,8 @@ async def slot_loop(uid, contas_q, proxies_q, pw_holder, canais, canal_carga, st
             dur = resumo["dur_s"] if resumo else 0
             log_ciclo(t0, f"{base} > CANAL: {canal} > {nav} > {ad_txt} > DUROU: {dur}s")
             eventos.emit("fim", n=slot_n, canal=canal,
-                         teve_ad=bool(resumo and resumo["teve_ad"]), dur=dur)
+                         teve_ad=bool(resumo and resumo["teve_ad"]), dur=dur,
+                         reabre=int(pausa_ciclo))
             _proxy_falhas.pop(proxy, None)   # funcionou -> zera strikes desse proxy
             _run_stats["ciclos"] += 1
             if resumo and resumo["teve_ad"]:
@@ -415,9 +420,9 @@ async def slot_loop(uid, contas_q, proxies_q, pw_holder, canais, canal_carga, st
         # se o driver caiu, respira ate o supervisor reerguer (evita spin de erro)
         while pw_holder["morto"].is_set() and not stop_event.is_set():
             await asyncio.sleep(random.uniform(3, 6))
-        # CADENCIA: pausa randomizada apos fechar, antes de reabrir (menos perfis juntos)
-        if not stop_event.is_set() and PAUSA_REABRIR_MAX_S > 0:
-            await asyncio.sleep(random.uniform(PAUSA_REABRIR_MIN_S, PAUSA_REABRIR_MAX_S))
+        # CADENCIA: pausa randomizada apos fechar, antes de reabrir (mesma do evento 'fim')
+        if not stop_event.is_set() and pausa_ciclo > 0:
+            await asyncio.sleep(pausa_ciclo)
 
 # ─────────────────────────── Modos de abertura (presets) ─────────────────────
 # Cada modo define a cadencia/velocidade da abertura+navegacao. O TURBO bate na

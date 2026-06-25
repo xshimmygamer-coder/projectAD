@@ -425,18 +425,17 @@ def main(page: ft.Page):
             if ev.get("ok"):
                 return f"Perfil {n} entrou em {canal}", CINZA, False        # rotineiro: oculta ao vivo
             return f"Perfil {n} não conseguiu entrar em {canal}", "#ff6b6b", True
-        if t == "ad_on":
-            return f"Perfil {n} assistindo a um anúncio de {ev.get('dur')}s em {canal}…", "#ffd24a", True
-        if t == "ad_off":
-            return f"Perfil {n} — anúncio terminou em {canal} (fecha em ~{ev.get('grace')}s)", "#ffd24a", True
+        if t == "ad_on":   # INICIO: anuncio identificado
+            return f"Perfil {n} — anúncio de {ev.get('dur')}s identificado em {canal}", "#ffd24a", True
+        if t == "ad_off":  # MEIO: anuncio assistido com sucesso
+            return f"Perfil {n} — anúncio assistido com sucesso ✅ ({ev.get('dur')}s)", VERDE, True
         if t == "bau":
-            return f"Perfil {n} coletou o baú em {canal}", VERDE, True
-        if t == "fim":
+            return f"Perfil {n} coletou o baú em {canal}", VERDE, False   # oculto ao vivo
+        if t == "fim":     # FIM: perfil encerrando / reabrindo
             if ev.get("teve_ad"):
                 estado["contador"][canal] = estado["contador"].get(canal, 0) + 1
                 atualiza_contador()
-                return f"Perfil {n} saiu de {canal} — assistiu anúncio ✅ (durou {ev.get('dur')}s)", VERDE, True
-            return f"Perfil {n} saiu de {canal} (durou {ev.get('dur')}s)", CINZA, False  # rotineiro
+            return f"Perfil {n} se encerrando (reabre em ~{ev.get('reabre', 0)}s)", CINZA, True
         if t == "proxy_morto":
             return f"Perfil {n}: proxy sem rede — trocando de proxy", "#ff6b6b", True
         if t == "proxy_descartado":
