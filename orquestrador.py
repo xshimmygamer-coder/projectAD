@@ -84,6 +84,10 @@ PAUSA_REABRIR_MAX_S = 20
 # Descarte de proxy: apos N falhas de rede, o proxy sai do rodizio (residencial
 # estatico que falha N vezes esta expirado). 0 = nunca descarta (sempre re-tenta).
 PROXY_MAX_FALHAS = 3
+# Slate roxo: se durante um ad break aparecer "Commercial break in progress" (experiencia
+# degradada), DESCARTA o perfil e segue o ciclo (conta/proxy novos). Checa a cada SLATE_CHECK_S.
+DESCARTAR_SLATE = True
+SLATE_CHECK_S = 8
 LOG_CICLOS     = True         # grava 1 linha por ciclo (horario, token, proxy) em...
 ARQ_LOG_CICLOS = paths.arquivo("ciclos_log.txt")   # sempre ao lado do exe (independe do CWD)
 
@@ -193,7 +197,7 @@ async def sessao_no_canal(pw, debug_port, canal, rotulo, slot_n=0, libera_cb=Non
     endpoint = f"http://127.0.0.1:{debug_port}"
     browser = await pw.chromium.connect_over_cdp(endpoint)
     t_sess = _agora()
-    resumo = {"chegou": False, "teve_ad": False, "ad_info": "", "dur_s": 0}
+    resumo = {"chegou": False, "teve_ad": False, "ad_info": "", "dur_s": 0, "slate": False}
     try:
         page = await navegacao._pegar_page(browser)
         if PREVIEW:
@@ -259,6 +263,7 @@ async def sessao_no_canal(pw, debug_port, canal, rotulo, slot_n=0, libera_cb=Non
 
         prox_bau = _agora()   # checa bau ja na entrada e a cada BAU_CHECK_S
         prox_banner = _agora() + timedelta(seconds=12)  # re-checa banners que aparecem depois
+        prox_slate = _agora()   # checa o slate roxo durante os ad breaks
         # TETO DURO: fecha SEMPRE depois disso, aconteca o que acontecer (perfil travado,
         # em_ad preso, overlay grudado). Garante que nenhum perfil fica zumbi.
         limite_duro = t_sess + timedelta(seconds=SESSAO_MAX_S + 240)
@@ -282,6 +287,19 @@ async def sessao_no_canal(pw, debug_port, canal, rotulo, slot_n=0, libera_cb=Non
                     pass
                 prox_bau = _agora() + timedelta(seconds=BAU_CHECK_S)
             if slot["em_ad"]:
+                # SLATE ROXO: durante o ad break, perfil BOM mostra o video do anuncio; perfil
+                # RUIM mostra "Commercial break in progress" -> descarta e segue o ciclo.
+                if DESCARTAR_SLATE and _agora() >= prox_slate:
+                    prox_slate = _agora() + timedelta(seconds=SLATE_CHECK_S)
+                    try:
+                        if await asyncio.wait_for(navegacao.slate_publicidade(page), timeout=8):
+                            resumo["slate"] = True
+                            print(f"[{rotulo}] SLATE roxo (Commercial break) — descartando perfil",
+                                  flush=True)
+                            eventos.emit("slate", n=slot_n, canal=canal)
+                            break
+                    except Exception:
+                        pass
                 # se passou MUITO do fim previsto do ad e o AD_END nao veio, os manifests
                 # pararam (ex.: proxy caiu no meio do ad) -> destrava p/ poder fechar.
                 afm = slot.get("ad_fim_max")
@@ -368,7 +386,8 @@ async def slot_loop(uid, contas_q, proxies_q, pw_holder, canais, canal_carga, st
             nav = "navegou" if (resumo and resumo["chegou"]) else "NAO chegou"
             ad_txt = f"AD: {resumo['ad_info']}" if (resumo and resumo["teve_ad"]) else "sem anuncio"
             dur = resumo["dur_s"] if resumo else 0
-            log_ciclo(t0, f"{base} > CANAL: {canal} > {nav} > {ad_txt} > DUROU: {dur}s")
+            slate_txt = " > SLATE (descartado)" if (resumo and resumo.get("slate")) else ""
+            log_ciclo(t0, f"{base} > CANAL: {canal} > {nav} > {ad_txt}{slate_txt} > DUROU: {dur}s")
             eventos.emit("fim", n=slot_n, canal=canal,
                          teve_ad=bool(resumo and resumo["teve_ad"]), dur=dur,
                          reabre=int(pausa_ciclo))
@@ -456,7 +475,7 @@ def _aplicar_config_run():
     global SESSAO_MIN_S, SESSAO_MAX_S, GRACE_POS_AD_MIN_S, GRACE_POS_AD_MAX_S
     global AD_FIM_MARGEM_S, API_MIN_INTERVALO_S, STAGGER_START_S, BAU, BAU_CHECK_S
     global PREVIEW, PREVIEW_INTERVALO, PAUSA_REABRIR_MIN_S, PAUSA_REABRIR_MAX_S
-    global TIMEOUT_NAV, TIMEOUT_REDE, PROXY_MAX_FALHAS
+    global TIMEOUT_NAV, TIMEOUT_REDE, PROXY_MAX_FALHAS, DESCARTAR_SLATE
     global FORCAR_QUALIDADE, QUALIDADE_ALVO, TEMA_ESCURO, MAX_ABRINDO, ABRIR_INTERVALO_S
     global BATCH_SIZE, BATCH_PAUSA_S
     swap.aplicar_config_adspower()
@@ -477,6 +496,7 @@ def _aplicar_config_run():
     PAUSA_REABRIR_MIN_S = float(g("pausa_reabrir_min_s", PAUSA_REABRIR_MIN_S))
     PAUSA_REABRIR_MAX_S = float(g("pausa_reabrir_max_s", PAUSA_REABRIR_MAX_S))
     PROXY_MAX_FALHAS = int(g("proxy_max_falhas", PROXY_MAX_FALHAS))
+    DESCARTAR_SLATE = bool(g("descartar_slate", DESCARTAR_SLATE))
     TIMEOUT_NAV = int(g("timeout_nav_ms", TIMEOUT_NAV))
     TIMEOUT_REDE = int(g("timeout_rede_ms", TIMEOUT_REDE))
     FORCAR_QUALIDADE = bool(g("forcar_qualidade", FORCAR_QUALIDADE))

@@ -335,6 +335,22 @@ async def ad_na_tela(page):
     except Exception:
         return False
 
+
+# Slate roxo "Commercial break in progress" — SEMPRE em ingles (mesmo em perfis PT/ES).
+# Sinaliza que a conta/IP recebe a experiencia de anuncio DEGRADADA (slate em vez do video).
+SLATE_TXT = "Commercial break in progress"
+
+async def slate_publicidade(page):
+    """True se o slate roxo de anuncio esta visivel no player ('Commercial break in progress').
+    Indica perfil 'ruim' (experiencia degradada) -> abandonar e reciclar."""
+    try:
+        loc = page.get_by_text(SLATE_TXT, exact=False).first
+        if await loc.count() == 0:
+            return False
+        return await loc.is_visible()
+    except Exception:
+        return False
+
 async def resgatar_bau(page, rotulo=""):
     """Coleta o bau de pontos (community points) se estiver disponivel — MOUSE REAL.
     Seletores + fluxo do MURI_PRO (_coletar_bau_rapido)."""

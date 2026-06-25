@@ -251,6 +251,8 @@ def main(page: ft.Page):
     f_to_nav = ft.TextField(label="Timeout navegação (ms)", value=gr("timeout_nav_ms", 30000), width=220)
     f_to_rede = ft.TextField(label="Timeout rede proxy (ms)", value=gr("timeout_rede_ms", 20000), width=220)
     f_proxy_falhas = ft.TextField(label="Descartar proxy após N falhas (0=nunca)", value=gr("proxy_max_falhas", 3), width=260)
+    f_slate = ft.Switch(label="Descartar perfil no slate roxo (Commercial break)",
+                        value=bool(config_store.get("run", "descartar_slate", True)))
 
     # ── LEGIBILIDADE: texto branco + fundo do campo + borda (some no fundo escuro) ──
     for _c in (f_api_key, f_api_base, f_api_filtro, f_proxies, f_tokens,
@@ -263,7 +265,7 @@ def main(page: ft.Page):
         _c.focused_border_color = ROXO
         _c.cursor_color = ROXO
         _c.label_style = ft.TextStyle(color=CINZA)
-    for _s in (f_bau, f_prev, f_dark, f_q):
+    for _s in (f_bau, f_prev, f_dark, f_q, f_slate):
         _s.label_style = ft.TextStyle(color="#ffffff")
         _s.active_color = ROXO
 
@@ -302,6 +304,7 @@ def main(page: ft.Page):
             "timeout_nav_ms": _i(f_to_nav, 30000),
             "timeout_rede_ms": _i(f_to_rede, 20000),
             "proxy_max_falhas": _i(f_proxy_falhas, 3),
+            "descartar_slate": bool(f_slate.value),
         })
         aviso("Configurações da RUN salvas.")
 
@@ -321,6 +324,7 @@ def main(page: ft.Page):
         _linha(f_prev, f_prev_int),
         _linha(f_pausa_min, f_pausa_max),
         _linha(f_to_nav, f_to_rede, f_proxy_falhas),
+        f_slate,
         ft.FilledButton("Salvar", on_click=salvar_configs, style=ft.ButtonStyle(bgcolor=ROXO)),
     ], spacing=12, scroll=ft.ScrollMode.AUTO))
 
@@ -454,6 +458,8 @@ def main(page: ft.Page):
             return f"Perfil {n}: proxy sem rede — trocando de proxy", "#ff6b6b", True
         if t == "proxy_descartado":
             return f"Perfil {n}: proxy descartado (sem rede demais) — fora do rodízio", "#ff6b6b", True
+        if t == "slate":
+            return f"Perfil {n}: anúncio 'slate' roxo (Commercial break) — perfil descartado, reciclando", "#ff6b6b", True
         if t == "falha_abrir":
             return f"Perfil {n}: falha ao abrir — tentando outra conta", "#ff6b6b", True
         if t == "erro":
