@@ -336,31 +336,47 @@ async def ad_na_tela(page):
         return False
 
 
-# Slate roxo "Commercial break in progress" — SEMPRE em ingles (mesmo em perfis PT/ES).
-# Sinaliza que a conta/IP recebe a experiencia de anuncio DEGRADADA (slate em vez do video).
-SLATE_TXT = "Commercial break in progress"
+# Slate roxo do anuncio (SSAI): o "Commercial break in progress" e FRAME DE VIDEO (pixels com
+# o logo da Twitch), NAO texto na DOM -> get_by_text nunca acha. Detecta por COR: durante um
+# ad break, o player fica dominado pelo gradiente roxo/azul do slate (medido ~89% nesse caso).
+# Independe de idioma. Sinaliza perfil 'ruim' (experiencia degradada) -> abandonar e reciclar.
+SLATE_FRAC = 0.72   # fracao minima de pixels azul/roxo no player p/ considerar slate
+
+def _frac_roxo(raw):
+    import io, colorsys
+    from PIL import Image
+    im = Image.open(io.BytesIO(raw)).convert("RGB").resize((48, 32))
+    px = list(im.getdata())
+    if not px:
+        return 0.0
+    n = 0
+    for r, g, b in px:
+        h, s, v = colorsys.rgb_to_hsv(r / 255, g / 255, b / 255)
+        if 0.55 <= h <= 0.83 and s >= 0.20 and v >= 0.12:
+            n += 1
+    return n / len(px)
 
 async def slate_publicidade(page):
-    """True se o slate roxo de anuncio esta visivel ('Commercial break in progress').
-    Indica perfil 'ruim' (experiencia degradada) -> abandonar e reciclar. Robusto:
-    1) frase completa em qualquer lugar; 2) 'commercial break' DENTRO do player (evita chat)."""
+    """True se o player esta mostrando o slate roxo do anuncio. Barato primeiro (tem ad na
+    tela?), e SO entao tira screenshot do player e mede a fracao de roxo (gate anti-falso-
+    positivo: so considera slate se houver ad em andamento + player dominado pelo roxo)."""
     try:
-        loc = page.get_by_text(SLATE_TXT, exact=False).first   # frase completa (especifica)
-        if await loc.count() > 0 and await loc.is_visible():
-            return True
+        if not await ad_na_tela(page):           # sem overlay de ad -> nao e slate
+            return False
+        alvo = None
+        for sel in ('[data-a-target="video-player"]', '.video-player', '.persistent-player'):
+            loc = page.locator(sel).first
+            try:
+                if await loc.count() > 0:
+                    alvo = loc
+                    break
+            except Exception:
+                pass
+        raw = await (alvo.screenshot(type="jpeg", timeout=5000) if alvo is not None
+                     else page.screenshot(type="jpeg", timeout=5000))
+        return (await asyncio.to_thread(_frac_roxo, raw)) >= SLATE_FRAC
     except Exception:
-        pass
-    for psel in ('[data-a-target="video-player"]', '.video-player', '.persistent-player'):
-        try:
-            p = page.locator(psel).first
-            if await p.count() == 0:
-                continue
-            l2 = p.get_by_text("commercial break", exact=False).first
-            if await l2.count() > 0 and await l2.is_visible():
-                return True
-        except Exception:
-            pass
-    return False
+        return False
 
 async def resgatar_bau(page, rotulo=""):
     """Coleta o bau de pontos (community points) se estiver disponivel — MOUSE REAL.
