@@ -1,0 +1,23 @@
+Fluxo: 
+
+1. Configura quantidade de Threads > Cada perfil abre > Seta um token > Vai pro canal alvo > Espera X segundos > Se não vier AD em X segundos, fecha > reabre com outro token. 
+- No caso de ter AD na abertura > Abre > Seta Token > Vai pro canal alvo > X segundos, detecta AD > Permanece na página do canal até o AD acabar > Acabando o AD, fecha o perfil, reabre com outro token.
+- Loop. Melhor segurança sem usar stack própria, é usando Adspower. Automação via CDP = Mais viável/facilitado. 
+
+2. Estudar a melhor forma de injetar cookie novo + IPS/PROXIES novo a cada abertura do perfil. 
+- document.cookie = "auth-token=iccsioko84whzslwm88jwoapazkvrf; path=/; domain=.twitch.tv; secure; SameSite=None"; < Só funciona já na homepage da twitch. 
+- Injetar cookies da conta twitch antes mesmo de entrar na twitch ? Descobrir como. Estudar se dá pra fazer via API do adspower, fazendo set nas configurações de cookie do perfil, assim já seta antes 
+mesmo de abrir o perfil. 
+
+3. Navegação pro canal alvo
+- Via sidebar ou pesquisando o canal na barra de pesquisa da twitch = melhor fonte de tráfego possível. 
+
+4. Estudar a forma de detectar início e fim da transmissão de anúncio
+- Talvez monirando aba network do console do perfil, exista uma forma eficaz, precisa investigar.
+
+###########  ABERTURA DE PERFIL COM COOKIE DIFERENTE + SET PROXY DIFERENTE  ###########
+
+swap.py > lê o tokens.txt e prepara em .json pra injeção no adspower > randomiza fingerprints a cada reabertura de perfil > lê os ids dos perfis a serem usados "perfis.txt". > Faz troca de token/cookie
+faz troca de proxy via "proxies_pool.txt". 
+
+
