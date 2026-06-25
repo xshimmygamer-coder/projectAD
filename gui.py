@@ -111,25 +111,33 @@ def main(page: ft.Page):
     f_api_base = ft.TextField(label="Base URL",
                               value=config_store.get("adspower", "base",
                                                      "http://local.adspower.net:50325"))
-    _g_salvo = str(config_store.get("adspower", "group_id", "") or "")
-    dd_group = ft.Dropdown(
-        label="Grupo de perfis (clique em Detectar grupos)",
-        value=_g_salvo,
-        options=([ft.dropdown.Option(key="", text="Todos os grupos")]
-                 + ([ft.dropdown.Option(key=_g_salvo, text=f"(salvo) {_g_salvo}")]
-                    if _g_salvo else [])),
-        color="#ffffff", bgcolor=CARD, border_color="#3a3a3d",
-        label_style=ft.TextStyle(color=CINZA), expand=True)
+    # MULTI-GRUPO: a selecao e uma lista de group_ids separada por virgula (no settings).
+    _grupos_salvos = set(g.strip() for g in
+                         str(config_store.get("adspower", "group_id", "") or "").split(",") if g.strip())
     f_api_filtro = ft.TextField(label="Filtro de nome (opcional)",
                                 value=config_store.get("adspower", "filtro_nome", ""))
+    _chk_grupos = []   # lista de (group_id, Checkbox)
+    grupos_box = ft.Column([], spacing=2, scroll=ft.ScrollMode.AUTO, height=150)
+    lbl_grupos = ft.Text(
+        ("Grupos salvos: " + ", ".join(sorted(_grupos_salvos))) if _grupos_salvos
+        else "Nenhum grupo selecionado (= TODOS). Clique 'Detectar grupos'.",
+        color=CINZA, size=12)
+
+    def _grupos_marcados():
+        return [gid for gid, chk in _chk_grupos if chk.value]
 
     def _salvar_adspower():
+        # ja detectou? usa o que esta marcado. Senao, preserva o que ja estava salvo.
+        gid_val = (",".join(_grupos_marcados()) if _chk_grupos
+                   else ",".join(sorted(_grupos_salvos)))
         config_store.salvar_secao("adspower", {
             "api_key": f_api_key.value.strip(),
             "base": f_api_base.value.strip() or "http://local.adspower.net:50325",
-            "group_id": dd_group.value or "",
+            "group_id": gid_val,
             "filtro_nome": f_api_filtro.value.strip(),
         })
+        _grupos_salvos.clear()
+        _grupos_salvos.update(g for g in gid_val.split(",") if g)
 
     def detectar_grupos(e):
         _salvar_adspower()                 # usa a key/base atuais
@@ -139,26 +147,32 @@ def main(page: ft.Page):
         except Exception as ex:
             aviso(f"Erro ao listar grupos: {str(ex)[:70]}", "#ff6b6b")
             return
-        atual = dd_group.value
-        dd_group.options = ([ft.dropdown.Option(key="", text="Todos os grupos")]
-                            + [ft.dropdown.Option(key=str(g["group_id"]),
-                                                  text=g["group_name"] or g["group_id"])
-                               for g in grupos])
-        chaves = {o.key for o in dd_group.options}
-        dd_group.value = atual if atual in chaves else ""
+        _chk_grupos.clear()
+        grupos_box.controls.clear()
+        for g in grupos:
+            gid = str(g["group_id"])
+            chk = ft.Checkbox(label=(g["group_name"] or gid),
+                              value=(gid in _grupos_salvos),
+                              label_style=ft.TextStyle(color="#ffffff"))
+            _chk_grupos.append((gid, chk))
+            grupos_box.controls.append(chk)
+        lbl_grupos.value = (f"{len(grupos)} grupo(s) — marque 1 ou mais "
+                            f"(nenhum marcado = TODOS) e clique Salvar.")
         aviso(f"{len(grupos)} grupo(s) detectado(s).")
 
     def salvar_apis(e):
         _salvar_adspower()
-        aviso("Configurações do AdsPower salvas.")
+        sel = ", ".join(sorted(_grupos_salvos)) if _grupos_salvos else "TODOS"
+        aviso(f"AdsPower salvo. Grupos: {sel}.")
 
     aba_apis = ft.Container(padding=20, content=ft.Column([
         ft.Text("AdsPower", size=18, weight=ft.FontWeight.BOLD, color="#ffffff"),
-        ft.Text("Coloque a API key, clique Detectar grupos e escolha o grupo deste server.",
+        ft.Text("API key → 'Detectar grupos' → marque 1 ou mais grupos deste server → Salvar.",
                 color=CINZA, size=12),
         f_api_key, f_api_base,
-        ft.Row([dd_group, ft.OutlinedButton("Detectar grupos", on_click=detectar_grupos)],
-               vertical_alignment=ft.CrossAxisAlignment.CENTER, spacing=12),
+        ft.Row([ft.OutlinedButton("Detectar grupos", on_click=detectar_grupos)]),
+        lbl_grupos,
+        ft.Container(content=grupos_box, bgcolor=CARD, border_radius=6, padding=8),
         f_api_filtro,
         ft.FilledButton("Salvar", on_click=salvar_apis,
                         style=ft.ButtonStyle(bgcolor=ROXO)),

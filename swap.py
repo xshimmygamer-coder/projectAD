@@ -248,14 +248,8 @@ def listar_grupos(timeout=30):
         pagina += 1
     return grupos
 
-def listar_perfis(group_id=None, filtro_nome=None, timeout=30):
-    """Detecta os perfis do AdsPower via /api/v1/user/list (paginado). Retorna lista
-    de user_ids, ordenada pelo numero no nome (MURI 012 -> 12). Filtros opcionais.
-    group_id/filtro_nome=None -> usa os globais (atualizados pelo config)."""
-    if group_id is None:
-        group_id = PERFIS_GROUP_ID
-    if filtro_nome is None:
-        filtro_nome = PERFIS_FILTRO_NOME
+def _coletar_perfis(group_id, timeout):
+    """Pagina /api/v1/user/list (de UM group_id, ou todos se vazio). Retorna [{user_id,name}]."""
     PAGE = 100
     url = f"{BASE}/api/v1/user/list"
     todos, pagina = [], 1
@@ -279,6 +273,30 @@ def listar_perfis(group_id=None, filtro_nome=None, timeout=30):
         if len(todos) >= total:
             break
         pagina += 1
+        time.sleep(1.2)          # AdsPower limita ~1 req/s -> espaca as paginas
+    return todos
+
+
+def listar_perfis(group_id=None, filtro_nome=None, timeout=30):
+    """Detecta os perfis do AdsPower. group_id pode ser "" (TODOS), um id, ou VARIOS
+    separados por virgula (ex.: "9906242,9906199") -> consulta cada grupo e mescla (dedup).
+    Retorna user_ids ordenados pelo numero no nome (MURI 012 -> 12). group_id/filtro_nome=None
+    -> usa os globais (atualizados pelo config)."""
+    if group_id is None:
+        group_id = PERFIS_GROUP_ID
+    if filtro_nome is None:
+        filtro_nome = PERFIS_FILTRO_NOME
+    gids = [g.strip() for g in str(group_id or "").split(",") if g.strip()]
+    if not gids:
+        todos = _coletar_perfis("", timeout)              # nenhum selecionado = todos os grupos
+    else:
+        todos, vistos = [], set()
+        for i, gid in enumerate(gids):                     # mescla varios grupos, sem duplicar
+            if i:
+                time.sleep(1.2)                            # espaca as chamadas (rate limit AdsPower)
+            for p in _coletar_perfis(gid, timeout):
+                if p["user_id"] not in vistos:
+                    vistos.add(p["user_id"]); todos.append(p)
     if filtro_nome:
         pref = filtro_nome.strip().lower()
         todos = [p for p in todos if p["name"].lower().startswith(pref)]
