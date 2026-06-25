@@ -286,20 +286,20 @@ async def sessao_no_canal(pw, debug_port, canal, rotulo, slot_n=0, libera_cb=Non
                 except Exception:
                     pass
                 prox_bau = _agora() + timedelta(seconds=BAU_CHECK_S)
+            # SLATE ROXO: checa o tempo todo (independe do manifest). Perfil BOM ve o video do
+            # anuncio; perfil RUIM mostra "Commercial break in progress" -> descarta e recicla.
+            if DESCARTAR_SLATE and _agora() >= prox_slate:
+                prox_slate = _agora() + timedelta(seconds=SLATE_CHECK_S)
+                try:
+                    if await asyncio.wait_for(navegacao.slate_publicidade(page), timeout=8):
+                        resumo["slate"] = True
+                        print(f"[{rotulo}] SLATE roxo (Commercial break) — descartando perfil",
+                              flush=True)
+                        eventos.emit("slate", n=slot_n, canal=canal)
+                        break
+                except Exception:
+                    pass
             if slot["em_ad"]:
-                # SLATE ROXO: durante o ad break, perfil BOM mostra o video do anuncio; perfil
-                # RUIM mostra "Commercial break in progress" -> descarta e segue o ciclo.
-                if DESCARTAR_SLATE and _agora() >= prox_slate:
-                    prox_slate = _agora() + timedelta(seconds=SLATE_CHECK_S)
-                    try:
-                        if await asyncio.wait_for(navegacao.slate_publicidade(page), timeout=8):
-                            resumo["slate"] = True
-                            print(f"[{rotulo}] SLATE roxo (Commercial break) — descartando perfil",
-                                  flush=True)
-                            eventos.emit("slate", n=slot_n, canal=canal)
-                            break
-                    except Exception:
-                        pass
                 # se passou MUITO do fim previsto do ad e o AD_END nao veio, os manifests
                 # pararam (ex.: proxy caiu no meio do ad) -> destrava p/ poder fechar.
                 afm = slot.get("ad_fim_max")

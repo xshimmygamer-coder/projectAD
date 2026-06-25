@@ -341,15 +341,26 @@ async def ad_na_tela(page):
 SLATE_TXT = "Commercial break in progress"
 
 async def slate_publicidade(page):
-    """True se o slate roxo de anuncio esta visivel no player ('Commercial break in progress').
-    Indica perfil 'ruim' (experiencia degradada) -> abandonar e reciclar."""
+    """True se o slate roxo de anuncio esta visivel ('Commercial break in progress').
+    Indica perfil 'ruim' (experiencia degradada) -> abandonar e reciclar. Robusto:
+    1) frase completa em qualquer lugar; 2) 'commercial break' DENTRO do player (evita chat)."""
     try:
-        loc = page.get_by_text(SLATE_TXT, exact=False).first
-        if await loc.count() == 0:
-            return False
-        return await loc.is_visible()
+        loc = page.get_by_text(SLATE_TXT, exact=False).first   # frase completa (especifica)
+        if await loc.count() > 0 and await loc.is_visible():
+            return True
     except Exception:
-        return False
+        pass
+    for psel in ('[data-a-target="video-player"]', '.video-player', '.persistent-player'):
+        try:
+            p = page.locator(psel).first
+            if await p.count() == 0:
+                continue
+            l2 = p.get_by_text("commercial break", exact=False).first
+            if await l2.count() > 0 and await l2.is_visible():
+                return True
+        except Exception:
+            pass
+    return False
 
 async def resgatar_bau(page, rotulo=""):
     """Coleta o bau de pontos (community points) se estiver disponivel — MOUSE REAL.
