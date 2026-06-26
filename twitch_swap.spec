@@ -10,7 +10,9 @@ hiddenimports = [
     "win32gui", "win32con", "win32process", "win32api", "pywintypes",
     # modulos do projeto
     "orquestrador", "navegacao", "ad_detector", "swap", "preview",
-    "mouse_humano", "config_store", "eventos", "paths",
+    "mouse_humano", "config_store", "eventos", "paths", "proxy_checker",
+    # proxy checker: SOCKS5 (PySocks) + DNSBL (dnspython)
+    "socks", "dns", "dns.resolver", "dns.rdatatype", "dns.exception",
 ]
 
 # Empacota Flet (core + cliente WEB + desktop) + Playwright (driver) + Pillow + Patchright.

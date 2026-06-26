@@ -32,6 +32,7 @@ import config_store
 import eventos
 import paths
 import preview
+import proxy_checker
 import swap
 
 # orquestrador importa swap/navegacao/ad_detector — pesado, mas ok no start
@@ -180,12 +181,153 @@ def main(page: ft.Page):
 
     # ╔══ ABA PROXY ══╗
     f_proxies = ft.TextField(label="Proxies (1 por linha: host:port ou host:port:user:senha)",
-                             multiline=True, min_lines=14, max_lines=14,
+                             multiline=True, min_lines=10, max_lines=10,
                              value=_ler("proxies_pool.txt"))
 
     def salvar_proxies(e):
         _escrever("proxies_pool.txt", f_proxies.value)
         aviso(f"{_conta_linhas(f_proxies.value)} proxies salvos para esta RUN.")
+
+    # ── CHECKER de reputação (portado do MURIPRO2) ──
+    def _pcget(k, d):
+        return str(config_store.get("proxy_check", k, d))
+
+    f_pc_token = ft.TextField(label="IPInfo token (obrigatório p/ reputação)", password=True,
+                              can_reveal_password=True, value=_pcget("ipinfo_token", ""))
+    f_pc_echo = ft.TextField(label="Echo URL (opcional; privado evita 429 em lotes grandes)",
+                             value=_pcget("echo_url", "https://ipinfo.io/ip"))
+    f_pc_abuse_keys = ft.TextField(label="AbuseIPDB keys (opcional, vírgula)",
+                                   value=_pcget("abuseipdb_keys_str", ""))
+    f_pc_threads = ft.TextField(label="Threads", value=_pcget("threads", 20), width=130)
+    f_pc_to_proxy = ft.TextField(label="Timeout proxy (s)", value=_pcget("timeout_proxy", 12), width=170)
+    f_pc_to_api = ft.TextField(label="Timeout API (s)", value=_pcget("timeout_api", 8), width=160)
+    f_pc_abuse_max = ft.TextField(label="AbuseIPDB score máx", value=_pcget("abuseipdb_score_max", 50), width=180)
+    f_pc_paises = ft.TextField(label="Países (ISO2, vírgula — vazio=todos)", value=_pcget("paises_str", ""))
+    f_pc_estados = ft.TextField(label="Estados (vírgula — vazio=todos)", value=_pcget("estados_str", ""))
+    f_pc_zips = ft.TextField(label="ZIPs (vírgula — vazio=todos)", value=_pcget("zipcodes_str", ""))
+    sw_pc_dnsbl = ft.Switch(label="Usar DNSBL", value=bool(config_store.get("proxy_check", "dnsbl_enabled", True)))
+    sw_pc_abuse = ft.Switch(label="Usar AbuseIPDB", value=bool(config_store.get("proxy_check", "abuseipdb_enabled", False)))
+
+    for _c in (f_pc_token, f_pc_echo, f_pc_abuse_keys, f_pc_threads, f_pc_to_proxy,
+               f_pc_to_api, f_pc_abuse_max, f_pc_paises, f_pc_estados, f_pc_zips):
+        _c.color = "#ffffff"; _c.bgcolor = CARD; _c.border_color = "#3a3a3d"
+        _c.focused_border_color = ROXO; _c.cursor_color = ROXO
+        _c.label_style = ft.TextStyle(color=CINZA)
+    for _s in (sw_pc_dnsbl, sw_pc_abuse):
+        _s.label_style = ft.TextStyle(color="#ffffff"); _s.active_color = ROXO
+
+    txt_pc_prog = ft.Text("", color=CINZA, size=12)
+    txt_pc_res = ft.Text("Nenhuma checagem ainda.", color=VERDE, size=13, weight=ft.FontWeight.BOLD)
+    # quadro pequeno de LOGS ao vivo do checker (1 linha por proxy)
+    lista_pc_logs = ft.ListView(auto_scroll=True, spacing=1, padding=8)
+
+    def _pc_int(tf, d):
+        try:
+            return int(float(tf.value))
+        except (TypeError, ValueError):
+            return d
+
+    def _coletar_cfg_pc():
+        """Lê os campos, persiste em settings.json["proxy_check"] e devolve o cfg do checker."""
+        keys = [k.strip() for k in f_pc_abuse_keys.value.split(",") if k.strip()]
+        paises = [x.strip() for x in f_pc_paises.value.split(",") if x.strip()]
+        estados = [x.strip() for x in f_pc_estados.value.split(",") if x.strip()]
+        zips = [x.strip() for x in f_pc_zips.value.split(",") if x.strip()]
+        cfg = {
+            "ipinfo_token": f_pc_token.value.strip(),
+            "echo_url": f_pc_echo.value.strip() or "https://ipinfo.io/ip",
+            "abuseipdb_keys": keys,
+            "abuseipdb_enabled": bool(sw_pc_abuse.value),
+            "abuseipdb_score_max": _pc_int(f_pc_abuse_max, 50),
+            "dnsbl_enabled": bool(sw_pc_dnsbl.value),
+            "threads": _pc_int(f_pc_threads, 20),
+            "timeout_proxy": _pc_int(f_pc_to_proxy, 12),
+            "timeout_api": _pc_int(f_pc_to_api, 8),
+            "paises": paises, "estados": estados, "zipcodes": zips,
+        }
+        # persiste (guarda também as versões _str p/ repovoar os campos ao reabrir)
+        config_store.salvar_secao("proxy_check", {**cfg,
+            "abuseipdb_keys_str": f_pc_abuse_keys.value.strip(),
+            "paises_str": f_pc_paises.value.strip(),
+            "estados_str": f_pc_estados.value.strip(),
+            "zipcodes_str": f_pc_zips.value.strip()})
+        return cfg
+
+    def _checar_proxies(e):
+        if estado.get("pc_rodando"):
+            return
+        linhas = [l.strip() for l in f_proxies.value.replace("\r\n", "\n").split("\n")
+                  if l.strip() and not l.strip().startswith("#")]
+        if not linhas:
+            aviso("Cole proxies primeiro.", "#ff6b6b"); return
+        cfg = _coletar_cfg_pc()
+        if not cfg["ipinfo_token"]:
+            aviso("Preencha o IPInfo token (a reputação exige).", "#ff6b6b"); return
+        estado["pc_rodando"] = True
+        estado["proxies_aprovados"] = []
+        estado["pc_parar"] = threading.Event()
+        txt_pc_prog.value = f"Checando 0/{len(linhas)}…"
+        txt_pc_res.value = ""
+        lista_pc_logs.controls.clear()
+        btn_checar.disabled = True
+        btn_pc_parar.disabled = False
+
+        def _prog(feito, total, status, proxy, info):
+            txt_pc_prog.value = f"Checando {feito}/{total}…"
+            tag, cor = {"BOM": ("✓", VERDE), "RUIM": ("✗", "#ff6b6b")}.get(status, ("⚠", "#ffd24a"))
+            lista_pc_logs.controls.append(
+                ft.Text(f"[{feito}/{total}] {tag} {proxy} — {info}", color=cor, size=12,
+                        selectable=True, no_wrap=False))
+            if len(lista_pc_logs.controls) > 200:
+                del lista_pc_logs.controls[:len(lista_pc_logs.controls) - 150]
+
+        def _run():
+            try:
+                aprov, repro = proxy_checker.checar_lista(
+                    linhas, cfg, progress_cb=_prog, parar=estado["pc_parar"])
+            except Exception as ex:
+                txt_pc_prog.value = ""
+                txt_pc_res.value = f"Erro no checker: {str(ex)[:80]}"
+                estado["pc_rodando"] = False
+                btn_checar.disabled = False
+                btn_pc_parar.disabled = True
+                return
+            estado["proxies_aprovados"] = [r["proxy"] for r in aprov]
+            cancelado = estado["pc_parar"].is_set()
+            txt_pc_prog.value = "Parado." if cancelado else "Concluído."
+            txt_pc_res.value = f"✓ {len(aprov)} aprovados / {len(repro)} reprovados"
+            try:
+                _escrever("proxies_reprovados.txt",
+                          "\n".join(f"{r['proxy']} | {r['status']} | {r.get('info','')}" for r in repro))
+            except OSError:
+                pass
+            estado["pc_rodando"] = False
+            btn_checar.disabled = False
+            btn_pc_parar.disabled = True
+
+        threading.Thread(target=_run, daemon=True).start()
+
+    def _setar_aprovados(e):
+        aprov = estado.get("proxies_aprovados") or []
+        if not aprov:
+            aviso("0 aprovados — pool PRESERVADO. Cheque os proxies primeiro.", "#ff6b6b")
+            return
+        _escrever("proxies_pool.txt", "\n".join(aprov))
+        f_proxies.value = "\n".join(aprov)
+        aviso(f"{len(aprov)} proxies aprovados setados no pool.")
+
+    def _parar_pc(e):
+        ev = estado.get("pc_parar")
+        if ev:
+            ev.set()
+        txt_pc_prog.value = "Parando…"
+        btn_pc_parar.disabled = True
+
+    btn_checar = ft.FilledButton("🔎 Checar reputação", on_click=_checar_proxies,
+                                 style=ft.ButtonStyle(bgcolor=ROXO))
+    btn_setar = ft.FilledButton("✅ Setar aprovados no pool", on_click=_setar_aprovados,
+                                style=ft.ButtonStyle(bgcolor=VERDE))
+    btn_pc_parar = ft.OutlinedButton("■ Parar", on_click=_parar_pc, disabled=True)
 
     aba_proxy = ft.Container(padding=20, content=ft.Column([
         ft.Text("Proxies (SOCKS5)", size=18, weight=ft.FontWeight.BOLD, color="#ffffff"),
@@ -194,7 +336,21 @@ def main(page: ft.Page):
         f_proxies,
         ft.FilledButton("OK — salvar proxies", on_click=salvar_proxies,
                         style=ft.ButtonStyle(bgcolor=ROXO)),
-    ], spacing=12))
+        ft.Divider(color="#3a3a3d"),
+        ft.Text("Checker de reputação (IPInfo + DNSBL + AbuseIPDB)", size=16,
+                weight=ft.FontWeight.BOLD, color="#ffffff"),
+        ft.Text("Checa os proxies acima e mantém SÓ os aprovados. ⚠️ Proxies de datacenter "
+                "tendem a reprovar (flags hosting/proxy).", color=CINZA, size=12),
+        f_pc_token, f_pc_echo, f_pc_abuse_keys,
+        ft.Row([f_pc_threads, f_pc_to_proxy, f_pc_to_api, f_pc_abuse_max], spacing=12, wrap=True),
+        ft.Row([sw_pc_dnsbl, sw_pc_abuse], spacing=20, wrap=True),
+        ft.Row([f_pc_paises, f_pc_estados, f_pc_zips], spacing=12, wrap=True),
+        ft.Row([btn_checar, btn_setar, btn_pc_parar], spacing=12, wrap=True),
+        txt_pc_prog,
+        ft.Container(content=txt_pc_res, bgcolor=CARD, padding=10, border_radius=6),
+        ft.Text("Logs ao vivo do checker:", color=CINZA, size=12),
+        ft.Container(content=lista_pc_logs, bgcolor="#000000", border_radius=6, height=170),
+    ], spacing=12, scroll=ft.ScrollMode.AUTO))
 
     # ╔══ ABA TOKENS ══╗
     f_tokens = ft.TextField(label="Tokens / cookies (1 auth-token por linha; 'apelido,token' opcional)",

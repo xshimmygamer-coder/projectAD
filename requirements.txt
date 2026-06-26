@@ -1,5 +1,6 @@
 flet[all]==0.28.3
-requests
+requests[socks]
 playwright
 pywin32
 pillow
+dnspython
