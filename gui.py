@@ -43,6 +43,19 @@ ARQ_EVENTOS = paths.arquivo("eventos_live.jsonl")    # engine ANEXA eventos; GUI
 ARQ_PARAR_FLAG = paths.arquivo("parar.flag")         # GUI cria -> engine encerra
 ARQ_PREVIEW_FLAG = paths.arquivo("preview_on.flag")  # GUI liga/desliga a captura na engine
 PREVIEW_DIR = paths.arquivo("preview")               # engine grava slot_N.jpg; GUI le
+ARQ_ENGINE_PID = paths.arquivo("engine.pid")         # engine cria/atualiza enqto vive; remove ao sair
+ENGINE_HEARTBEAT_S = 3          # de quanto em quanto a engine "bate o coracao" (atualiza o arquivo)
+ENGINE_TIMEOUT_S = 12           # sem batida ha > isto = engine MORTA (reboot/crash/kill)
+
+
+def _engine_vivo():
+    """True se a ENGINE esta de fato viva: o arquivo de heartbeat existe e foi tocado
+    ha pouco. Cobre o caso de reabrir a GUI: se o motor morreu feio (reboot/crash) sem
+    escrever run_fim, o heartbeat fica velho/ausente -> a GUI NAO trava o Iniciar."""
+    try:
+        return (time.time() - os.stat(ARQ_ENGINE_PID).st_mtime) < ENGINE_TIMEOUT_S
+    except OSError:
+        return False
 
 APP_NOME = "MURIADS"
 
@@ -674,6 +687,14 @@ def main(page: ft.Page):
                     btn_iniciar.disabled = False
                     btn_parar.disabled = True
                     lista_logs.controls.append(ft.Text("Motor encerrou.", color="#ffffff", size=13))
+                # REATTACH: a GUI reabriu e o replay do log marcou rodando=True por causa de
+                # um run_inicio "pendurado" (motor morreu feio: reboot/crash/kill, sem run_fim).
+                # Nao fomos nos que lancamos a engine (proc is None) e o heartbeat esta velho/
+                # ausente -> a engine NAO esta viva. Destrava o Iniciar em vez de ficar preso.
+                elif proc is None and estado["rodando"] and not _engine_vivo():
+                    estado["rodando"] = False
+                    btn_iniciar.disabled = False
+                    btn_parar.disabled = True
             except Exception:
                 pass                                  # NUNCA deixa a thread morrer
             time.sleep(0.4)
@@ -708,8 +729,8 @@ def main(page: ft.Page):
         run["preview"] = bool(chk_preview.value)
         config_store.salvar_secao("run", run)
         f_prev.value = chk_preview.value   # mantem a aba Configs em sincronia
-        # limpa eventos/flags da run anterior e reinicia a posicao do tailer
-        for arq in (ARQ_EVENTOS, ARQ_PARAR_FLAG, ARQ_PREVIEW_FLAG):
+        # limpa eventos/flags/heartbeat da run anterior e reinicia a posicao do tailer
+        for arq in (ARQ_EVENTOS, ARQ_PARAR_FLAG, ARQ_PREVIEW_FLAG, ARQ_ENGINE_PID):
             try:
                 os.remove(arq)
             except OSError:
@@ -788,6 +809,19 @@ def _rodar_engine():
     Roda em processo PRÓPRIO -> não disputa CPU/GIL com a UI (a GUI não congela mais)."""
     eventos.set_sink(eventos.sink_arquivo(ARQ_EVENTOS))
 
+    # HEARTBEAT: enquanto o motor vive, (re)escreve ARQ_ENGINE_PID a cada ENGINE_HEARTBEAT_S.
+    # A GUI usa o mtime desse arquivo p/ saber se a engine esta viva. Se o motor morrer feio
+    # (reboot/crash/kill), o arquivo para de ser tocado -> a GUI destrava o Iniciar sozinha.
+    def _heartbeat():
+        while not eventos.parar.is_set():
+            try:
+                with open(ARQ_ENGINE_PID, "w", encoding="utf-8") as f:
+                    f.write(str(os.getpid()))
+            except OSError:
+                pass
+            time.sleep(ENGINE_HEARTBEAT_S)
+    threading.Thread(target=_heartbeat, daemon=True).start()
+
     def _watch_flags():
         while not eventos.parar.is_set():
             if os.path.exists(ARQ_PARAR_FLAG):
@@ -804,6 +838,12 @@ def _rodar_engine():
                 f.write(json.dumps({"tipo": "erro", "n": "-", "msg": str(ex)[:120]}) + "\n")
                 f.write(json.dumps({"tipo": "run_fim", "motivo": "erro"}) + "\n")
         except Exception:
+            pass
+    finally:
+        # saida limpa: remove o heartbeat na hora (a GUI ja ve a engine como morta).
+        try:
+            os.remove(ARQ_ENGINE_PID)
+        except OSError:
             pass
 
 
